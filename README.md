@@ -39,7 +39,11 @@ CTCL-ITR does **not** require private chain-of-thought. It records observable co
 CTCL-ITR/
 ├── docs/
 │   └── whitepaper/
-│       └── Interaction-Time_Runtime_and_Agent_Temporal_Ledger_v0.1.md
+│       ├── README.md
+│       ├── 01-foundations.md
+│       ├── 02-runtime-and-ledger.md
+│       ├── 03-interoperability-and-metrics.md
+│       └── 04-implementation-and-roadmap.md
 ├── schemas/
 │   ├── intent.schema.json
 │   ├── run.schema.json
@@ -62,6 +66,8 @@ CTCL-ITR/
 ├── VALIDATION.json
 └── README.md
 ```
+
+The downloadable v0.1 release pack additionally contains the canonical monolithic whitepaper and integrity hashes. The GitHub whitepaper is split into review-friendly projections.
 
 ## What v0.1 already specifies
 
@@ -97,28 +103,13 @@ events=18
 
 ## Relationship to CTCL
 
-CTCL provides the broader temporal / causal framework.
-
-CTCL-ITR is the execution-time layer that makes interaction time observable and auditable.
-
 ```text
 CTCL
 └── ITR — Interaction-Time Runtime
     └── ATL — Agent Temporal Ledger
 ```
 
-The underlying theory series distinguishes:
-
-1. Interaction Time
-2. Intent Cycle
-3. Execution Trajectory
-4. Interaction Topology
-5. AI Compute Economics
-6. Delegated Time
-7. Single-Run Quality
-8. World Time & Historical Sedimentation
-
-The v0.1 whitepaper maps these layers directly into runtime fields and event semantics.
+The underlying theory series distinguishes Interaction Time, Intent Cycle, Execution Trajectory, Interaction Topology, AI Compute Economics, Delegated Time, Single-Run Quality, and World Time / Historical Sedimentation.
 
 ## Interoperability direction
 
