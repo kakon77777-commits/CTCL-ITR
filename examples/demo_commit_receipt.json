@@ -1,0 +1,18 @@
+{
+  "schema_version": "0.1",
+  "commit_id": "commit:demo-001",
+  "run_id": "run:demo-001",
+  "intent_id": "intent:demo-001",
+  "authority_ref": "auth:publish-demo",
+  "candidate_ref": "sha256:0eb793430cdaacbb12dd74c60f009594f2addd1368dc5788c1aa6edf99c598f9",
+  "target": "demo://published/release",
+  "effect_class": "external_compensatable",
+  "executed_at": "2026-08-20T02:16:00+08:00",
+  "external_confirmation": {"published": true, "version": "v0.1"},
+  "state_before_ref": "state://demo/unpublished",
+  "state_after_ref": "state://demo/published/v0.1",
+  "validator_refs": ["val:2"],
+  "provenance_ref": "prov:demo-001",
+  "state": "confirmed",
+  "extensions": {}
+}
