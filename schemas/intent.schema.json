@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://evemisslab.example/schemas/itr/intent-v0.1.json",
+  "title": "ITR Intent v0.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "intent_id", "version", "goal", "hard_constraints", "forbidden_states", "success_criteria", "authority_scope", "risk_class"],
+  "properties": {
+    "schema_version": {"const": "0.1"},
+    "intent_id": {"type": "string", "minLength": 1, "maxLength": 256},
+    "version": {"type": "integer", "minimum": 1},
+    "goal": {"type": "string", "minLength": 1},
+    "hard_constraints": {"type": "array", "items": {"type": "string"}},
+    "soft_preferences": {"type": "array", "items": {"type": "string"}, "default": []},
+    "forbidden_states": {"type": "array", "items": {"type": "string"}},
+    "success_criteria": {"type": "array", "items": {"type": "string"}, "minItems": 1},
+    "authority_scope": {"type": "string", "minLength": 1},
+    "risk_class": {"enum": ["low", "medium", "high", "critical"]},
+    "extensions": {"type": "object", "additionalProperties": true}
+  }
+}
