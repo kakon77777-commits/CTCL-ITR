@@ -16,7 +16,9 @@ SRC = BASE / "src"
 if str(SRC) not in sys.path:
     sys.path.insert(0, str(SRC))
 
-from ctcl_itr.topology import analyze_events, load_events
+from ctcl_itr.interop.cloudevents import from_cloudevent, to_cloudevent
+from ctcl_itr.interop.opentelemetry import project_events
+from ctcl_itr.topology import analyze_events
 
 
 def load(name):
@@ -38,6 +40,10 @@ def validate_event_file(path, validator):
             validator.validate(obj)
             events.append(obj)
     return events
+
+
+def load_jsonl(path):
+    return [json.loads(line) for line in Path(path).read_text(encoding="utf-8").splitlines() if line.strip()]
 
 
 def main():
@@ -87,9 +93,26 @@ def main():
     assert machine["join_nodes"] == ["evt_008"]
     assert unit["poset_width"] == 3
 
-    print("ITR/ATL v0.2 topology pack: PASS")
+    expected_cloudevents = [to_cloudevent(event) for event in multi_events]
+    stored_cloudevents = load_jsonl(EXAMPLES / "multi_agent_branch_join.cloudevents.jsonl")
+    assert stored_cloudevents == expected_cloudevents, "CloudEvents reference export is stale"
+    roundtrip = [from_cloudevent(envelope) for envelope in stored_cloudevents]
+    assert roundtrip == multi_events, "CloudEvents round-trip must preserve ATL events"
+
+    expected_spans = project_events(multi_events)
+    stored_spans = json.loads((EXAMPLES / "multi_agent_branch_join.otel_spans.json").read_text(encoding="utf-8"))
+    assert stored_spans == expected_spans, "OpenTelemetry reference export is stale"
+    spans_by_event = {span["event_id"]: span for span in stored_spans}
+    join = spans_by_event["evt_008"]
+    assert join["parent_span_id"] is None
+    assert {link["event_id"] for link in join["links"]} == {"evt_005", "evt_006", "evt_007"}
+
+    print("ITR/ATL v0.2.1 observability pack: PASS")
     print(f"legacy_events={len(events)}")
     print(f"multi_agent_events={len(multi_events)}")
+    print(f"cloudevents_roundtrip={len(roundtrip)}")
+    print(f"otel_spans={len(stored_spans)}")
+    print(f"join_links={len(join['links'])}")
     print(f"machine_work={machine['work']}")
     print(f"machine_depth={machine['depth']}")
     print(f"poset_width={machine['poset_width']}")
