@@ -6,7 +6,7 @@ A causal, temporal, auditable runtime ledger for long-horizon and multi-agent AI
 
 ## Status
 
-**v0.1 — Engineering Contract / Reference Pack**
+**v0.2.0 — Topology Core / Engineering Contract**
 
 CTCL-ITR turns AI work from a flat `prompt → response` record into an observable execution model:
 
@@ -60,10 +60,21 @@ CTCL-ITR/
 │   └── demo_run.summary.json
 ├── sql/
 │   └── sqlite_schema.sql
+├── src/
+│   └── ctcl_itr/
+│       ├── __init__.py
+│       └── topology.py
+├── tests/
+│   ├── test_topology.py
+│   └── test_pack_validation.py
 ├── validator/
 │   └── validate_pack.py
+├── pyproject.toml
 ├── requirements.txt
+├── RELEASE_NOTES_v0.2.md
 ├── VALIDATION.json
+├── VALIDATION_v0.2.json
+├── SHA256SUMS.txt
 └── README.md
 ```
 
@@ -97,11 +108,54 @@ python validator/validate_pack.py
 Expected:
 
 ```text
-ITR/ATL v0.1 example pack: PASS
-events=18
+ITR/ATL v0.2 topology pack: PASS
+legacy_events=18
+multi_agent_events=12
+machine_work=1850.0
+machine_depth=1100.0
+poset_width=3
 ```
 
+## v0.2.0 — Topology Core
+
+v0.2.0 adds executable analysis for ATL causal DAGs:
+
+- branch / join detection
+- Interaction Work
+- Critical Depth / Span
+- deterministic Critical Path
+- Structural Parallelism (`Work / Depth`)
+- exact finite-poset width via Dilworth's theorem
+- `unit` and `machine_runtime_ms` weight contracts
+
+Analyze the reference multi-agent ledger:
+
+```bash
+python -m pip install -e .
+ctcl-itr-topology examples/multi_agent_branch_join.events.jsonl --weight machine_runtime_ms --pretty
+```
+
+Or without installation:
+
+```bash
+PYTHONPATH=src python -m ctcl_itr.topology examples/multi_agent_branch_join.events.jsonl --weight machine_runtime_ms --pretty
+```
+
+The reference graph contains three incomparable Agent branches followed by an `all` join. Under machine-runtime weighting its expected metrics are:
+
+```text
+work = 1850 ms
+depth = 1100 ms
+poset_width = 3
+```
+
+The analyzer treats `causal_parent_ids[]` as canonical hard happens-before edges. Storage order remains separate from causal order.
+
 ## Relationship to CTCL
+
+CTCL provides the broader temporal / causal framework.
+
+CTCL-ITR is the execution-time layer that makes interaction time observable and auditable.
 
 ```text
 CTCL
@@ -109,7 +163,18 @@ CTCL
     └── ATL — Agent Temporal Ledger
 ```
 
-The underlying theory series distinguishes Interaction Time, Intent Cycle, Execution Trajectory, Interaction Topology, AI Compute Economics, Delegated Time, Single-Run Quality, and World Time / Historical Sedimentation.
+The underlying theory series distinguishes:
+
+1. Interaction Time
+2. Intent Cycle
+3. Execution Trajectory
+4. Interaction Topology
+5. AI Compute Economics
+6. Delegated Time
+7. Single-Run Quality
+8. World Time & Historical Sedimentation
+
+The v0.1 whitepaper maps these layers directly into runtime fields and event semantics. v0.2.0 makes the Interaction Topology layer executable.
 
 ## Interoperability direction
 
@@ -126,9 +191,12 @@ The canonical ATL causal graph keeps `causal_parent_ids[]` because multi-agent j
 
 ## Roadmap
 
-### v0.2
+### v0.2.0 — complete in this branch
 - multi-agent branch / join reference run
 - critical-path and interaction-depth calculator
+- exact finite-poset width analyzer
+
+### v0.2.1 — next interoperability slice
 - OpenTelemetry exporter
 - CloudEvents adapter
 - event hash chain
@@ -154,4 +222,4 @@ The canonical ATL causal graph keeps `causal_parent_ids[]` because multi-agent j
 ---
 
 EveMissLab / EVEMISS TECHNOLOGY CO., LTD.  
-CTCL-ITR v0.1 — 2026
+CTCL-ITR v0.2.0 — 2026
