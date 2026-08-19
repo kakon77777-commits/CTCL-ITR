@@ -1,0 +1,30 @@
+{
+  "pack": "Interaction-Time Runtime & Agent Temporal Ledger v0.1",
+  "date": "2026-08-20",
+  "checks": {
+    "schemas_load_and_self_validate": true,
+    "example_objects_validate": true,
+    "jsonl_events_validate": true,
+    "event_ids_unique": true,
+    "ledger_seq_contiguous": true,
+    "causal_parents_precede_children_in_demo": true,
+    "validation_before_success": true,
+    "human_approval_before_commit": true,
+    "commit_confirmed_before_success": true,
+    "sqlite_append_only_update_blocked": true,
+    "sqlite_append_only_delete_blocked": true,
+    "whitepaper_utf8": true,
+    "whitepaper_no_unicode_escape": true,
+    "whitepaper_no_bracket_math": true,
+    "whitepaper_no_parenthesis_math": true,
+    "whitepaper_display_math_balanced": true,
+    "whitepaper_inline_math_balanced": true
+  },
+  "example_validator": {
+    "jsonschema_installed": true,
+    "returncode": 0,
+    "stdout": "ITR/ATL v0.1 example pack: PASS\nevents=18",
+    "stderr": ""
+  },
+  "all_passed": true
+}
