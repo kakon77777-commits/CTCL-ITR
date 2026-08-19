@@ -1,0 +1,15 @@
+{
+  "schema_version": "0.1",
+  "checkpoint_id": "chk:demo-001:1",
+  "run_id": "run:demo-001",
+  "event_offset": 11,
+  "state_ref": "state://run/demo-001/after-suspend",
+  "artifact_refs": [
+    {"artifact_id": "sha256:0eb793430cdaacbb12dd74c60f009594f2addd1368dc5788c1aa6edf99c598f9", "media_type": "text/plain", "role": "release_candidate", "uri": "artifact://demo/release.txt"},
+    {"artifact_id": "sha256:37ed8c68c7f7ce5de56a8a77fde491181cd75beb38a04c50f9aaa1c77661359a", "media_type": "application/json", "role": "validator_result", "uri": "artifact://demo/validation.json"}
+  ],
+  "authority_ref": null,
+  "budget_snapshot": {"token_in": 420, "token_out": 100, "tool_calls": 2},
+  "created_at": "2026-08-20T02:11:02+08:00",
+  "extensions": {}
+}
