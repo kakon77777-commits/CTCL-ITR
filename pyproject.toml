@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ctcl-itr"
-version = "0.2.3"
+version = "0.2.4"
 description = "Causal, temporal, auditable runtime ledger utilities for long-horizon and multi-agent AI systems."
 readme = "README.md"
 requires-python = ">=3.11"
@@ -23,6 +23,7 @@ ctcl-itr-cloudevents = "ctcl_itr.interop.cloudevents:_main"
 ctcl-itr-otel = "ctcl_itr.interop.opentelemetry:_main"
 ctcl-itr-integrity = "ctcl_itr.integrity:_main"
 ctcl-itr-governance-demo = "ctcl_itr.governance:_main"
+ctcl-itr-governance-store = "ctcl_itr.governance_store:_main"
 
 [tool.setuptools.packages.find]
 where = ["src"]

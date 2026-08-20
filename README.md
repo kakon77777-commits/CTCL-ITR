@@ -6,7 +6,7 @@ A causal, temporal, auditable runtime ledger for long-horizon and multi-agent AI
 
 ## Status
 
-**v0.2.2 — Ledger Integrity / Engineering Contract**
+**v0.2.4 — Durable Governance Store / Engineering Contract**
 
 CTCL-ITR turns AI work from a flat `prompt → response` record into an observable execution model:
 
@@ -64,12 +64,15 @@ CTCL-ITR/
 │   ├── multi_agent_branch_join.integrity.jsonl
 │   └── multi_agent_branch_join.anchor.json
 ├── sql/
-│   └── sqlite_schema.sql
+│   ├── sqlite_schema.sql
+│   └── governance_store.sql
 ├── src/
 │   └── ctcl_itr/
 │       ├── __init__.py
 │       ├── topology.py
 │       ├── integrity.py
+│       ├── governance.py
+│       ├── governance_store.py
 │       └── interop/
 │           ├── cloudevents.py
 │           └── opentelemetry.py
@@ -79,6 +82,8 @@ CTCL-ITR/
 │   ├── test_opentelemetry_projection.py
 │   ├── test_interop_cli.py
 │   ├── test_integrity.py
+│   ├── test_governance.py
+│   ├── test_durable_governance.py
 │   └── test_pack_validation.py
 ├── validator/
 │   └── validate_pack.py
@@ -87,10 +92,14 @@ CTCL-ITR/
 ├── RELEASE_NOTES_v0.2.md
 ├── RELEASE_NOTES_v0.2.1.md
 ├── RELEASE_NOTES_v0.2.2.md
+├── RELEASE_NOTES_v0.2.3.md
+├── RELEASE_NOTES_v0.2.4.md
 ├── VALIDATION.json
 ├── VALIDATION_v0.2.json
 ├── VALIDATION_v0.2.1.json
 ├── VALIDATION_v0.2.2.json
+├── VALIDATION_v0.2.3.json
+├── VALIDATION_v0.2.4.json
 ├── SHA256SUMS.txt
 └── README.md
 ```
@@ -125,6 +134,8 @@ python validator/validate_pack.py
 Expected:
 
 ```text
+ITR/ATL v0.2.4 durable governance store: PASS
+ITR/ATL v0.2.3 governance core pack: PASS
 ITR/ATL v0.2.2 ledger integrity pack: PASS
 ITR/ATL v0.2.1 observability pack: PASS
 legacy_events=18
@@ -133,6 +144,12 @@ cloudevents_roundtrip=12
 otel_spans=12
 join_links=3
 integrity_records=12
+governance_events=5
+governance_resume_eligible=True
+governance_scope_block=scope_mismatch
+durable_restart_recovered=True
+durable_atomic_resolve=True
+durable_authority_uses=2
 anchor_checked=True
 tamper_detection=record_digest_mismatch
 truncation_detection=anchor_event_count_mismatch
@@ -250,6 +267,61 @@ The reference profile hashes the exact nonblank JSONL record bytes, excluding th
 
 The chain detects record mutation, reordering, interior deletion, and sidecar link tampering. A trusted `LedgerAnchor` binds the final chain head and event count, which is what makes suffix truncation detectable. An anchor stored under the same rewrite authority as the ledger is not a cryptographic trust root; external signing/publication is a future layer.
 
+## v0.2.3 — Governance Core
+
+v0.2.3 makes human checkpoints explicit runtime objects rather than treating an approval click as the governance model.
+
+```text
+ApprovalRequest
+  -> DecisionReceipt
+  -> AuthorityGrant
+  -> Resume Eligibility
+  -> authority.checked
+  -> run.resumed
+```
+
+The three objects remain distinct:
+
+```text
+Human decision != authority grant != runtime resume
+```
+
+`ApprovalRequest` carries the trigger, decision-ready context, evidence references, requested authority, risk class, and expiry. `DecisionReceipt` records the principal, decision, selected option, reason, and human active/governance time. `AuthorityGrant` narrows the resulting scope, target, expiry, revocability, and maximum use count.
+
+Reference CLI:
+
+```bash
+ctcl-itr-governance-demo demo --pretty
+```
+
+The reference `ApprovalQueue` is deterministic and in-memory; it defines semantics for pending, approved, denied, modified, deferred, cancelled, and expired requests, plus authority consumption and revocation. It is not a distributed workflow queue.
+
+A suspended run is resume-eligible only when the decision authorizes the action and an active bounded grant matches the action and target, remains unexpired/unrevoked, and still has remaining uses.
+
+## v0.2.4 — Durable Governance Store
+
+v0.2.4 adds `SQLiteApprovalQueue`, a restart-safe reference implementation of the v0.2.3 governance queue semantics. Canonical `ApprovalRequest`, `DecisionReceipt`, and `AuthorityGrant` JSON objects remain unchanged.
+
+```text
+ApprovalRequest / DecisionReceipt / AuthorityGrant
+        |
+        v
+SQLite durable state + state_version
+        |
+        +--> restart recovery
+        +--> atomic resolve / consume / revoke
+        +--> append-only governance mutation journal
+```
+
+The reference profile enables SQLite foreign keys, WAL journaling, and `synchronous=FULL`. Multi-object `resolve()` and authority read-modify-write operations use `BEGIN IMMEDIATE`.
+
+```bash
+ctcl-itr-governance-store demo --db /tmp/ctcl-governance.sqlite3 --pretty
+ctcl-itr-governance-store status --db /tmp/ctcl-governance.sqlite3 --pretty
+```
+
+The store is an operational durability layer, not the canonical ATL event history. Its `governance_mutations` table is append-only reference evidence and does not replace the v0.2.2 integrity chain. Distributed leases/fencing and multi-node consensus remain future work.
+
 ## Relationship to CTCL
 
 CTCL provides the broader temporal / causal framework.
@@ -307,9 +379,17 @@ The canonical ATL causal graph keeps `causal_parent_ids[]` because multi-agent j
 - mutation / reorder / deletion / anchored truncation detection
 - integrity CLI and JSON Schemas
 
-### v0.2.3 — governance slice
-- human approval queue
+### v0.2.3 — Governance Core
+- human approval queue semantics
 - checkpoint decision receipts
+- bounded authority grants
+- resume eligibility / revocation / expiry
+
+### v0.2.4 — Durable Governance Store
+- SQLite-backed restart-safe approval queue
+- transactional decision/grant persistence
+- durable authority use/revocation/expiration
+- append-only governance mutation journal
 
 ### v0.3
 - distributed workers and fencing
@@ -331,4 +411,4 @@ The canonical ATL causal graph keeps `causal_parent_ids[]` because multi-agent j
 ---
 
 EveMissLab / EVEMISS TECHNOLOGY CO., LTD.  
-CTCL-ITR v0.2.2 — 2026
+CTCL-ITR v0.2.4 — 2026
