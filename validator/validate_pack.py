@@ -18,6 +18,7 @@ if str(SRC) not in sys.path:
 
 from ctcl_itr.interop.cloudevents import from_cloudevent, to_cloudevent
 from ctcl_itr.interop.opentelemetry import project_events
+from ctcl_itr.integrity import read_jsonl_record_bytes, seal_records, verify_records
 from ctcl_itr.topology import analyze_events
 
 
@@ -60,6 +61,8 @@ def main():
         "commit-receipt.schema.json",
         "run-summary.schema.json",
         "temporal-event.schema.json",
+        "integrity-record.schema.json",
+        "ledger-anchor.schema.json",
     ]:
         jsonschema.Draft202012Validator.check_schema(load(schema_name))
 
@@ -107,12 +110,44 @@ def main():
     assert join["parent_span_id"] is None
     assert {link["event_id"] for link in join["links"]} == {"evt_005", "evt_006", "evt_007"}
 
+    raw_records = read_jsonl_record_bytes(multi_path)
+    expected_integrity, expected_anchor = seal_records(raw_records)
+    stored_integrity = load_jsonl(EXAMPLES / "multi_agent_branch_join.integrity.jsonl")
+    stored_anchor = json.loads((EXAMPLES / "multi_agent_branch_join.anchor.json").read_text(encoding="utf-8"))
+    assert stored_integrity == expected_integrity, "integrity reference export is stale"
+    assert stored_anchor == expected_anchor, "ledger anchor reference export is stale"
+
+    integrity_schema = load("integrity-record.schema.json")
+    integrity_validator = jsonschema.Draft202012Validator(integrity_schema)
+    for item in stored_integrity:
+        integrity_validator.validate(item)
+    jsonschema.Draft202012Validator(load("ledger-anchor.schema.json")).validate(stored_anchor)
+
+    integrity_report = verify_records(raw_records, stored_integrity, stored_anchor)
+    assert integrity_report["valid"] is True
+    assert integrity_report["anchor_checked"] is True
+
+    tampered_records = list(raw_records)
+    tampered_records[0] = tampered_records[0].replace(b'"status":"ok"', b'"status":"OK"', 1)
+    tamper_report = verify_records(tampered_records, stored_integrity, stored_anchor)
+    assert tamper_report["valid"] is False
+    assert tamper_report["failure"]["code"] == "record_digest_mismatch"
+
+    truncation_report = verify_records(raw_records[:-1], stored_integrity[:-1], stored_anchor)
+    assert truncation_report["valid"] is False
+    assert truncation_report["failure"]["code"] == "anchor_event_count_mismatch"
+
+    print("ITR/ATL v0.2.2 ledger integrity pack: PASS")
     print("ITR/ATL v0.2.1 observability pack: PASS")
     print(f"legacy_events={len(events)}")
     print(f"multi_agent_events={len(multi_events)}")
     print(f"cloudevents_roundtrip={len(roundtrip)}")
     print(f"otel_spans={len(stored_spans)}")
     print(f"join_links={len(join['links'])}")
+    print(f"integrity_records={len(stored_integrity)}")
+    print(f"anchor_checked={integrity_report['anchor_checked']}")
+    print(f"tamper_detection={tamper_report['failure']['code']}")
+    print(f"truncation_detection={truncation_report['failure']['code']}")
     print(f"machine_work={machine['work']}")
     print(f"machine_depth={machine['depth']}")
     print(f"poset_width={machine['poset_width']}")

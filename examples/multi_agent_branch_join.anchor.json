@@ -1,0 +1,10 @@
+{
+  "event_count": 12,
+  "final_chain_digest": "sha256:d842860c1dde0195dc31c80bffd541f1c10cc809bfb16367bc88d768bb90adf1",
+  "first_event_id": "evt_001",
+  "hash_algorithm": "sha256",
+  "last_event_id": "evt_012",
+  "record_encoding": "atl-jsonl-record-v1",
+  "run_id": "run:demo-multi-agent-001",
+  "schema_version": "0.2.2"
+}

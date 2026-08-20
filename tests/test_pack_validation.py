@@ -21,3 +21,22 @@ def test_reference_pack_validator_includes_v021_observability_exports():
     assert "cloudevents_roundtrip=12" in completed.stdout
     assert "otel_spans=12" in completed.stdout
     assert "join_links=3" in completed.stdout
+
+
+def test_reference_pack_validator_includes_v022_ledger_integrity():
+    root = Path(__file__).resolve().parents[1]
+    env = os.environ.copy()
+    env["PYTHONPATH"] = str(root / "src")
+    completed = subprocess.run(
+        [sys.executable, "validator/validate_pack.py"],
+        cwd=root,
+        env=env,
+        capture_output=True,
+        text=True,
+    )
+    assert completed.returncode == 0, completed.stderr
+    assert "ITR/ATL v0.2.2 ledger integrity pack: PASS" in completed.stdout
+    assert "integrity_records=12" in completed.stdout
+    assert "anchor_checked=True" in completed.stdout
+    assert "tamper_detection=record_digest_mismatch" in completed.stdout
+    assert "truncation_detection=anchor_event_count_mismatch" in completed.stdout
