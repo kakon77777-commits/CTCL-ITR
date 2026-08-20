@@ -1,0 +1,1 @@
+{"schema_version":"0.2.3","authority_ref":"auth:gov-001","decision_id":"decision:gov-001","principal":"user:neo","scope":["publish"],"target":"demo://published/release","issued_at":"2026-08-20T08:10:01+00:00","expires_at":"2026-08-20T09:00:00+00:00","max_uses":1,"revocable":true,"uses":0,"state":"active","revocation_reason":null}
