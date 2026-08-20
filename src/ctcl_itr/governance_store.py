@@ -161,6 +161,30 @@ class SQLiteApprovalQueue:
         ).fetchall()
         return [_json_load(row["payload_json"]) for row in rows]
 
+    def list_requests(self, status: str | None = None) -> list[dict[str, Any]]:
+        if status is None:
+            rows = self._conn.execute(
+                "SELECT payload_json FROM governance_approval_requests ORDER BY approval_id"
+            ).fetchall()
+        else:
+            rows = self._conn.execute(
+                "SELECT payload_json FROM governance_approval_requests WHERE status=? ORDER BY approval_id",
+                (status,),
+            ).fetchall()
+        return [_json_load(row["payload_json"]) for row in rows]
+
+    def list_receipts(self) -> list[dict[str, Any]]:
+        rows = self._conn.execute(
+            "SELECT payload_json FROM governance_decision_receipts ORDER BY decision_id"
+        ).fetchall()
+        return [_json_load(row["payload_json"]) for row in rows]
+
+    def list_grants(self) -> list[dict[str, Any]]:
+        rows = self._conn.execute(
+            "SELECT payload_json FROM governance_authority_grants ORDER BY authority_ref"
+        ).fetchall()
+        return [_json_load(row["payload_json"]) for row in rows]
+
     def get_request(self, approval_id: str) -> dict[str, Any]:
         row = self._conn.execute(
             "SELECT payload_json FROM governance_approval_requests WHERE approval_id=?", (approval_id,)

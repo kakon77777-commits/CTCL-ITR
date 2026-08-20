@@ -1,0 +1,49 @@
+{
+  "release": "CTCL-ITR v0.2.5 Governance Observability & Oversight Metrics",
+  "date": "2026-08-21",
+  "verification": {
+    "pytest": {
+      "command": "python -m pytest -q -p no:cacheprovider",
+      "returncode": 0,
+      "output": "67 passed in 24.85s"
+    },
+    "base_pack_validator": {
+      "command": "python validator/validate_pack.py",
+      "returncode": 0,
+      "status": "PASS"
+    },
+    "metrics_validator": {
+      "command": "python validator/validate_metrics.py",
+      "returncode": 0,
+      "markers": {
+        "governance_hid": 0.4444444444444444,
+        "governance_eod": 0.3157894736842105,
+        "governance_oversight_debt": 28.0,
+        "governance_escalation_p95_ms": 2400000
+      }
+    },
+    "editable_install": {
+      "installed_version": "0.2.5",
+      "returncode": 0
+    }
+  },
+  "measurement_boundaries": {
+    "metrics_are_authority": false,
+    "default_weights_are_objective_ontology": false,
+    "approval_expiry_equals_harm_deadline": false,
+    "explicit_intervention_deadline_preferred": true,
+    "oversight_debt_vector_is_canonical_diagnostic": true,
+    "oversight_debt_total_is_policy_projection": true
+  },
+  "compatibility": {
+    "temporal_event_schema_changed": false,
+    "governance_object_schemas_changed": false,
+    "durable_governance_mutation_semantics_changed": false,
+    "v0.2.4_durable_store_valid": true,
+    "v0.2.3_governance_valid": true,
+    "v0.2.2_integrity_valid": true,
+    "v0.2.1_observability_valid": true,
+    "v0.2.0_topology_valid": true
+  },
+  "all_passed": true
+}
