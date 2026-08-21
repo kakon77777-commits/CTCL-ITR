@@ -1,0 +1,281 @@
+{
+  "schema_version": "0.2.5",
+  "observed_at": "2026-08-20T10:00:00+00:00",
+  "policy": {
+    "risk_weights": {
+      "low": 1.0,
+      "medium": 2.0,
+      "high": 4.0,
+      "critical": 8.0
+    },
+    "debt_multipliers": {
+      "unresolved": 1.0,
+      "overdue": 1.0,
+      "deferred": 0.5,
+      "stale_authority": 1.0
+    },
+    "effective_transition_types": [
+      "action.completed",
+      "validation.completed",
+      "commit.confirmed",
+      "human.checkpoint.resolved"
+    ],
+    "closing_decisions": [
+      "approve",
+      "deny",
+      "modify",
+      "cancel"
+    ]
+  },
+  "intervention_deadlines": {
+    "approval:h1": "2026-08-20T08:15:00+00:00",
+    "approval:c1": "2026-08-20T08:20:00+00:00"
+  },
+  "approval_requests": [
+    {
+      "schema_version": "0.2.3",
+      "approval_id": "approval:m1",
+      "run_id": "run:approval:m1",
+      "intent_id": "intent:approval:m1",
+      "trigger_event_id": "evt:approval:m1",
+      "requested_action": "publish",
+      "target": "demo://published/release",
+      "risk_class": "medium",
+      "reason": "reference governance metrics scenario",
+      "options": [
+        "approve",
+        "deny",
+        "defer"
+      ],
+      "evidence_refs": [
+        "validation:metrics"
+      ],
+      "authority_requested": {
+        "scope": [
+          "publish"
+        ],
+        "max_uses": 2
+      },
+      "requested_at": "2026-08-20T08:00:00+00:00",
+      "expires_at": "2026-08-20T09:00:00+00:00",
+      "status": "pending"
+    },
+    {
+      "schema_version": "0.2.3",
+      "approval_id": "approval:h1",
+      "run_id": "run:approval:h1",
+      "intent_id": "intent:approval:h1",
+      "trigger_event_id": "evt:approval:h1",
+      "requested_action": "publish",
+      "target": "demo://published/release",
+      "risk_class": "high",
+      "reason": "reference governance metrics scenario",
+      "options": [
+        "approve",
+        "deny",
+        "defer"
+      ],
+      "evidence_refs": [
+        "validation:metrics"
+      ],
+      "authority_requested": {
+        "scope": [
+          "publish"
+        ],
+        "max_uses": 2
+      },
+      "requested_at": "2026-08-20T08:00:00+00:00",
+      "expires_at": "2026-08-20T08:30:00+00:00",
+      "status": "pending"
+    },
+    {
+      "schema_version": "0.2.3",
+      "approval_id": "approval:c1",
+      "run_id": "run:approval:c1",
+      "intent_id": "intent:approval:c1",
+      "trigger_event_id": "evt:approval:c1",
+      "requested_action": "publish",
+      "target": "demo://published/release",
+      "risk_class": "critical",
+      "reason": "reference governance metrics scenario",
+      "options": [
+        "approve",
+        "deny",
+        "defer"
+      ],
+      "evidence_refs": [
+        "validation:metrics"
+      ],
+      "authority_requested": {
+        "scope": [
+          "publish"
+        ],
+        "max_uses": 2
+      },
+      "requested_at": "2026-08-20T08:00:00+00:00",
+      "expires_at": "2026-08-20T08:20:00+00:00",
+      "status": "pending"
+    },
+    {
+      "schema_version": "0.2.3",
+      "approval_id": "approval:h2",
+      "run_id": "run:approval:h2",
+      "intent_id": "intent:approval:h2",
+      "trigger_event_id": "evt:approval:h2",
+      "requested_action": "publish",
+      "target": "demo://published/release",
+      "risk_class": "high",
+      "reason": "reference governance metrics scenario",
+      "options": [
+        "approve",
+        "deny",
+        "defer"
+      ],
+      "evidence_refs": [
+        "validation:metrics"
+      ],
+      "authority_requested": {
+        "scope": [
+          "publish"
+        ],
+        "max_uses": 2
+      },
+      "requested_at": "2026-08-20T08:00:00+00:00",
+      "expires_at": "2026-08-20T09:00:00+00:00",
+      "status": "pending"
+    },
+    {
+      "schema_version": "0.2.3",
+      "approval_id": "approval:l1",
+      "run_id": "run:approval:l1",
+      "intent_id": "intent:approval:l1",
+      "trigger_event_id": "evt:approval:l1",
+      "requested_action": "publish",
+      "target": "demo://published/release",
+      "risk_class": "low",
+      "reason": "reference governance metrics scenario",
+      "options": [
+        "approve",
+        "deny",
+        "defer"
+      ],
+      "evidence_refs": [
+        "validation:metrics"
+      ],
+      "authority_requested": {
+        "scope": [
+          "publish"
+        ],
+        "max_uses": 2
+      },
+      "requested_at": "2026-08-20T08:00:00+00:00",
+      "expires_at": "2026-08-20T08:30:00+00:00",
+      "status": "pending"
+    }
+  ],
+  "decision_receipts": [
+    {
+      "schema_version": "0.2.3",
+      "decision_id": "decision:m1",
+      "approval_id": "approval:m1",
+      "run_id": "run:approval:m1",
+      "principal": "user:neo",
+      "decision": "approve",
+      "selected_option": "approve",
+      "decided_at": "2026-08-20T08:10:00+00:00",
+      "human_active_ms": 42000,
+      "human_governance_ms": 42000,
+      "reason": "reference metrics decision"
+    },
+    {
+      "schema_version": "0.2.3",
+      "decision_id": "decision:h1",
+      "approval_id": "approval:h1",
+      "run_id": "run:approval:h1",
+      "principal": "user:neo",
+      "decision": "deny",
+      "selected_option": "deny",
+      "decided_at": "2026-08-20T08:05:00+00:00",
+      "human_active_ms": 20000,
+      "human_governance_ms": 20000,
+      "reason": "reference metrics decision"
+    },
+    {
+      "schema_version": "0.2.3",
+      "decision_id": "decision:h2",
+      "approval_id": "approval:h2",
+      "run_id": "run:approval:h2",
+      "principal": "user:neo",
+      "decision": "defer",
+      "selected_option": "defer",
+      "decided_at": "2026-08-20T08:15:00+00:00",
+      "human_active_ms": 30000,
+      "human_governance_ms": 30000,
+      "reason": "reference metrics decision"
+    },
+    {
+      "schema_version": "0.2.3",
+      "decision_id": "decision:l1",
+      "approval_id": "approval:l1",
+      "run_id": "run:approval:l1",
+      "principal": "user:neo",
+      "decision": "approve",
+      "selected_option": "approve",
+      "decided_at": "2026-08-20T08:40:00+00:00",
+      "human_active_ms": 50000,
+      "human_governance_ms": 50000,
+      "reason": "reference metrics decision"
+    }
+  ],
+  "authority_grants": [
+    {
+      "schema_version": "0.2.3",
+      "authority_ref": "auth:m1",
+      "decision_id": "decision:m1",
+      "principal": "user:neo",
+      "scope": [
+        "publish"
+      ],
+      "target": "demo://published/release",
+      "issued_at": "2026-08-20T08:10:01+00:00",
+      "expires_at": "2026-08-20T09:00:00+00:00",
+      "max_uses": 2,
+      "revocable": true,
+      "uses": 0,
+      "state": "active",
+      "revocation_reason": null
+    }
+  ],
+  "events": [
+    {
+      "event_type": "action.completed"
+    },
+    {
+      "event_type": "action.completed"
+    },
+    {
+      "event_type": "validation.completed"
+    },
+    {
+      "event_type": "validation.completed"
+    },
+    {
+      "event_type": "commit.confirmed"
+    },
+    {
+      "event_type": "human.checkpoint.resolved"
+    },
+    {
+      "event_type": "human.checkpoint.resolved"
+    },
+    {
+      "event_type": "human.checkpoint.resolved"
+    },
+    {
+      "event_type": "human.checkpoint.resolved"
+    },
+    {
+      "event_type": "run.suspended"
+    }
+  ]
+}

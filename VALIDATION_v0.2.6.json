@@ -1,0 +1,12 @@
+{
+  "release": "CTCL-ITR v0.2.6 Governance Horizon & Escalation Signals",
+  "date": "2026-08-21",
+  "verification": {
+    "pytest": {"command": "python -m pytest -q -p no:cacheprovider", "returncode": 0, "output": "77 passed in 19.93s"},
+    "validators": {"pack": "PASS", "metrics": "PASS", "signals": "PASS"},
+    "compileall": {"returncode": 0},
+    "editable_install": {"returncode": 0, "installed_version": "0.2.6"},
+    "installed_cli": {"returncode": 0, "autonomy_horizon": 12.0, "governance_horizon": 9.0, "autonomy_governance_gap": 3.0, "governance_margin": -3.0, "signal_breaches": 6, "overall_level": "critical", "recommended_escalation": "urgent_human_review", "non_authoritative": true}
+  },
+  "all_passed": true
+}

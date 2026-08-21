@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://evemisslab.example/schemas/itr/governance-horizon-assessment-v0.2.6.json",
+  "title": "CTCL-ITR GovernanceHorizonAssessment v0.2.6",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "assessment_id",
+    "assessed_at",
+    "measurement_contract",
+    "autonomy_horizon_depth",
+    "governance_horizon_depth",
+    "evidence_refs"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.2.6"
+    },
+    "assessment_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "assessed_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "measurement_contract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "unit",
+        "reliability_p",
+        "scope_id",
+        "assessment_method"
+      ],
+      "properties": {
+        "unit": {
+          "const": "interaction_depth"
+        },
+        "reliability_p": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 1
+        },
+        "scope_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "assessment_method": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "autonomy_horizon_depth": {
+      "type": "number",
+      "minimum": 0
+    },
+    "governance_horizon_depth": {
+      "type": "number",
+      "minimum": 0
+    },
+    "evidence_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    }
+  }
+}
