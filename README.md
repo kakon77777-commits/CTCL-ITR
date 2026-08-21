@@ -6,7 +6,7 @@ A causal, temporal, auditable runtime ledger for long-horizon and multi-agent AI
 
 ## Status
 
-**v0.2.4 — Durable Governance Store / Engineering Contract**
+**v0.2.7 — Horizon Calibration & Evidence Profiles / Engineering Contract**
 
 CTCL-ITR turns AI work from a flat `prompt → response` record into an observable execution model:
 
@@ -129,6 +129,8 @@ The downloadable v0.1 release pack additionally contains the canonical monolithi
 ```bash
 python -m pip install -r requirements.txt
 python validator/validate_pack.py
+python validator/validate_metrics.py
+python validator/validate_signals.py
 ```
 
 Expected:
@@ -157,7 +159,6 @@ machine_work=1850.0
 machine_depth=1100.0
 poset_width=3
 ```
-
 
 ## v0.2.0 — Topology Core
 
@@ -193,7 +194,6 @@ poset_width = 3
 ```
 
 The analyzer treats `causal_parent_ids[]` as canonical hard happens-before edges. Storage order remains separate from causal order.
-
 
 ## v0.2.1 — Observability Adapters
 
@@ -322,6 +322,125 @@ ctcl-itr-governance-store status --db /tmp/ctcl-governance.sqlite3 --pretty
 
 The store is an operational durability layer, not the canonical ATL event history. Its `governance_mutations` table is append-only reference evidence and does not replace the v0.2.2 integrity chain. Distributed leases/fencing and multi-node consensus remain future work.
 
+## v0.2.5 — Governance Observability & Oversight Metrics
+
+v0.2.5 adds a read-only governance diagnostics layer above ATL checkpoint events and durable governance state.
+
+It computes:
+
+```text
+Human Intervention Density
+Effective Oversight Density
+Escalation Latency (mean / p50 / p95 / max)
+Intervention Timing
+Oversight Debt
+Human Governance Time
+Risk-Class Oversight Coverage
+```
+
+Reference CLI:
+
+```bash
+ctcl-itr-governance-metrics --scenario examples/governance_metrics_scenario.json --pretty
+```
+
+The metrics layer preserves:
+
+```text
+Observation != Authority
+Metric != Policy Decision
+```
+
+Human Intervention Density is descriptive rather than an optimization target: fewer human interventions are not automatically better governance.
+
+## v0.2.6 — Governance Horizon & Escalation Signals
+
+v0.2.6 turns directional governance metrics into deterministic, non-authoritative escalation signals while keeping horizon measurement explicit.
+
+```text
+GovernanceMetricsReport v0.2.5
+        +
+GovernanceHorizonAssessment
+        +
+GovernanceEscalationPolicy
+        |
+        v
+GovernanceSignalReport
+```
+
+The horizon assessment keeps Autonomy Horizon and Governance Horizon under one measurement contract:
+
+```text
+H_A = Autonomy Horizon
+H_G = Governance Horizon
+Delta_AG = H_A - H_G
+M_G = H_G - H_A
+```
+
+Reference CLI:
+
+```bash
+ctcl-itr-governance-signals   --metrics examples/governance_metrics_report.json   --horizon examples/governance_horizon_assessment.json   --policy examples/governance_escalation_policy.json   --pretty
+```
+
+The reference policy signals only directional quantities: Autonomy–Governance Gap, Effective Oversight Density, Oversight Debt, p95 escalation latency, explicit intervention-deadline breaches, and critical-risk oversight coverage. Human Intervention Density remains context, not a pass/fail threshold.
+
+Core boundary:
+
+```text
+Signal != Authority
+Signal != Automatic Enforcement
+```
+
+The aggregate `recommended_escalation` field is advisory only. It does not grant, revoke, suspend, resume, or commit actions.
+
+## v0.2.7 — Horizon Calibration & Evidence Profiles
+
+v0.2.7 derives the v0.2.6 Autonomy / Governance Horizon assessment from repeated evidence instead of requiring manually entered depths.
+
+```text
+Repeated trials by interaction depth
+        |
+        v
+empirical binomial reliability
+        |
+        v
+non-increasing PAVA calibration
+        |
+        v
+H_A / H_G at declared reliability p
+        |
+        v
+GovernanceHorizonAssessment v0.2.6
+```
+
+Reference CLI:
+
+```bash
+ctcl-itr-horizon-calibrate --suite examples/horizon_calibration_suite.json --pretty
+```
+
+The reference method `monotone_binomial_pava_v1` reports Wilson evidence intervals at each observed depth, enforces the expected non-increasing reliability relationship, and refuses to extrapolate a Horizon when the target reliability is not bracketed by observed evidence.
+
+Reference evidence reproduces the earlier example from repeated trials:
+
+```text
+reliability_p = 0.90
+autonomy_trials = 80
+governance_trials = 80
+H_A = 12
+H_G = 9
+Delta_AG = 3
+```
+
+Core boundary:
+
+```text
+Calibration != Authority
+Evidence Profile != Policy Decision
+Calibrated Horizon != Automatic Enforcement
+```
+
 ## Relationship to CTCL
 
 CTCL provides the broader temporal / causal framework.
@@ -391,6 +510,26 @@ The canonical ATL causal graph keeps `causal_parent_ids[]` because multi-agent j
 - durable authority use/revocation/expiration
 - append-only governance mutation journal
 
+### v0.2.5 — Governance Observability & Oversight Metrics
+- Human Intervention Density
+- risk-weighted Effective Oversight Density
+- escalation latency and intervention timing
+- Oversight Debt and risk coverage
+
+### v0.2.6 — Governance Horizon & Escalation Signals
+- explicit Autonomy / Governance Horizon assessment contract
+- Autonomy–Governance Gap and governance margin
+- directional threshold signals
+- explicit-deadline breach signal
+- non-authoritative aggregate escalation projection
+
+### v0.2.7 — Horizon Calibration & Evidence Profiles
+- repeated-trial Horizon calibration suites
+- Wilson evidence intervals
+- monotone empirical PAVA reliability calibration
+- explicit support / no-extrapolation states
+- v0.2.6-compatible derived Horizon assessment
+
 ### v0.3
 - distributed workers and fencing
 - cross-process resume
@@ -411,4 +550,4 @@ The canonical ATL causal graph keeps `causal_parent_ids[]` because multi-agent j
 ---
 
 EveMissLab / EVEMISS TECHNOLOGY CO., LTD.  
-CTCL-ITR v0.2.4 — 2026
+CTCL-ITR v0.2.7 — 2026
