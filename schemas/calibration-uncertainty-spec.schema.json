@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://evemisslab.example/schemas/itr/calibration-uncertainty-spec-v0.2.9.json",
+  "title": "CTCL-ITR CalibrationUncertaintySpec v0.2.9",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "uncertainty_id", "generated_at", "method", "seed", "replicates", "interval_p", "minimum_supported_fraction"],
+  "properties": {
+    "schema_version": {"const": "0.2.9"},
+    "uncertainty_id": {"type": "string", "minLength": 1},
+    "generated_at": {"type": "string", "format": "date-time"},
+    "method": {"const": "stratified_empirical_binomial_sha256_v1"},
+    "seed": {"type": "string", "minLength": 1},
+    "replicates": {"type": "integer", "minimum": 1},
+    "interval_p": {"type": "number", "exclusiveMinimum": 0, "maximum": 1},
+    "minimum_supported_fraction": {"type": "number", "exclusiveMinimum": 0, "maximum": 1}
+  }
+}

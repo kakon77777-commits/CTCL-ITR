@@ -1,0 +1,24 @@
+{
+  "release": "CTCL-ITR v0.2.9 Calibration Uncertainty, Resampling & Drift Bands",
+  "date": "2026-08-23",
+  "verification": {
+    "legacy_groups": ["43 passed", "34 passed", "20 passed", "18 passed"],
+    "v0.2.9": "17 passed",
+    "total_tests": 132,
+    "validators": ["validate_pack", "validate_metrics", "validate_signals", "validate_calibration", "validate_robustness", "validate_uncertainty"],
+    "compileall": true,
+    "installed_version": "0.2.9",
+    "installed_cli": true
+  },
+  "reference": {
+    "replicates": 256,
+    "interval_p": 0.9,
+    "autonomy_adjusted_support": 0.76171875,
+    "autonomy_adjusted_positive_share": 0.9282051282051282,
+    "governance_adjusted_support": 0.78515625,
+    "governance_adjusted_positive_share": 0.9601990049751243,
+    "composition_resampled": false,
+    "non_authoritative": true
+  },
+  "all_passed": true
+}

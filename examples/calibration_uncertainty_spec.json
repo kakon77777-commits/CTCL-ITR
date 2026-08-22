@@ -1,0 +1,10 @@
+{
+  "schema_version": "0.2.9",
+  "uncertainty_id": "uncertainty:reference-base-current",
+  "generated_at": "2026-08-23T00:30:00+00:00",
+  "method": "stratified_empirical_binomial_sha256_v1",
+  "seed": "ctcl-itr-v0.2.9-reference-20260823",
+  "replicates": 256,
+  "interval_p": 0.90,
+  "minimum_supported_fraction": 0.50
+}
