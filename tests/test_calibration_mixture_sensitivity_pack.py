@@ -47,7 +47,8 @@ def test_mixture_sensitivity_validator_passes():
     assert "axes_are_additive=False" in completed.stdout
 
 
-def test_package_metadata_exposes_v0210_console_entry_point():
+def test_package_metadata_preserves_v0210_console_entry_point():
     metadata = tomllib.loads((ROOT / "pyproject.toml").read_text(encoding="utf-8"))
-    assert metadata["project"]["version"] == "0.2.10"
+    version = tuple(int(part) for part in metadata["project"]["version"].split("."))
+    assert version >= (0, 2, 10)
     assert metadata["project"]["scripts"]["ctcl-itr-mixture-sensitivity"] == "ctcl_itr.calibration_mixture_sensitivity:_main"
