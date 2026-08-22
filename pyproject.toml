@@ -4,14 +4,18 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ctcl-itr"
-version = "0.2.9"
+version = "0.2.10"
 description = "Causal, temporal, auditable runtime ledger utilities for long-horizon and multi-agent AI systems."
 readme = "README.md"
 requires-python = ">=3.11"
-dependencies = ["jsonschema>=4.18,<5"]
+dependencies = [
+  "jsonschema>=4.18,<5",
+]
 
 [project.optional-dependencies]
-test = ["pytest>=8,<9"]
+test = [
+  "pytest>=8,<9",
+]
 
 [project.scripts]
 ctcl-itr-topology = "ctcl_itr.topology:_main"
@@ -25,6 +29,7 @@ ctcl-itr-governance-signals = "ctcl_itr.governance_signals:_main"
 ctcl-itr-horizon-calibrate = "ctcl_itr.horizon_calibration:_main"
 ctcl-itr-calibration-robustness = "ctcl_itr.calibration_robustness:_main"
 ctcl-itr-calibration-uncertainty = "ctcl_itr.calibration_uncertainty:_main"
+ctcl-itr-mixture-sensitivity = "ctcl_itr.calibration_mixture_sensitivity:_main"
 
 [tool.setuptools.packages.find]
 where = ["src"]

@@ -1,0 +1,135 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://evemisslab.com/schemas/ctcl-itr/calibration-mixture-sensitivity-report-v0.2.10.json",
+  "title": "CTCL-ITR Calibration Mixture Sensitivity Report v0.2.10",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "sensitivity_id", "generated_at", "method",
+    "base_snapshot_id", "current_snapshot_id", "comparison_id",
+    "measurement_contract", "families", "reference_family_weights",
+    "grid", "conditioning", "subjects", "uncertainty_decomposition",
+    "interpretation_boundary", "non_authoritative"
+  ],
+  "properties": {
+    "schema_version": {"const": "0.2.10"},
+    "sensitivity_id": {"type": "string", "minLength": 1},
+    "generated_at": {"type": "string", "format": "date-time"},
+    "method": {"const": "simplex_grid_reference_mixture_v1"},
+    "base_snapshot_id": {"type": "string", "minLength": 1},
+    "current_snapshot_id": {"type": "string", "minLength": 1},
+    "comparison_id": {"type": "string", "minLength": 1},
+    "measurement_contract": {"type": "object"},
+    "families": {"type": "array", "minItems": 2, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+    "reference_family_weights": {"$ref": "#/$defs/weights"},
+    "grid": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["grid_step", "minimum_family_weight", "max_grid_points", "total_points"],
+      "properties": {
+        "grid_step": {"type": "number", "exclusiveMinimum": 0, "exclusiveMaximum": 1},
+        "minimum_family_weight": {"type": "number", "exclusiveMinimum": 0, "exclusiveMaximum": 1},
+        "max_grid_points": {"type": "integer", "minimum": 1},
+        "total_points": {"type": "integer", "minimum": 1}
+      }
+    },
+    "conditioning": {"type": "object"},
+    "subjects": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["autonomy", "governance"],
+      "properties": {
+        "autonomy": {"$ref": "#/$defs/subject"},
+        "governance": {"$ref": "#/$defs/subject"}
+      }
+    },
+    "uncertainty_decomposition": {"const": "separate_axes_not_additive"},
+    "interpretation_boundary": {"const": "reference_mixture_sensitivity_only"},
+    "non_authoritative": {"const": true}
+  },
+  "$defs": {
+    "nullableNumber": {"type": ["number", "null"]},
+    "weights": {
+      "type": "object",
+      "minProperties": 2,
+      "additionalProperties": {"type": "number", "minimum": 0, "maximum": 1}
+    },
+    "mixtureScan": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "reference_family_weights", "support_status", "support_reasons",
+        "composition_adjusted_delta", "reference_base_horizon", "reference_current_horizon"
+      ],
+      "properties": {
+        "reference_family_weights": {"$ref": "#/$defs/weights"},
+        "support_status": {"enum": ["supported", "unsupported"]},
+        "support_reasons": {"type": "array", "items": {"type": "string"}},
+        "composition_adjusted_delta": {"$ref": "#/$defs/nullableNumber"},
+        "reference_base_horizon": {"$ref": "#/$defs/nullableNumber"},
+        "reference_current_horizon": {"$ref": "#/$defs/nullableNumber"}
+      }
+    },
+    "sensitivityRange": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "required": ["minimum", "maximum", "span", "argmin_weights", "argmax_weights"],
+      "properties": {
+        "minimum": {"type": "number"},
+        "maximum": {"type": "number"},
+        "span": {"type": "number", "minimum": 0},
+        "argmin_weights": {"$ref": "#/$defs/weights"},
+        "argmax_weights": {"$ref": "#/$defs/weights"}
+      }
+    },
+    "signShares": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "required": ["positive", "negative", "zero"],
+      "properties": {
+        "positive": {"type": "number", "minimum": 0, "maximum": 1},
+        "negative": {"type": "number", "minimum": 0, "maximum": 1},
+        "zero": {"type": "number", "minimum": 0, "maximum": 1}
+      }
+    },
+    "uncertaintyAxes": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sampling_uncertainty_at_reference", "sampling_band_width_at_reference",
+        "reference_mixture_sensitivity_span", "mixture_to_sampling_width_ratio",
+        "larger_reported_axis", "axes_are_additive"
+      ],
+      "properties": {
+        "sampling_uncertainty_at_reference": {"type": ["object", "null"]},
+        "sampling_band_width_at_reference": {"$ref": "#/$defs/nullableNumber"},
+        "reference_mixture_sensitivity_span": {"$ref": "#/$defs/nullableNumber"},
+        "mixture_to_sampling_width_ratio": {"$ref": "#/$defs/nullableNumber"},
+        "larger_reported_axis": {"enum": ["sampling", "mixture_choice", "equal", "unavailable"]},
+        "axes_are_additive": {"const": false}
+      }
+    },
+    "subject": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "reference_point_estimate", "mixture_scan", "supported_grid_points",
+        "total_grid_points", "supported_grid_fraction", "sensitivity_range",
+        "reference_position_in_supported_range", "sign_shares",
+        "unsupported_reason_counts", "uncertainty_axes"
+      ],
+      "properties": {
+        "reference_point_estimate": {"$ref": "#/$defs/nullableNumber"},
+        "mixture_scan": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/mixtureScan"}},
+        "supported_grid_points": {"type": "integer", "minimum": 0},
+        "total_grid_points": {"type": "integer", "minimum": 1},
+        "supported_grid_fraction": {"type": "number", "minimum": 0, "maximum": 1},
+        "sensitivity_range": {"$ref": "#/$defs/sensitivityRange"},
+        "reference_position_in_supported_range": {"$ref": "#/$defs/nullableNumber"},
+        "sign_shares": {"$ref": "#/$defs/signShares"},
+        "unsupported_reason_counts": {"type": "object", "additionalProperties": {"type": "integer", "minimum": 1}},
+        "uncertainty_axes": {"$ref": "#/$defs/uncertaintyAxes"}
+      }
+    }
+  }
+}
