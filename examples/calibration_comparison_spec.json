@@ -1,0 +1,9 @@
+{
+  "schema_version": "0.2.8",
+  "comparison_id": "comparison:base-current",
+  "generated_at": "2026-08-23T00:10:00+00:00",
+  "reference_family_weights": {
+    "code": 0.5,
+    "research": 0.5
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://evemisslab.example/schemas/itr/calibration-snapshot-v0.2.8.json",
+  "title": "CTCL-ITR CalibrationSnapshot v0.2.8",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "snapshot_id", "observed_at", "backend_id", "benchmark_id", "benchmark_version", "agent_config_id", "measurement_contract", "family_suites"],
+  "$defs": {
+    "contract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["unit", "reliability_p", "scope_id", "assessment_method"],
+      "properties": {
+        "unit": {"const": "interaction_depth"},
+        "reliability_p": {"type": "number", "exclusiveMinimum": 0, "maximum": 1},
+        "scope_id": {"type": "string", "minLength": 1},
+        "assessment_method": {"const": "monotone_binomial_pava_v1"}
+      }
+    },
+    "minimums": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["min_distinct_depths", "min_total_trials", "min_trials_per_depth"],
+      "properties": {
+        "min_distinct_depths": {"type": "integer", "minimum": 1},
+        "min_total_trials": {"type": "integer", "minimum": 1},
+        "min_trials_per_depth": {"type": "integer", "minimum": 1}
+      }
+    },
+    "point": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["depth", "trials", "successes", "evidence_refs"],
+      "properties": {
+        "depth": {"type": "number", "minimum": 0},
+        "trials": {"type": "integer", "minimum": 1},
+        "successes": {"type": "integer", "minimum": 0},
+        "evidence_refs": {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true}
+      }
+    },
+    "family_suite": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema_version", "calibration_id", "calibrated_at", "measurement_contract", "evidence_confidence_p", "minimums", "subjects"],
+      "properties": {
+        "schema_version": {"const": "0.2.7"},
+        "calibration_id": {"type": "string", "minLength": 1},
+        "calibrated_at": {"type": "string", "format": "date-time"},
+        "measurement_contract": {"$ref": "#/$defs/contract"},
+        "evidence_confidence_p": {"type": "number", "exclusiveMinimum": 0, "maximum": 1},
+        "minimums": {"$ref": "#/$defs/minimums"},
+        "subjects": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["autonomy", "governance"],
+          "properties": {
+            "autonomy": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/point"}},
+            "governance": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/point"}}
+          }
+        }
+      }
+    }
+  },
+  "properties": {
+    "schema_version": {"const": "0.2.8"},
+    "snapshot_id": {"type": "string", "minLength": 1},
+    "observed_at": {"type": "string", "format": "date-time"},
+    "backend_id": {"type": "string", "minLength": 1},
+    "benchmark_id": {"type": "string", "minLength": 1},
+    "benchmark_version": {"type": "string", "minLength": 1},
+    "agent_config_id": {"type": "string", "minLength": 1},
+    "measurement_contract": {"$ref": "#/$defs/contract"},
+    "family_suites": {
+      "type": "object",
+      "minProperties": 1,
+      "propertyNames": {"type": "string", "minLength": 1},
+      "additionalProperties": {"$ref": "#/$defs/family_suite"}
+    }
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "release": "CTCL-ITR v0.2.8 Calibration Robustness, Drift & Task-Family Profiles",
+  "date": "2026-08-22",
+  "verification": {
+    "pytest_segmented_full_suite": {
+      "groups": [
+        {
+          "name": "legacy_governance_observability",
+          "passed": 43,
+          "failed": 0
+        },
+        {
+          "name": "legacy_signals_integrity_topology",
+          "passed": 34,
+          "failed": 0
+        },
+        {
+          "name": "v0.2.7_horizon_calibration",
+          "passed": 20,
+          "failed": 0
+        },
+        {
+          "name": "v0.2.8_calibration_robustness",
+          "passed": 18,
+          "failed": 0
+        }
+      ],
+      "total_passed": 115,
+      "total_failed": 0
+    },
+    "validators": {
+      "validate_pack": "PASS",
+      "validate_metrics": "PASS",
+      "validate_signals": "PASS",
+      "validate_calibration": "PASS",
+      "validate_robustness": "PASS"
+    },
+    "compileall": {
+      "command": "python -m compileall -q src validator",
+      "returncode": 0
+    },
+    "editable_install": {
+      "command": "python -m pip install -e . --no-build-isolation --no-deps",
+      "returncode": 0,
+      "installed_version": "0.2.8"
+    },
+    "installed_cli": {
+      "command": "ctcl-itr-calibration-robustness --base examples/calibration_snapshot_base.json --current examples/calibration_snapshot_current.json --spec examples/calibration_comparison_spec.json",
+      "returncode": 0,
+      "comparison_kind": "cross_backend",
+      "autonomy_observed_delta": -0.6000000000000005,
+      "autonomy_composition_adjusted_delta": 0.8470588235294114,
+      "governance_observed_delta": -0.39999999999999947,
+      "governance_composition_adjusted_delta": 0.8923076923076918,
+      "composition_total_variation": 0.6,
+      "family_direction_agreement": 1.0,
+      "non_authoritative": true
+    }
+  },
+  "compatibility": {
+    "v0.2.7_calibration_contract_preserved": true,
+    "v0.2.6_signal_contract_preserved": true,
+    "v0.2.5_metrics_contract_preserved": true,
+    "v0.2.4_store_compatible": true,
+    "v0.2.2_integrity_compatible": true,
+    "v0.2.1_observability_compatible": true,
+    "v0.2.0_topology_compatible": true,
+    "temporal_event_schema_changed": false,
+    "governance_authority_semantics_changed": false
+  },
+  "methodology": {
+    "family_method": "monotone_binomial_pava_v1",
+    "mixture_interpolation": "piecewise_linear_inside_observed_family_support",
+    "reference_mixture": {
+      "code": 0.5,
+      "research": 0.5
+    },
+    "composition_adjustment_is_causal": false,
+    "non_authoritative": true
+  },
+  "all_passed": true
+}
