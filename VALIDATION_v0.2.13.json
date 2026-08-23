@@ -1,0 +1,94 @@
+{
+  "release": "CTCL-ITR v0.2.13 Geometry Drift & Boundary Motion",
+  "date": "2026-08-23",
+  "verification": {
+    "pytest_inventory": 183,
+    "pytest_segmented_full_suite": {
+      "groups": [
+        {"name": "legacy_governance_observability", "passed": 47, "failed": 0},
+        {"name": "legacy_signals_integrity_topology", "passed": 30, "failed": 0},
+        {"name": "v0.2.7_horizon_calibration", "passed": 20, "failed": 0},
+        {"name": "v0.2.8_calibration_robustness", "passed": 18, "failed": 0},
+        {"name": "v0.2.9_calibration_uncertainty", "passed": 17, "failed": 0},
+        {"name": "v0.2.10_mixture_sensitivity", "passed": 10, "failed": 0},
+        {"name": "v0.2.11_joint_surface", "passed": 13, "failed": 0},
+        {"name": "v0.2.12_surface_geometry", "passed": 14, "failed": 0},
+        {"name": "v0.2.13_geometry_drift", "passed": 14, "failed": 0}
+      ],
+      "total_passed": 183,
+      "total_failed": 0
+    },
+    "validators": {
+      "validate_pack": "PASS",
+      "validate_metrics": "PASS",
+      "validate_signals": "PASS",
+      "validate_calibration": "PASS",
+      "validate_robustness": "PASS",
+      "validate_uncertainty": "PASS",
+      "validate_mixture_sensitivity": "PASS",
+      "validate_joint_surface": "PASS",
+      "validate_surface_geometry": "PASS",
+      "validate_geometry_drift": "PASS"
+    },
+    "compileall": {
+      "command": "python -m compileall -q src validator",
+      "returncode": 0
+    },
+    "editable_install": {
+      "installed_version": "0.2.13",
+      "installed_cli_exact_reference": true
+    }
+  },
+  "reference": {
+    "autonomy": {
+      "base_supported_cells": 6,
+      "current_supported_cells": 8,
+      "gained_supported_cells": 2,
+      "lost_supported_cells": 0,
+      "supported_jaccard": 0.75,
+      "split_count": 0,
+      "merge_count": 0,
+      "base_positive_boundary_code_weight": 0.5528922561345437,
+      "current_positive_boundary_code_weight": 0.37677630955816144,
+      "positive_boundary_code_displacement": -0.1761159465763823,
+      "positive_boundary_l1_displacement": 0.3522318931527646,
+      "support_frontier_code_displacement": 0.20000000000000007,
+      "matched_gradient_edges": 5,
+      "appeared_gradient_edges": 2,
+      "mean_absolute_point_slope_change": 0.555555555555559,
+      "max_absolute_point_slope_change": 1.0000000000000235
+    },
+    "governance": {
+      "base_supported_cells": 6,
+      "current_supported_cells": 8,
+      "gained_supported_cells": 2,
+      "lost_supported_cells": 0,
+      "supported_jaccard": 0.75,
+      "split_count": 0,
+      "merge_count": 0,
+      "base_positive_boundary_code_weight": 0.5,
+      "current_positive_boundary_code_weight": 0.35854728749637416,
+      "positive_boundary_code_displacement": -0.14145271250362584,
+      "positive_boundary_l1_displacement": 0.28290542500725163,
+      "support_frontier_code_displacement": 0.20000000000000007,
+      "matched_gradient_edges": 5,
+      "appeared_gradient_edges": 2,
+      "mean_absolute_point_slope_change": 0.555555555555559,
+      "max_absolute_point_slope_change": 1.0000000000000147
+    },
+    "unsupported_region_interpolated": false,
+    "boundary_matching_is_descriptive_not_identity": true,
+    "non_authoritative": true
+  },
+  "compatibility": {
+    "v0.2.12_surface_geometry_preserved": true,
+    "v0.2.11_joint_surface_preserved": true,
+    "v0.2.10_mixture_sensitivity_preserved": true,
+    "v0.2.9_resampling_preserved": true,
+    "v0.2.8_robustness_preserved": true,
+    "v0.2.7_calibration_preserved": true,
+    "governance_authorization_semantics_changed": false,
+    "new_runtime_dependency": false
+  },
+  "all_passed": true
+}
