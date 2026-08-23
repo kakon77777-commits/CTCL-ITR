@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ctcl-itr"
-version = "0.2.13"
+version = "0.2.14"
 description = "Causal, temporal, auditable runtime ledger utilities for long-horizon and multi-agent AI systems."
 readme = "README.md"
 requires-python = ">=3.11"
@@ -33,6 +33,7 @@ ctcl-itr-mixture-sensitivity = "ctcl_itr.calibration_mixture_sensitivity:_main"
 ctcl-itr-joint-surface = "ctcl_itr.calibration_joint_surface:_main"
 ctcl-itr-surface-geometry = "ctcl_itr.calibration_surface_geometry:_main"
 ctcl-itr-geometry-drift = "ctcl_itr.calibration_geometry_drift:_main"
+ctcl-itr-geometry-trajectory = "ctcl_itr.calibration_geometry_trajectory:_main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
