@@ -1,6 +1,6 @@
 """CTCL-ITR reference utilities."""
 
-__version__ = "0.2.11"
+__version__ = "0.2.12"
 __all__ = ["TopologyError", "analyze_events", "load_events"]
 
 

@@ -1,0 +1,77 @@
+{
+  "release": "CTCL-ITR v0.2.12 Surface Geometry & Stability Boundaries",
+  "date": "2026-08-23",
+  "verification": {
+    "pytest_segmented_full_suite": {
+      "groups": [
+        {"name": "legacy_governance_observability", "passed": 43, "failed": 0},
+        {"name": "legacy_signals_integrity_topology", "passed": 34, "failed": 0},
+        {"name": "v0.2.7_horizon_calibration", "passed": 20, "failed": 0},
+        {"name": "v0.2.8_calibration_robustness", "passed": 18, "failed": 0},
+        {"name": "v0.2.9_calibration_uncertainty", "passed": 17, "failed": 0},
+        {"name": "v0.2.10_mixture_sensitivity", "passed": 10, "failed": 0},
+        {"name": "v0.2.11_joint_surface", "passed": 13, "failed": 0},
+        {"name": "v0.2.12_surface_geometry", "passed": 14, "failed": 0}
+      ],
+      "total_passed": 169,
+      "total_failed": 0
+    },
+    "validators": {
+      "validate_pack": "PASS",
+      "validate_metrics": "PASS",
+      "validate_signals": "PASS",
+      "validate_calibration": "PASS",
+      "validate_robustness": "PASS",
+      "validate_uncertainty": "PASS",
+      "validate_mixture_sensitivity": "PASS",
+      "validate_joint_surface": "PASS",
+      "validate_surface_geometry": "PASS"
+    },
+    "compileall": {
+      "command": "python -m compileall -q src validator",
+      "returncode": 0
+    },
+    "editable_install": {
+      "installed_version": "0.2.12",
+      "installed_cli_exact_reference": true
+    }
+  },
+  "reference": {
+    "autonomy": {
+      "supported_component_count": 1,
+      "largest_supported_component_size": 6,
+      "crosses_zero_component_size": 5,
+      "positive_band_component_size": 1,
+      "support_boundary_edges": 1,
+      "sign_class_boundary_edges": 1,
+      "positive_stability_boundaries": 1,
+      "positive_stability_boundary_code_weight": 0.5528922561345437,
+      "local_gradient_edges": 5,
+      "max_absolute_point_estimate_slope": 2.3865546218487226
+    },
+    "governance": {
+      "supported_component_count": 1,
+      "largest_supported_component_size": 6,
+      "crosses_zero_component_size": 5,
+      "positive_band_component_size": 1,
+      "support_boundary_edges": 1,
+      "sign_class_boundary_edges": 1,
+      "positive_stability_boundaries": 1,
+      "positive_stability_boundary_code_weight": 0.5,
+      "local_gradient_edges": 5,
+      "max_absolute_point_estimate_slope": 2.6324786324786325
+    },
+    "unsupported_cells_interpolated": false,
+    "non_authoritative": true
+  },
+  "compatibility": {
+    "v0.2.11_joint_surface_preserved": true,
+    "v0.2.10_mixture_sensitivity_preserved": true,
+    "v0.2.9_resampling_preserved": true,
+    "v0.2.8_robustness_preserved": true,
+    "v0.2.7_calibration_preserved": true,
+    "governance_authorization_semantics_changed": false,
+    "new_runtime_dependency": false
+  },
+  "all_passed": true
+}

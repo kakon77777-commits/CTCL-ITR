@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://evemisslab.com/schemas/ctcl-itr/calibration-surface-geometry-spec-v0.2.12.json",
+  "title": "CTCL-ITR Calibration Surface Geometry Spec v0.2.12",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "geometry_id",
+    "generated_at",
+    "method",
+    "adjacency_tolerance",
+    "zero_tolerance"
+  ],
+  "properties": {
+    "schema_version": {"const": "0.2.12"},
+    "geometry_id": {"type": "string", "minLength": 1},
+    "generated_at": {"type": "string", "format": "date-time"},
+    "method": {"const": "simplex_supported_surface_geometry_v1"},
+    "adjacency_tolerance": {"type": "number", "exclusiveMinimum": 0, "maximum": 0.001},
+    "zero_tolerance": {"type": "number", "minimum": 0, "maximum": 0.000001}
+  }
+}

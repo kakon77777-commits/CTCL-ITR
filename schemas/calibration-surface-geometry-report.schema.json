@@ -1,0 +1,248 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://evemisslab.com/schemas/ctcl-itr/calibration-surface-geometry-report-v0.2.12.json",
+  "title": "CTCL-ITR Calibration Surface Geometry Report v0.2.12",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "geometry_id", "generated_at", "method", "source_surface",
+    "measurement_contract", "families", "grid", "boundary_interpolation",
+    "conditioning", "subjects", "interpretation_boundary", "non_authoritative"
+  ],
+  "properties": {
+    "schema_version": {"const": "0.2.12"},
+    "geometry_id": {"type": "string", "minLength": 1},
+    "generated_at": {"type": "string", "format": "date-time"},
+    "method": {"const": "simplex_supported_surface_geometry_v1"},
+    "source_surface": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema_version", "surface_id", "method"],
+      "properties": {
+        "schema_version": {"const": "0.2.11"},
+        "surface_id": {"type": "string", "minLength": 1},
+        "method": {"const": "joint_empirical_binomial_simplex_surface_v1"}
+      }
+    },
+    "measurement_contract": {"type": "object"},
+    "families": {"type": "array", "minItems": 2, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+    "grid": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["grid_step", "adjacency_method", "adjacency_tolerance"],
+      "properties": {
+        "grid_step": {"type": "number", "exclusiveMinimum": 0, "exclusiveMaximum": 1},
+        "adjacency_method": {"const": "simplex_single_transfer_v1"},
+        "adjacency_tolerance": {"type": "number", "exclusiveMinimum": 0}
+      }
+    },
+    "boundary_interpolation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["positive_stability", "negative_stability", "zero_tolerance"],
+      "properties": {
+        "positive_stability": {"const": "supported_edge_lower_band_zero_crossing_linear_v1"},
+        "negative_stability": {"const": "supported_edge_upper_band_zero_crossing_linear_v1"},
+        "zero_tolerance": {"type": "number", "minimum": 0}
+      }
+    },
+    "conditioning": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "supported_cells_only_for_graph", "unsupported_cells_interpolated",
+        "sign_boundary_interpolation_supported_edges_only", "local_gradients_supported_edges_only"
+      ],
+      "properties": {
+        "supported_cells_only_for_graph": {"const": true},
+        "unsupported_cells_interpolated": {"const": false},
+        "sign_boundary_interpolation_supported_edges_only": {"const": true},
+        "local_gradients_supported_edges_only": {"const": true}
+      }
+    },
+    "subjects": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["autonomy", "governance"],
+      "properties": {
+        "autonomy": {"$ref": "#/$defs/subject"},
+        "governance": {"$ref": "#/$defs/subject"}
+      }
+    },
+    "interpretation_boundary": {"const": "evidence_supported_discrete_surface_geometry"},
+    "non_authoritative": {"const": true}
+  },
+  "$defs": {
+    "weights": {
+      "type": "object",
+      "minProperties": 2,
+      "additionalProperties": {"type": "number", "minimum": 0, "maximum": 1}
+    },
+    "component": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["component_id", "size", "members"],
+      "properties": {
+        "component_id": {"type": "string", "minLength": 1},
+        "size": {"type": "integer", "minimum": 1},
+        "members": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}}
+      }
+    },
+    "node": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["cell_key", "reference_family_weights", "band_sign_class"],
+      "properties": {
+        "cell_key": {"type": "string", "minLength": 1},
+        "reference_family_weights": {"$ref": "#/$defs/weights"},
+        "band_sign_class": {"enum": ["positive_band", "negative_band", "crosses_zero", "zero_band"]}
+      }
+    },
+    "graphEdge": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["cell_a", "cell_b", "weights_a", "weights_b", "increased_family", "decreased_family", "transfer_mass"],
+      "properties": {
+        "cell_a": {"type": "string", "minLength": 1},
+        "cell_b": {"type": "string", "minLength": 1},
+        "weights_a": {"$ref": "#/$defs/weights"},
+        "weights_b": {"$ref": "#/$defs/weights"},
+        "increased_family": {"type": "string", "minLength": 1},
+        "decreased_family": {"type": "string", "minLength": 1},
+        "transfer_mass": {"type": "number", "exclusiveMinimum": 0}
+      }
+    },
+    "supportedGraph": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["supported_node_count", "supported_edge_count", "nodes", "edges", "connected_components", "isolated_nodes"],
+      "properties": {
+        "supported_node_count": {"type": "integer", "minimum": 0},
+        "supported_edge_count": {"type": "integer", "minimum": 0},
+        "nodes": {"type": "array", "items": {"$ref": "#/$defs/node"}},
+        "edges": {"type": "array", "items": {"$ref": "#/$defs/graphEdge"}},
+        "connected_components": {"type": "array", "items": {"$ref": "#/$defs/component"}},
+        "isolated_nodes": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}}
+      }
+    },
+    "region": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["node_count", "component_count", "components"],
+      "properties": {
+        "node_count": {"type": "integer", "minimum": 0},
+        "component_count": {"type": "integer", "minimum": 0},
+        "components": {"type": "array", "items": {"$ref": "#/$defs/component"}}
+      }
+    },
+    "supportEdge": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["supported_cell", "unsupported_cell", "transfer_mass"],
+      "properties": {
+        "supported_cell": {"type": "string", "minLength": 1},
+        "unsupported_cell": {"type": "string", "minLength": 1},
+        "transfer_mass": {"type": "number", "exclusiveMinimum": 0}
+      }
+    },
+    "signEdge": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["cell_a", "cell_b", "class_a", "class_b", "transfer_mass"],
+      "properties": {
+        "cell_a": {"type": "string", "minLength": 1},
+        "cell_b": {"type": "string", "minLength": 1},
+        "class_a": {"enum": ["positive_band", "negative_band", "crosses_zero", "zero_band"]},
+        "class_b": {"enum": ["positive_band", "negative_band", "crosses_zero", "zero_band"]},
+        "transfer_mass": {"type": "number", "exclusiveMinimum": 0}
+      }
+    },
+    "crossing": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "cell_a", "cell_b", "endpoint_field", "endpoint_value_a", "endpoint_value_b",
+        "interpolation_fraction", "estimated_reference_family_weights", "observed_cell"
+      ],
+      "properties": {
+        "cell_a": {"type": "string", "minLength": 1},
+        "cell_b": {"type": "string", "minLength": 1},
+        "endpoint_field": {"enum": ["band.lower", "band.upper"]},
+        "endpoint_value_a": {"type": "number"},
+        "endpoint_value_b": {"type": "number"},
+        "interpolation_fraction": {"type": "number", "minimum": 0, "maximum": 1},
+        "estimated_reference_family_weights": {"$ref": "#/$defs/weights"},
+        "observed_cell": {"const": false}
+      }
+    },
+    "gradient": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "cell_a", "cell_b", "transfer_mass", "increased_family", "decreased_family",
+        "point_estimate_slope", "band_lower_slope", "band_upper_slope"
+      ],
+      "properties": {
+        "cell_a": {"type": "string", "minLength": 1},
+        "cell_b": {"type": "string", "minLength": 1},
+        "transfer_mass": {"type": "number", "exclusiveMinimum": 0},
+        "increased_family": {"type": "string", "minLength": 1},
+        "decreased_family": {"type": "string", "minLength": 1},
+        "point_estimate_slope": {"type": "number"},
+        "band_lower_slope": {"type": "number"},
+        "band_upper_slope": {"type": "number"}
+      }
+    },
+    "geometrySummary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "supported_component_count", "largest_supported_component_size", "support_boundary_edge_count",
+        "sign_class_boundary_edge_count", "positive_stability_boundary_count",
+        "negative_stability_boundary_count", "local_gradient_edge_count", "max_absolute_point_estimate_slope"
+      ],
+      "properties": {
+        "supported_component_count": {"type": "integer", "minimum": 0},
+        "largest_supported_component_size": {"type": "integer", "minimum": 0},
+        "support_boundary_edge_count": {"type": "integer", "minimum": 0},
+        "sign_class_boundary_edge_count": {"type": "integer", "minimum": 0},
+        "positive_stability_boundary_count": {"type": "integer", "minimum": 0},
+        "negative_stability_boundary_count": {"type": "integer", "minimum": 0},
+        "local_gradient_edge_count": {"type": "integer", "minimum": 0},
+        "max_absolute_point_estimate_slope": {"type": ["number", "null"]}
+      }
+    },
+    "subject": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["supported_graph", "sign_regions", "boundaries", "local_gradients", "geometry_summary"],
+      "properties": {
+        "supported_graph": {"$ref": "#/$defs/supportedGraph"},
+        "sign_regions": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["positive_band", "negative_band", "crosses_zero", "zero_band"],
+          "properties": {
+            "positive_band": {"$ref": "#/$defs/region"},
+            "negative_band": {"$ref": "#/$defs/region"},
+            "crosses_zero": {"$ref": "#/$defs/region"},
+            "zero_band": {"$ref": "#/$defs/region"}
+          }
+        },
+        "boundaries": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["support_edges", "sign_class_edges", "positive_stability_zero_crossings", "negative_stability_zero_crossings"],
+          "properties": {
+            "support_edges": {"type": "array", "items": {"$ref": "#/$defs/supportEdge"}},
+            "sign_class_edges": {"type": "array", "items": {"$ref": "#/$defs/signEdge"}},
+            "positive_stability_zero_crossings": {"type": "array", "items": {"$ref": "#/$defs/crossing"}},
+            "negative_stability_zero_crossings": {"type": "array", "items": {"$ref": "#/$defs/crossing"}}
+          }
+        },
+        "local_gradients": {"type": "array", "items": {"$ref": "#/$defs/gradient"}},
+        "geometry_summary": {"$ref": "#/$defs/geometrySummary"}
+      }
+    }
+  }
+}
