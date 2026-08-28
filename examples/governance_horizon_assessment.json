@@ -1,0 +1,17 @@
+{
+  "schema_version": "0.2.6",
+  "assessment_id": "horizon:reference",
+  "assessed_at": "2026-08-21T12:00:00+00:00",
+  "measurement_contract": {
+    "unit": "interaction_depth",
+    "reliability_p": 0.9,
+    "scope_id": "reference-governance-scope",
+    "assessment_method": "external_benchmark_assessment"
+  },
+  "autonomy_horizon_depth": 12.0,
+  "governance_horizon_depth": 9.0,
+  "evidence_refs": [
+    "evidence:autonomy",
+    "evidence:governance"
+  ]
+}

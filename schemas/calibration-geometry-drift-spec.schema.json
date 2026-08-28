@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://evemisslab.com/ctcl-itr/schemas/calibration-geometry-drift-spec.schema.json",
+  "title": "CTCL-ITR Calibration Geometry Drift Spec",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "drift_id",
+    "generated_at",
+    "method",
+    "boundary_match_method"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.2.13"
+    },
+    "drift_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "method": {
+      "const": "surface_geometry_drift_v1"
+    },
+    "boundary_match_method": {
+      "const": "greedy_l1_nearest_v1"
+    }
+  }
+}

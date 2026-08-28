@@ -1,0 +1,46 @@
+{
+  "release": "CTCL-ITR v0.2.10 Reference-Mixture Sensitivity & Uncertainty Decomposition",
+  "date": "2026-08-23",
+  "verification": {
+    "pytest_segmented_full_suite": {
+      "groups": [
+        {"name": "legacy_governance_observability", "passed": 43, "failed": 0},
+        {"name": "legacy_signals_integrity_topology", "passed": 34, "failed": 0},
+        {"name": "v0.2.7_horizon_calibration", "passed": 20, "failed": 0},
+        {"name": "v0.2.8_calibration_robustness", "passed": 18, "failed": 0},
+        {"name": "v0.2.9_calibration_uncertainty", "passed": 17, "failed": 0},
+        {"name": "v0.2.10_mixture_sensitivity", "passed": 10, "failed": 0}
+      ],
+      "total_passed": 142,
+      "total_failed": 0
+    },
+    "validators": {
+      "validate_pack": "PASS",
+      "validate_metrics": "PASS",
+      "validate_signals": "PASS",
+      "validate_calibration": "PASS",
+      "validate_robustness": "PASS",
+      "validate_uncertainty": "PASS",
+      "validate_mixture_sensitivity": "PASS"
+    },
+    "compileall": true,
+    "editable_install": {"version": "0.2.10", "passed": true},
+    "installed_cli": {"name": "ctcl-itr-mixture-sensitivity", "passed": true}
+  },
+  "reference": {
+    "grid_points": 9,
+    "autonomy_supported_grid_points": 6,
+    "autonomy_supported_grid_fraction": 0.6666666666666666,
+    "autonomy_mixture_sensitivity_span": 0.6382047071702237,
+    "autonomy_sampling_band_width_at_reference": 2.2120491350754494,
+    "autonomy_larger_reported_axis": "sampling",
+    "governance_supported_grid_points": 6,
+    "governance_supported_grid_fraction": 0.6666666666666666,
+    "governance_mixture_sensitivity_span": 0.7033639143730888,
+    "governance_sampling_band_width_at_reference": 1.9594474153297696,
+    "governance_larger_reported_axis": "sampling",
+    "axes_are_additive": false,
+    "non_authoritative": true
+  },
+  "all_passed": true
+}

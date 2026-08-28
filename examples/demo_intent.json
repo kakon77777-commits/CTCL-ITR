@@ -1,0 +1,24 @@
+{
+  "schema_version": "0.1",
+  "intent_id": "intent:demo-001",
+  "version": 1,
+  "goal": "Build, validate, approve, and publish a demo release artifact",
+  "hard_constraints": [
+    "do_not_publish_without_approval"
+  ],
+  "soft_preferences": [
+    "minimize_human_interruptions"
+  ],
+  "forbidden_states": [
+    "unapproved_external_publish"
+  ],
+  "success_criteria": [
+    "artifact_created",
+    "tests_passed",
+    "approval_received",
+    "commit_receipt_present"
+  ],
+  "authority_scope": "prepare_validate_then_step_up_for_publish",
+  "risk_class": "medium",
+  "extensions": {}
+}

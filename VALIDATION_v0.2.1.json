@@ -1,0 +1,66 @@
+{
+  "release": "CTCL-ITR v0.2.1 Observability Adapters",
+  "date": "2026-08-20",
+  "verification": {
+    "pytest": {
+      "command": "python -m pytest -q -p no:cacheprovider",
+      "returncode": 0,
+      "output": "23 passed in 6.80s"
+    },
+    "pack_validator": {
+      "command": "python validator/validate_pack.py",
+      "returncode": 0,
+      "output": "ITR/ATL v0.2.1 observability pack: PASS | legacy_events=18 | multi_agent_events=12 | cloudevents_roundtrip=12 | otel_spans=12 | join_links=3 | machine_work=1850.0 | machine_depth=1100.0 | poset_width=3"
+    },
+    "compileall": {
+      "command": "python -m compileall -q src validator",
+      "returncode": 0
+    },
+    "editable_install": {
+      "command": "python -m pip install -e . --no-build-isolation --no-deps",
+      "returncode": 0,
+      "installed_version": "0.2.1",
+      "verified_earlier_in_release_cycle": true,
+      "reinstalled_in_final_gate": false
+    },
+    "installed_cli_version": {
+      "command": "python -c import ctcl_itr; print(ctcl_itr.__version__)",
+      "returncode": 0,
+      "version": "0.2.1"
+    },
+    "cloud_events_cli": {
+      "command": "ctcl-itr-cloudevents examples/multi_agent_branch_join.events.jsonl",
+      "returncode": 0,
+      "envelope_count": 12
+    },
+    "otel_cli": {
+      "command": "ctcl-itr-otel examples/multi_agent_branch_join.events.jsonl",
+      "returncode": 0,
+      "span_count": 12,
+      "join_parent_span_id": null,
+      "join_links": 3
+    }
+  },
+  "standards_baseline": {
+    "cloudevents_specversion": "1.0",
+    "cloudevents_required_context": [
+      "id",
+      "source",
+      "specversion",
+      "type"
+    ],
+    "otel_genai_conventions_status": "Development",
+    "otel_genai_operations": [
+      "plan",
+      "invoke_agent",
+      "execute_tool"
+    ],
+    "otel_multi_parent_mapping": "span links"
+  },
+  "compatibility": {
+    "v0.1_reference_events_valid": true,
+    "v0.2_topology_reference_valid": true,
+    "atl_schema_semantics_changed": false
+  },
+  "all_passed": true
+}

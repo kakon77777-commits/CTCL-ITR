@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://evemisslab.example/schemas/itr/decision-receipt-v0.2.3.json",
+  "title": "ITR DecisionReceipt v0.2.3",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "decision_id",
+    "approval_id",
+    "run_id",
+    "principal",
+    "decision",
+    "selected_option",
+    "decided_at",
+    "human_active_ms",
+    "human_governance_ms"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.2.3"
+    },
+    "decision_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "approval_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "run_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "principal": {
+      "type": "string",
+      "minLength": 1
+    },
+    "decision": {
+      "enum": [
+        "approve",
+        "deny",
+        "modify",
+        "defer",
+        "cancel"
+      ]
+    },
+    "selected_option": {
+      "type": "string",
+      "minLength": 1
+    },
+    "decided_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "human_active_ms": {
+      "type": "number",
+      "minimum": 0
+    },
+    "human_governance_ms": {
+      "type": "number",
+      "minimum": 0
+    },
+    "reason": {
+      "type": "string"
+    }
+  }
+}

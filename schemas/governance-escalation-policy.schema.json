@@ -1,0 +1,130 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://evemisslab.example/schemas/itr/governance-escalation-policy-v0.2.6.json",
+  "title": "CTCL-ITR GovernanceEscalationPolicy v0.2.6",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "policy_id",
+    "thresholds",
+    "severities"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.2.6"
+    },
+    "policy_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "thresholds": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "max_autonomy_governance_gap",
+        "min_effective_oversight_density",
+        "max_oversight_debt",
+        "max_escalation_p95_ms",
+        "max_explicit_deadline_breaches",
+        "min_critical_oversight_coverage"
+      ],
+      "properties": {
+        "max_autonomy_governance_gap": {
+          "type": "number",
+          "minimum": 0
+        },
+        "min_effective_oversight_density": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "max_oversight_debt": {
+          "type": "number",
+          "minimum": 0
+        },
+        "max_escalation_p95_ms": {
+          "type": "number",
+          "minimum": 0
+        },
+        "max_explicit_deadline_breaches": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "min_critical_oversight_coverage": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      }
+    },
+    "severities": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "autonomy_governance_gap",
+        "effective_oversight_density_low",
+        "oversight_debt_high",
+        "escalation_latency_p95_high",
+        "explicit_intervention_deadline_breach",
+        "critical_oversight_coverage_low"
+      ],
+      "properties": {
+        "autonomy_governance_gap": {
+          "enum": [
+            "info",
+            "low",
+            "medium",
+            "high",
+            "critical"
+          ]
+        },
+        "effective_oversight_density_low": {
+          "enum": [
+            "info",
+            "low",
+            "medium",
+            "high",
+            "critical"
+          ]
+        },
+        "oversight_debt_high": {
+          "enum": [
+            "info",
+            "low",
+            "medium",
+            "high",
+            "critical"
+          ]
+        },
+        "escalation_latency_p95_high": {
+          "enum": [
+            "info",
+            "low",
+            "medium",
+            "high",
+            "critical"
+          ]
+        },
+        "explicit_intervention_deadline_breach": {
+          "enum": [
+            "info",
+            "low",
+            "medium",
+            "high",
+            "critical"
+          ]
+        },
+        "critical_oversight_coverage_low": {
+          "enum": [
+            "info",
+            "low",
+            "medium",
+            "high",
+            "critical"
+          ]
+        }
+      }
+    }
+  }
+}

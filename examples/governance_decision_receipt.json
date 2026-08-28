@@ -1,0 +1,13 @@
+{
+  "schema_version": "0.2.3",
+  "decision_id": "decision:gov-001",
+  "approval_id": "approval:gov-001",
+  "run_id": "run:gov-001",
+  "principal": "user:neo",
+  "decision": "approve",
+  "selected_option": "approve",
+  "decided_at": "2026-08-20T08:10:00+00:00",
+  "human_active_ms": 42000,
+  "human_governance_ms": 42000,
+  "reason": "approved after validator pass"
+}

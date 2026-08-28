@@ -1,0 +1,38 @@
+{
+  "schema_version": "0.1",
+  "run_id": "run:demo-001",
+  "status": "succeeded",
+  "metrics": {
+    "event_count": 18,
+    "action_count": 2,
+    "validation_count": 2,
+    "retry_count": 1,
+    "human_checkpoint_count": 1,
+    "machine_runtime_ms": 995,
+    "human_governance_ms": 42000,
+    "token_in": 420,
+    "token_out": 100,
+    "tool_calls": 3,
+    "interaction_work": 18,
+    "interaction_depth": 18,
+    "human_intervention_density": 0.25
+  },
+  "completion": {
+    "nominal": 1.0,
+    "verified": 1.0
+  },
+  "quality": {
+    "intent": 0.98,
+    "specification": 0.95,
+    "plan": 0.92,
+    "execution": 0.9,
+    "constraint_retention": 1.0,
+    "verification": 0.95,
+    "completion": 1.0,
+    "result": 0.96,
+    "governance": 1.0,
+    "world_commit": 1.0
+  },
+  "commit_state": "confirmed",
+  "extensions": {}
+}

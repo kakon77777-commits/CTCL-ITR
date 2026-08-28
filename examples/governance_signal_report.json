@@ -1,0 +1,129 @@
+{
+  "schema_version": "0.2.6",
+  "observed_at": "2026-08-20T10:00:00+00:00",
+  "horizon": {
+    "assessment_id": "horizon:reference",
+    "assessed_at": "2026-08-21T12:00:00+00:00",
+    "measurement_contract": {
+      "unit": "interaction_depth",
+      "reliability_p": 0.9,
+      "scope_id": "reference-governance-scope",
+      "assessment_method": "external_benchmark_assessment"
+    },
+    "autonomy_horizon_depth": 12.0,
+    "governance_horizon_depth": 9.0,
+    "autonomy_governance_gap": 3.0,
+    "governance_margin": -3.0,
+    "evidence_refs": [
+      "evidence:autonomy",
+      "evidence:governance"
+    ]
+  },
+  "context_metrics": {
+    "human_intervention_density": 0.4444444444444444,
+    "effective_oversight_density": 0.3157894736842105,
+    "oversight_debt": 28.0,
+    "escalation_p95_ms": 2400000,
+    "critical_oversight_coverage": 0.0,
+    "explicit_deadline_breaches": 1
+  },
+  "signals": [
+    {
+      "code": "autonomy_governance_gap",
+      "status": "breach",
+      "severity": "critical",
+      "observed": 3.0,
+      "threshold": 0.0,
+      "comparator": "<=",
+      "unit": "interaction_depth",
+      "rationale": "Autonomy Horizon must not extend beyond the declared Governance Horizon beyond policy tolerance.",
+      "evidence_ids": []
+    },
+    {
+      "code": "effective_oversight_density_low",
+      "status": "breach",
+      "severity": "high",
+      "observed": 0.3157894736842105,
+      "threshold": 0.5,
+      "comparator": ">=",
+      "unit": "ratio",
+      "rationale": "Risk-weighted effective oversight density is below the declared governance floor.",
+      "evidence_ids": []
+    },
+    {
+      "code": "oversight_debt_high",
+      "status": "breach",
+      "severity": "high",
+      "observed": 28.0,
+      "threshold": 20.0,
+      "comparator": "<=",
+      "unit": "policy_weight",
+      "rationale": "Outstanding governance obligations exceed the declared oversight-debt ceiling.",
+      "evidence_ids": []
+    },
+    {
+      "code": "escalation_latency_p95_high",
+      "status": "breach",
+      "severity": "medium",
+      "observed": 2400000,
+      "threshold": 1800000.0,
+      "comparator": "<=",
+      "unit": "milliseconds",
+      "rationale": "Observed p95 human escalation latency exceeds the declared response-time ceiling.",
+      "evidence_ids": []
+    },
+    {
+      "code": "explicit_intervention_deadline_breach",
+      "status": "breach",
+      "severity": "critical",
+      "observed": 1,
+      "threshold": 0,
+      "comparator": "<=",
+      "unit": "count",
+      "rationale": "One or more explicit intervention deadlines were missed or remained unresolved past deadline.",
+      "evidence_ids": [
+        "approval:c1"
+      ]
+    },
+    {
+      "code": "critical_oversight_coverage_low",
+      "status": "breach",
+      "severity": "critical",
+      "observed": 0.0,
+      "threshold": 0.75,
+      "comparator": ">=",
+      "unit": "ratio",
+      "rationale": "Critical-risk oversight coverage is below the declared minimum.",
+      "evidence_ids": []
+    }
+  ],
+  "signal_counts": {
+    "total": 6,
+    "breach": 6,
+    "clear": 0,
+    "not_applicable": 0
+  },
+  "overall_level": "critical",
+  "recommended_escalation": "urgent_human_review",
+  "non_authoritative": true,
+  "policy": {
+    "schema_version": "0.2.6",
+    "policy_id": "policy:governance-signals:reference",
+    "thresholds": {
+      "max_autonomy_governance_gap": 0.0,
+      "min_effective_oversight_density": 0.5,
+      "max_oversight_debt": 20.0,
+      "max_escalation_p95_ms": 1800000.0,
+      "max_explicit_deadline_breaches": 0,
+      "min_critical_oversight_coverage": 0.75
+    },
+    "severities": {
+      "autonomy_governance_gap": "critical",
+      "effective_oversight_density_low": "high",
+      "oversight_debt_high": "high",
+      "escalation_latency_p95_high": "medium",
+      "explicit_intervention_deadline_breach": "critical",
+      "critical_oversight_coverage_low": "critical"
+    }
+  }
+}

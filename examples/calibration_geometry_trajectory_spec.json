@@ -1,0 +1,24 @@
+{
+  "schema_version": "0.2.14",
+  "trajectory_id": "geometry-trajectory:reference",
+  "generated_at": "2026-08-25T01:00:00+00:00",
+  "method": "surface_geometry_trajectory_v1",
+  "time_unit": "day",
+  "observations": [
+    {
+      "observation_id": "obs:current",
+      "observed_at": "2026-08-23T00:00:00+00:00",
+      "geometry_id": "geometry:reference-base-current"
+    },
+    {
+      "observation_id": "obs:later",
+      "observed_at": "2026-08-24T00:00:00+00:00",
+      "geometry_id": "geometry:reference-base-later"
+    },
+    {
+      "observation_id": "obs:regressed",
+      "observed_at": "2026-08-25T00:00:00+00:00",
+      "geometry_id": "geometry:reference-base-regressed"
+    }
+  ]
+}

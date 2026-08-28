@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://evemisslab.example/schemas/itr/commit-receipt-v0.1.json",
+  "title": "ITR CommitReceipt v0.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "commit_id",
+    "run_id",
+    "intent_id",
+    "authority_ref",
+    "candidate_ref",
+    "target",
+    "effect_class",
+    "executed_at",
+    "external_confirmation",
+    "validator_refs",
+    "provenance_ref",
+    "state"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1"
+    },
+    "commit_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "run_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "intent_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "authority_ref": {
+      "type": "string",
+      "minLength": 1
+    },
+    "candidate_ref": {
+      "type": "string",
+      "minLength": 1
+    },
+    "target": {
+      "type": "string",
+      "minLength": 1
+    },
+    "effect_class": {
+      "enum": [
+        "external_reversible",
+        "external_compensatable",
+        "external_irreversible"
+      ]
+    },
+    "executed_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "external_confirmation": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "state_before_ref": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "state_after_ref": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "validator_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "provenance_ref": {
+      "type": "string",
+      "minLength": 1
+    },
+    "state": {
+      "enum": [
+        "candidate",
+        "awaiting_authority",
+        "authorized",
+        "executed",
+        "confirmed",
+        "compensated",
+        "failed"
+      ]
+    },
+    "extensions": {
+      "type": "object",
+      "additionalProperties": true
+    }
+  }
+}

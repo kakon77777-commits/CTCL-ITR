@@ -1,0 +1,420 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://evemisslab.example/schemas/itr/governance-signal-report-v0.2.6.json",
+  "title": "CTCL-ITR GovernanceSignalReport v0.2.6",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "observed_at",
+    "horizon",
+    "context_metrics",
+    "signals",
+    "signal_counts",
+    "overall_level",
+    "recommended_escalation",
+    "non_authoritative",
+    "policy"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.2.6"
+    },
+    "observed_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "horizon": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "assessment_id",
+        "assessed_at",
+        "measurement_contract",
+        "autonomy_horizon_depth",
+        "governance_horizon_depth",
+        "autonomy_governance_gap",
+        "governance_margin",
+        "evidence_refs"
+      ],
+      "properties": {
+        "assessment_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "assessed_at": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "measurement_contract": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "unit",
+            "reliability_p",
+            "scope_id",
+            "assessment_method"
+          ],
+          "properties": {
+            "unit": {
+              "const": "interaction_depth"
+            },
+            "reliability_p": {
+              "type": "number",
+              "exclusiveMinimum": 0,
+              "maximum": 1
+            },
+            "scope_id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "assessment_method": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "autonomy_horizon_depth": {
+          "type": "number",
+          "minimum": 0
+        },
+        "governance_horizon_depth": {
+          "type": "number",
+          "minimum": 0
+        },
+        "autonomy_governance_gap": {
+          "type": "number"
+        },
+        "governance_margin": {
+          "type": "number"
+        },
+        "evidence_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "context_metrics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "human_intervention_density",
+        "effective_oversight_density",
+        "oversight_debt",
+        "escalation_p95_ms",
+        "critical_oversight_coverage",
+        "explicit_deadline_breaches"
+      ],
+      "properties": {
+        "human_intervention_density": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "effective_oversight_density": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "oversight_debt": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "escalation_p95_ms": {
+          "type": [
+            "integer",
+            "number",
+            "null"
+          ]
+        },
+        "critical_oversight_coverage": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "explicit_deadline_breaches": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "signals": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "code",
+          "status",
+          "severity",
+          "observed",
+          "threshold",
+          "comparator",
+          "unit",
+          "rationale",
+          "evidence_ids"
+        ],
+        "properties": {
+          "code": {
+            "enum": [
+              "autonomy_governance_gap",
+              "effective_oversight_density_low",
+              "oversight_debt_high",
+              "escalation_latency_p95_high",
+              "explicit_intervention_deadline_breach",
+              "critical_oversight_coverage_low"
+            ]
+          },
+          "status": {
+            "enum": [
+              "clear",
+              "breach",
+              "not_applicable"
+            ]
+          },
+          "severity": {
+            "enum": [
+              "info",
+              "low",
+              "medium",
+              "high",
+              "critical"
+            ]
+          },
+          "observed": {
+            "type": [
+              "number",
+              "integer",
+              "null"
+            ]
+          },
+          "threshold": {
+            "type": [
+              "number",
+              "integer"
+            ]
+          },
+          "comparator": {
+            "enum": [
+              "<=",
+              ">="
+            ]
+          },
+          "unit": {
+            "enum": [
+              "interaction_depth",
+              "ratio",
+              "policy_weight",
+              "milliseconds",
+              "count"
+            ]
+          },
+          "rationale": {
+            "type": "string",
+            "minLength": 1
+          },
+          "evidence_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "uniqueItems": true
+          }
+        }
+      },
+      "minItems": 6,
+      "maxItems": 6
+    },
+    "signal_counts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "total",
+        "breach",
+        "clear",
+        "not_applicable"
+      ],
+      "properties": {
+        "total": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "breach": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "clear": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "not_applicable": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "overall_level": {
+      "enum": [
+        "clear",
+        "info",
+        "low",
+        "medium",
+        "high",
+        "critical"
+      ]
+    },
+    "recommended_escalation": {
+      "enum": [
+        "none",
+        "watch",
+        "review",
+        "priority_review",
+        "urgent_human_review"
+      ]
+    },
+    "non_authoritative": {
+      "const": true
+    },
+    "policy": {
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "$id": "https://evemisslab.example/schemas/itr/governance-escalation-policy-v0.2.6.json",
+      "title": "CTCL-ITR GovernanceEscalationPolicy v0.2.6",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "policy_id",
+        "thresholds",
+        "severities"
+      ],
+      "properties": {
+        "schema_version": {
+          "const": "0.2.6"
+        },
+        "policy_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "thresholds": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "max_autonomy_governance_gap",
+            "min_effective_oversight_density",
+            "max_oversight_debt",
+            "max_escalation_p95_ms",
+            "max_explicit_deadline_breaches",
+            "min_critical_oversight_coverage"
+          ],
+          "properties": {
+            "max_autonomy_governance_gap": {
+              "type": "number",
+              "minimum": 0
+            },
+            "min_effective_oversight_density": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "max_oversight_debt": {
+              "type": "number",
+              "minimum": 0
+            },
+            "max_escalation_p95_ms": {
+              "type": "number",
+              "minimum": 0
+            },
+            "max_explicit_deadline_breaches": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "min_critical_oversight_coverage": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            }
+          }
+        },
+        "severities": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "autonomy_governance_gap",
+            "effective_oversight_density_low",
+            "oversight_debt_high",
+            "escalation_latency_p95_high",
+            "explicit_intervention_deadline_breach",
+            "critical_oversight_coverage_low"
+          ],
+          "properties": {
+            "autonomy_governance_gap": {
+              "enum": [
+                "info",
+                "low",
+                "medium",
+                "high",
+                "critical"
+              ]
+            },
+            "effective_oversight_density_low": {
+              "enum": [
+                "info",
+                "low",
+                "medium",
+                "high",
+                "critical"
+              ]
+            },
+            "oversight_debt_high": {
+              "enum": [
+                "info",
+                "low",
+                "medium",
+                "high",
+                "critical"
+              ]
+            },
+            "escalation_latency_p95_high": {
+              "enum": [
+                "info",
+                "low",
+                "medium",
+                "high",
+                "critical"
+              ]
+            },
+            "explicit_intervention_deadline_breach": {
+              "enum": [
+                "info",
+                "low",
+                "medium",
+                "high",
+                "critical"
+              ]
+            },
+            "critical_oversight_coverage_low": {
+              "enum": [
+                "info",
+                "low",
+                "medium",
+                "high",
+                "critical"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

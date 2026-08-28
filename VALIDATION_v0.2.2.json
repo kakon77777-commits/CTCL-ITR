@@ -1,0 +1,52 @@
+{
+  "release": "CTCL-ITR v0.2.2 Ledger Integrity",
+  "date": "2026-08-20",
+  "verification": {
+    "pytest": {
+      "command": "python -m pytest -q -p no:cacheprovider",
+      "returncode": 0,
+      "output": "..................................                                       [100%]\n34 passed in 11.64s"
+    },
+    "pack_validator": {
+      "command": "python validator/validate_pack.py",
+      "returncode": 0,
+      "output": "ITR/ATL v0.2.2 ledger integrity pack: PASS | ITR/ATL v0.2.1 observability pack: PASS | legacy_events=18 | multi_agent_events=12 | cloudevents_roundtrip=12 | otel_spans=12 | join_links=3 | integrity_records=12 | anchor_checked=True | tamper_detection=record_digest_mismatch | truncation_detection=anchor_event_count_mismatch | machine_work=1850.0 | machine_depth=1100.0 | poset_width=3"
+    },
+    "compileall": {
+      "command": "python -m compileall -q src validator",
+      "returncode": 0
+    },
+    "editable_install": {
+      "command": "python -m pip install -e . --no-build-isolation --no-deps",
+      "returncode": 0,
+      "installed_version": "0.2.2"
+    },
+    "integrity_seal_cli": {
+      "returncode": 0,
+      "event_count": 12,
+      "final_chain_digest": "sha256:d842860c1dde0195dc31c80bffd541f1c10cc809bfb16367bc88d768bb90adf1"
+    },
+    "integrity_verify_cli": {
+      "returncode": 0,
+      "valid": true,
+      "anchor_checked": true
+    },
+    "tamper_cli": {
+      "returncode": 1,
+      "failure_code": "record_digest_mismatch"
+    }
+  },
+  "integrity_profile": {
+    "hash_algorithm": "sha256",
+    "record_encoding": "atl-jsonl-record-v1",
+    "domain_separator": "CTCL-ITR/ATL/CHAIN/v0.2.2\\0",
+    "trusted_anchor_required_for_suffix_truncation": true
+  },
+  "compatibility": {
+    "v0.1_reference_events_valid": true,
+    "v0.2_topology_reference_valid": true,
+    "v0.2.1_observability_reference_valid": true,
+    "temporal_event_schema_changed_for_integrity": false
+  },
+  "all_passed": true
+}

@@ -1,0 +1,69 @@
+{
+  "release": "CTCL-ITR v0.2.14 Geometry Motion Stability & Multi-Snapshot Trajectories",
+  "date": "2026-08-23",
+  "verification": {
+    "pytest_inventory": 198,
+    "pytest_segmented_full_suite": {
+      "groups": [
+        {"name": "legacy_runtime_governance_observability_signals_integrity_topology", "passed": 77, "failed": 0},
+        {"name": "v0.2.7_horizon_calibration", "passed": 20, "failed": 0},
+        {"name": "v0.2.8_calibration_robustness", "passed": 18, "failed": 0},
+        {"name": "v0.2.9_calibration_uncertainty", "passed": 17, "failed": 0},
+        {"name": "v0.2.10_mixture_sensitivity", "passed": 10, "failed": 0},
+        {"name": "v0.2.11_joint_surface", "passed": 13, "failed": 0},
+        {"name": "v0.2.12_surface_geometry", "passed": 14, "failed": 0},
+        {"name": "v0.2.13_geometry_drift", "passed": 14, "failed": 0},
+        {"name": "v0.2.14_geometry_trajectory", "passed": 15, "failed": 0}
+      ],
+      "total_passed": 198,
+      "total_failed": 0
+    },
+    "validators": {
+      "validate_pack": "PASS",
+      "validate_metrics": "PASS",
+      "validate_signals": "PASS",
+      "validate_calibration": "PASS",
+      "validate_robustness": "PASS",
+      "validate_uncertainty": "PASS",
+      "validate_mixture_sensitivity": "PASS",
+      "validate_joint_surface": "PASS",
+      "validate_surface_geometry": "PASS",
+      "validate_geometry_drift": "PASS",
+      "validate_geometry_trajectory": "PASS"
+    },
+    "compileall": true,
+    "editable_install": {"version": "0.2.14", "installed_cli_exact_reference": true}
+  },
+  "reference": {
+    "observation_count": 3,
+    "autonomy": {
+      "supported_cell_counts": [6, 8, 6],
+      "support_direction_reversal_count": 1,
+      "positive_boundary_code_weights": [0.5528922561345437, 0.37677630955816144, 0.5528922561345437],
+      "positive_boundary_code_velocity_reversal_count": 1,
+      "positive_boundary_code_acceleration_per_day2": 0.3522318931527646,
+      "component_lineage_spans_all_observations": 1,
+      "support_excursion_cells": 2,
+      "gradient_presence_excursions": 2
+    },
+    "governance": {
+      "supported_cell_counts": [6, 8, 6],
+      "support_direction_reversal_count": 1,
+      "positive_boundary_code_weights": [0.5, 0.35854728749637416, 0.5],
+      "positive_boundary_code_velocity_reversal_count": 1,
+      "positive_boundary_code_acceleration_per_day2": 0.2829054250072517,
+      "component_lineage_spans_all_observations": 1,
+      "support_excursion_cells": 2,
+      "gradient_presence_excursions": 2
+    },
+    "non_authoritative": true
+  },
+  "compatibility": {
+    "v0.2.13_geometry_drift_preserved": true,
+    "v0.2.12_surface_geometry_preserved": true,
+    "v0.2.11_joint_surface_preserved": true,
+    "governance_authorization_semantics_changed": false,
+    "new_runtime_dependency": false
+  },
+  "all_passed": true
+}

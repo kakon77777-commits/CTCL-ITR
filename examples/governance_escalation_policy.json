@@ -1,0 +1,20 @@
+{
+  "schema_version": "0.2.6",
+  "policy_id": "policy:governance-signals:reference",
+  "thresholds": {
+    "max_autonomy_governance_gap": 0.0,
+    "min_effective_oversight_density": 0.5,
+    "max_oversight_debt": 20.0,
+    "max_escalation_p95_ms": 1800000,
+    "max_explicit_deadline_breaches": 0,
+    "min_critical_oversight_coverage": 0.75
+  },
+  "severities": {
+    "autonomy_governance_gap": "critical",
+    "effective_oversight_density_low": "high",
+    "oversight_debt_high": "high",
+    "escalation_latency_p95_high": "medium",
+    "explicit_intervention_deadline_breach": "critical",
+    "critical_oversight_coverage_low": "critical"
+  }
+}

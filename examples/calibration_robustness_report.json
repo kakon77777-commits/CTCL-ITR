@@ -1,0 +1,417 @@
+{
+  "schema_version": "0.2.8",
+  "comparison_id": "comparison:base-current",
+  "generated_at": "2026-08-23T00:10:00+00:00",
+  "base_snapshot_id": "snapshot:base",
+  "current_snapshot_id": "snapshot:current",
+  "measurement_contract": {
+    "unit": "interaction_depth",
+    "reliability_p": 0.9,
+    "scope_id": "scope:reference",
+    "assessment_method": "monotone_binomial_pava_v1"
+  },
+  "reference_family_weights": {
+    "code": 0.5,
+    "research": 0.5
+  },
+  "elapsed_seconds": 86400.0,
+  "context_diagnostics": {
+    "backend_changed": true,
+    "benchmark_version_changed": false,
+    "agent_config_changed": false,
+    "family_set_changed": false,
+    "comparison_kind": "cross_backend"
+  },
+  "subjects": {
+    "autonomy": {
+      "support_status": "supported",
+      "support_reasons": [],
+      "observed_family_weights": {
+        "base": {
+          "code": 0.8,
+          "research": 0.2
+        },
+        "current": {
+          "code": 0.2,
+          "research": 0.8
+        }
+      },
+      "reference_family_weights": {
+        "code": 0.5,
+        "research": 0.5
+      },
+      "composition_total_variation": 0.6,
+      "observed_mix": {
+        "base": {
+          "support_status": "supported",
+          "support_reasons": [],
+          "horizon_depth": 7.2,
+          "common_support": [
+            4.0,
+            8.0
+          ],
+          "crossing_bracket": {
+            "lower_depth": 6.0,
+            "upper_depth": 8.0,
+            "lower_probability": 0.9600000000000001,
+            "upper_probability": 0.86
+          },
+          "curve": [
+            {
+              "depth": 4.0,
+              "success_probability": 1.0
+            },
+            {
+              "depth": 6.0,
+              "success_probability": 0.9600000000000001
+            },
+            {
+              "depth": 8.0,
+              "success_probability": 0.86
+            }
+          ],
+          "weights": {
+            "code": 0.8,
+            "research": 0.2
+          }
+        },
+        "current": {
+          "support_status": "supported",
+          "support_reasons": [],
+          "horizon_depth": 6.6,
+          "common_support": [
+            4.0,
+            8.0
+          ],
+          "crossing_bracket": {
+            "lower_depth": 6.0,
+            "upper_depth": 8.0,
+            "lower_probability": 0.96,
+            "upper_probability": 0.76
+          },
+          "curve": [
+            {
+              "depth": 4.0,
+              "success_probability": 1.0
+            },
+            {
+              "depth": 6.0,
+              "success_probability": 0.96
+            },
+            {
+              "depth": 8.0,
+              "success_probability": 0.76
+            }
+          ],
+          "weights": {
+            "code": 0.2,
+            "research": 0.8
+          }
+        }
+      },
+      "reference_mix": {
+        "base": {
+          "support_status": "supported",
+          "support_reasons": [],
+          "horizon_depth": 6.352941176470588,
+          "common_support": [
+            4.0,
+            8.0
+          ],
+          "crossing_bracket": {
+            "lower_depth": 6.0,
+            "upper_depth": 8.0,
+            "lower_probability": 0.9375,
+            "upper_probability": 0.725
+          },
+          "curve": [
+            {
+              "depth": 4.0,
+              "success_probability": 1.0
+            },
+            {
+              "depth": 6.0,
+              "success_probability": 0.9375
+            },
+            {
+              "depth": 8.0,
+              "success_probability": 0.725
+            }
+          ],
+          "weights": {
+            "code": 0.5,
+            "research": 0.5
+          }
+        },
+        "current": {
+          "support_status": "supported",
+          "support_reasons": [],
+          "horizon_depth": 7.199999999999999,
+          "common_support": [
+            4.0,
+            8.0
+          ],
+          "crossing_bracket": {
+            "lower_depth": 6.0,
+            "upper_depth": 8.0,
+            "lower_probability": 0.975,
+            "upper_probability": 0.85
+          },
+          "curve": [
+            {
+              "depth": 4.0,
+              "success_probability": 1.0
+            },
+            {
+              "depth": 6.0,
+              "success_probability": 0.975
+            },
+            {
+              "depth": 8.0,
+              "success_probability": 0.85
+            }
+          ],
+          "weights": {
+            "code": 0.5,
+            "research": 0.5
+          }
+        }
+      },
+      "observed_mix_delta": -0.6000000000000005,
+      "composition_adjusted_delta": 0.8470588235294114,
+      "composition_residual": -1.447058823529412,
+      "composition_adjusted_delta_per_day": 0.8470588235294114,
+      "family_horizon_deltas": {
+        "code": {
+          "base_horizon_depth": 12.0,
+          "current_horizon_depth": 13.333333333333332,
+          "delta": 1.3333333333333321,
+          "base_support_status": "supported",
+          "current_support_status": "supported"
+        },
+        "research": {
+          "base_horizon_depth": 6.0,
+          "current_horizon_depth": 6.3999999999999995,
+          "delta": 0.39999999999999947,
+          "base_support_status": "supported",
+          "current_support_status": "supported"
+        }
+      },
+      "supported_family_fraction": 1.0,
+      "family_direction_agreement": 1.0,
+      "base_family_horizon_range": [
+        6.0,
+        12.0
+      ],
+      "current_family_horizon_range": [
+        6.3999999999999995,
+        13.333333333333332
+      ],
+      "max_abs_family_delta": 1.3333333333333321
+    },
+    "governance": {
+      "support_status": "supported",
+      "support_reasons": [],
+      "observed_family_weights": {
+        "base": {
+          "code": 0.8,
+          "research": 0.2
+        },
+        "current": {
+          "code": 0.2,
+          "research": 0.8
+        }
+      },
+      "reference_family_weights": {
+        "code": 0.5,
+        "research": 0.5
+      },
+      "composition_total_variation": 0.6,
+      "observed_mix": {
+        "base": {
+          "support_status": "supported",
+          "support_reasons": [],
+          "horizon_depth": 6.0,
+          "common_support": [
+            3.0,
+            7.0
+          ],
+          "crossing_bracket": {
+            "lower_depth": 6.0,
+            "upper_depth": 7.0,
+            "lower_probability": 0.9,
+            "upper_probability": 0.8466666666666667
+          },
+          "curve": [
+            {
+              "depth": 3.0,
+              "success_probability": 1.0
+            },
+            {
+              "depth": 5.0,
+              "success_probability": 0.9533333333333335
+            },
+            {
+              "depth": 6.0,
+              "success_probability": 0.9
+            },
+            {
+              "depth": 7.0,
+              "success_probability": 0.8466666666666667
+            }
+          ],
+          "weights": {
+            "code": 0.8,
+            "research": 0.2
+          }
+        },
+        "current": {
+          "support_status": "supported",
+          "support_reasons": [],
+          "horizon_depth": 5.6000000000000005,
+          "common_support": [
+            3.0,
+            7.0
+          ],
+          "crossing_bracket": {
+            "lower_depth": 5.0,
+            "upper_depth": 6.0,
+            "lower_probability": 0.96,
+            "upper_probability": 0.8600000000000001
+          },
+          "curve": [
+            {
+              "depth": 3.0,
+              "success_probability": 1.0
+            },
+            {
+              "depth": 5.0,
+              "success_probability": 0.96
+            },
+            {
+              "depth": 6.0,
+              "success_probability": 0.8600000000000001
+            },
+            {
+              "depth": 7.0,
+              "success_probability": 0.76
+            }
+          ],
+          "weights": {
+            "code": 0.2,
+            "research": 0.8
+          }
+        }
+      },
+      "reference_mix": {
+        "base": {
+          "support_status": "supported",
+          "support_reasons": [],
+          "horizon_depth": 5.3076923076923075,
+          "common_support": [
+            3.0,
+            7.0
+          ],
+          "crossing_bracket": {
+            "lower_depth": 5.0,
+            "upper_depth": 6.0,
+            "lower_probability": 0.9333333333333333,
+            "upper_probability": 0.825
+          },
+          "curve": [
+            {
+              "depth": 3.0,
+              "success_probability": 1.0
+            },
+            {
+              "depth": 5.0,
+              "success_probability": 0.9333333333333333
+            },
+            {
+              "depth": 6.0,
+              "success_probability": 0.825
+            },
+            {
+              "depth": 7.0,
+              "success_probability": 0.7166666666666667
+            }
+          ],
+          "weights": {
+            "code": 0.5,
+            "research": 0.5
+          }
+        },
+        "current": {
+          "support_status": "supported",
+          "support_reasons": [],
+          "horizon_depth": 6.199999999999999,
+          "common_support": [
+            3.0,
+            7.0
+          ],
+          "crossing_bracket": {
+            "lower_depth": 6.0,
+            "upper_depth": 7.0,
+            "lower_probability": 0.9125,
+            "upper_probability": 0.85
+          },
+          "curve": [
+            {
+              "depth": 3.0,
+              "success_probability": 1.0
+            },
+            {
+              "depth": 5.0,
+              "success_probability": 0.975
+            },
+            {
+              "depth": 6.0,
+              "success_probability": 0.9125
+            },
+            {
+              "depth": 7.0,
+              "success_probability": 0.85
+            }
+          ],
+          "weights": {
+            "code": 0.5,
+            "research": 0.5
+          }
+        }
+      },
+      "observed_mix_delta": -0.39999999999999947,
+      "composition_adjusted_delta": 0.8923076923076918,
+      "composition_residual": -1.2923076923076913,
+      "composition_adjusted_delta_per_day": 0.8923076923076918,
+      "family_horizon_deltas": {
+        "code": {
+          "base_horizon_depth": 9.0,
+          "current_horizon_depth": 10.0,
+          "delta": 1.0,
+          "base_support_status": "supported",
+          "current_support_status": "supported"
+        },
+        "research": {
+          "base_horizon_depth": 5.0,
+          "current_horizon_depth": 5.3999999999999995,
+          "delta": 0.39999999999999947,
+          "base_support_status": "supported",
+          "current_support_status": "supported"
+        }
+      },
+      "supported_family_fraction": 1.0,
+      "family_direction_agreement": 1.0,
+      "base_family_horizon_range": [
+        5.0,
+        9.0
+      ],
+      "current_family_horizon_range": [
+        5.3999999999999995,
+        10.0
+      ],
+      "max_abs_family_delta": 1.0
+    }
+  },
+  "attribution_boundary": "composition_standardization_only",
+  "non_authoritative": true
+}

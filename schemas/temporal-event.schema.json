@@ -1,0 +1,387 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://evemisslab.example/schemas/itr/temporal-event-v0.1.json",
+  "title": "ITR TemporalEvent v0.1",
+  "type": "object",
+  "additionalProperties": false,
+  "$defs": {
+    "authority": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "authority_ref",
+        "principal",
+        "scope"
+      ],
+      "properties": {
+        "authority_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "principal": {
+          "type": "string",
+          "minLength": 1
+        },
+        "scope": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "expires_at": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "requires_fresh_approval": {
+          "type": "boolean",
+          "default": false
+        }
+      }
+    },
+    "budget": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "token_in": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "token_out": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "reasoning_tokens": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "tool_calls": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "machine_runtime_ms": {
+          "type": "number",
+          "minimum": 0
+        },
+        "money_microunits": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "human_active_ms": {
+          "type": "number",
+          "minimum": 0
+        },
+        "human_governance_ms": {
+          "type": "number",
+          "minimum": 0
+        },
+        "human_review_ms": {
+          "type": "number",
+          "minimum": 0
+        },
+        "human_wait_ms": {
+          "type": "number",
+          "minimum": 0
+        }
+      }
+    },
+    "artifact_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "artifact_id",
+        "media_type",
+        "role"
+      ],
+      "properties": {
+        "artifact_id": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "media_type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "role": {
+          "type": "string",
+          "minLength": 1
+        },
+        "uri": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    }
+  },
+  "required": [
+    "schema_version",
+    "event_id",
+    "ledger_seq",
+    "event_type",
+    "source",
+    "subject",
+    "occurred_at",
+    "recorded_at",
+    "run_id",
+    "causal_parent_ids",
+    "actor",
+    "data"
+  ],
+  "properties": {
+    "schema_version": {
+      "enum": [
+        "0.1",
+        "0.2"
+      ]
+    },
+    "event_id": {
+      "type": "string",
+      "pattern": "^evt_[A-Za-z0-9._:-]+$"
+    },
+    "ledger_seq": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "event_type": {
+      "type": "string",
+      "pattern": "^[a-z]+(?:[._][a-z0-9]+)+$"
+    },
+    "source": {
+      "type": "string",
+      "minLength": 1
+    },
+    "subject": {
+      "type": "string",
+      "minLength": 1
+    },
+    "occurred_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "recorded_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "run_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "attempt_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "loop_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "interaction_round": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 0
+    },
+    "loop_sequence": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 0
+    },
+    "action_index": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 0
+    },
+    "causal_parent_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^evt_[A-Za-z0-9._:-]+$"
+      },
+      "uniqueItems": true
+    },
+    "actor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "actor_id",
+        "actor_type"
+      ],
+      "properties": {
+        "actor_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "actor_type": {
+          "enum": [
+            "human",
+            "agent",
+            "subagent",
+            "tool",
+            "validator",
+            "runtime",
+            "governance_agent",
+            "external_system"
+          ]
+        }
+      }
+    },
+    "trace": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "trace_id": {
+          "type": "string"
+        },
+        "span_id": {
+          "type": "string"
+        },
+        "traceparent": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "tracestate": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "effect_class": {
+      "enum": [
+        "none",
+        "read_only",
+        "sandbox_mutation",
+        "external_reversible",
+        "external_compensatable",
+        "external_irreversible"
+      ]
+    },
+    "execution_key": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "authority": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/authority"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "budget": {
+      "$ref": "#/$defs/budget"
+    },
+    "artifact_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/artifact_ref"
+      }
+    },
+    "input_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "output_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "quality_delta": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "number"
+      }
+    },
+    "completion_delta": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": -1,
+      "maximum": 1
+    },
+    "status": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "data": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "extensions": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "branch_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "parallel_group": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "join_semantics": {
+      "enum": [
+        null,
+        "all",
+        "any",
+        "quorum",
+        "evidence_merge"
+      ]
+    },
+    "join_quorum": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 1
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "join_semantics": {
+            "const": "quorum"
+          }
+        },
+        "required": [
+          "join_semantics"
+        ]
+      },
+      "then": {
+        "required": [
+          "join_quorum"
+        ]
+      }
+    }
+  ]
+}

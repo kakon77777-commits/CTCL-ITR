@@ -1,0 +1,1111 @@
+{
+  "schema_version": "0.2.14",
+  "trajectory_id": "geometry-trajectory:reference",
+  "generated_at": "2026-08-25T01:00:00+00:00",
+  "method": "surface_geometry_trajectory_v1",
+  "time_unit": "day",
+  "observation_count": 3,
+  "observations": [
+    {
+      "observation_id": "obs:current",
+      "observed_at": "2026-08-23T00:00:00+00:00",
+      "geometry_id": "geometry:reference-base-current"
+    },
+    {
+      "observation_id": "obs:later",
+      "observed_at": "2026-08-24T00:00:00+00:00",
+      "geometry_id": "geometry:reference-base-later"
+    },
+    {
+      "observation_id": "obs:regressed",
+      "observed_at": "2026-08-25T00:00:00+00:00",
+      "geometry_id": "geometry:reference-base-regressed"
+    }
+  ],
+  "measurement_contract": {
+    "unit": "interaction_depth",
+    "reliability_p": 0.9,
+    "scope_id": "scope:reference",
+    "assessment_method": "monotone_binomial_pava_v1"
+  },
+  "families": [
+    "code",
+    "research"
+  ],
+  "grid": {
+    "grid_step": 0.1,
+    "adjacency_method": "simplex_single_transfer_v1",
+    "adjacency_tolerance": 1e-09
+  },
+  "boundary_interpolation": {
+    "positive_stability": "supported_edge_lower_band_zero_crossing_linear_v1",
+    "negative_stability": "supported_edge_upper_band_zero_crossing_linear_v1",
+    "zero_tolerance": 1e-12
+  },
+  "conditioning": {
+    "compatible_geometry_contract_required": true,
+    "consecutive_motion_delegates_to_v0_2_13": true,
+    "boundary_component_matching_is_descriptive_not_identity": true,
+    "unsupported_region_interpolated": false,
+    "finite_difference_derivatives_are_descriptive": true
+  },
+  "steps": [
+    {
+      "step_index": 0,
+      "from_observation_id": "obs:current",
+      "to_observation_id": "obs:later",
+      "elapsed_seconds": 86400.0,
+      "elapsed_days": 1.0,
+      "subjects": {
+        "autonomy": {
+          "net_supported_cell_change": 2,
+          "split_count": 0,
+          "merge_count": 0,
+          "positive_boundary_matched_count": 1,
+          "positive_boundary_mean_l1_displacement": 0.3522318931527646,
+          "support_frontier_mean_l1_displacement": 0.4000000000000001,
+          "matched_gradient_edge_count": 5,
+          "max_absolute_point_estimate_slope_change": 1.0000000000000235
+        },
+        "governance": {
+          "net_supported_cell_change": 2,
+          "split_count": 0,
+          "merge_count": 0,
+          "positive_boundary_matched_count": 1,
+          "positive_boundary_mean_l1_displacement": 0.28290542500725163,
+          "support_frontier_mean_l1_displacement": 0.4000000000000001,
+          "matched_gradient_edge_count": 5,
+          "max_absolute_point_estimate_slope_change": 1.0000000000000147
+        }
+      }
+    },
+    {
+      "step_index": 1,
+      "from_observation_id": "obs:later",
+      "to_observation_id": "obs:regressed",
+      "elapsed_seconds": 86400.0,
+      "elapsed_days": 1.0,
+      "subjects": {
+        "autonomy": {
+          "net_supported_cell_change": -2,
+          "split_count": 0,
+          "merge_count": 0,
+          "positive_boundary_matched_count": 1,
+          "positive_boundary_mean_l1_displacement": 0.3522318931527646,
+          "support_frontier_mean_l1_displacement": 0.4000000000000001,
+          "matched_gradient_edge_count": 5,
+          "max_absolute_point_estimate_slope_change": 1.0000000000000235
+        },
+        "governance": {
+          "net_supported_cell_change": -2,
+          "split_count": 0,
+          "merge_count": 0,
+          "positive_boundary_matched_count": 1,
+          "positive_boundary_mean_l1_displacement": 0.28290542500725163,
+          "support_frontier_mean_l1_displacement": 0.4000000000000001,
+          "matched_gradient_edge_count": 5,
+          "max_absolute_point_estimate_slope_change": 1.0000000000000147
+        }
+      }
+    }
+  ],
+  "subjects": {
+    "autonomy": {
+      "supported_domain_trajectory": {
+        "supported_cell_counts": [
+          6,
+          8,
+          6
+        ],
+        "step_changes": [
+          2,
+          -2
+        ],
+        "step_directions": [
+          "expansion",
+          "contraction"
+        ],
+        "direction_reversal_count": 1,
+        "net_supported_cell_change": 0,
+        "minimum_supported_cell_count": 6,
+        "maximum_supported_cell_count": 8
+      },
+      "stability_boundary_trajectories": {
+        "positive": {
+          "matching_is_descriptive_not_identity": true,
+          "lineage_count": 1,
+          "spans_all_observations_count": 1,
+          "lineages": [
+            {
+              "first_observation_index": 0,
+              "last_observation_index": 2,
+              "observation_count": 3,
+              "lifespan_days": 2.0,
+              "spans_all_observations": true,
+              "points": [
+                {
+                  "observation_index": 0,
+                  "observation_id": "obs:current",
+                  "observed_at": "2026-08-23T00:00:00+00:00",
+                  "reference_family_weights": {
+                    "code": 0.5528922561345437,
+                    "research": 0.44710774386545626
+                  }
+                },
+                {
+                  "observation_index": 1,
+                  "observation_id": "obs:later",
+                  "observed_at": "2026-08-24T00:00:00+00:00",
+                  "reference_family_weights": {
+                    "code": 0.37677630955816144,
+                    "research": 0.6232236904418386
+                  }
+                },
+                {
+                  "observation_index": 2,
+                  "observation_id": "obs:regressed",
+                  "observed_at": "2026-08-25T00:00:00+00:00",
+                  "reference_family_weights": {
+                    "code": 0.5528922561345437,
+                    "research": 0.44710774386545626
+                  }
+                }
+              ],
+              "velocities": [
+                {
+                  "from_observation_index": 0,
+                  "to_observation_index": 1,
+                  "from_observation_id": "obs:current",
+                  "to_observation_id": "obs:later",
+                  "elapsed_days": 1.0,
+                  "l1_displacement": 0.3522318931527646,
+                  "l1_speed_per_day": 0.3522318931527646,
+                  "signed_family_velocity_per_day": {
+                    "code": -0.1761159465763823,
+                    "research": 0.1761159465763823
+                  }
+                },
+                {
+                  "from_observation_index": 1,
+                  "to_observation_index": 2,
+                  "from_observation_id": "obs:later",
+                  "to_observation_id": "obs:regressed",
+                  "elapsed_days": 1.0,
+                  "l1_displacement": 0.3522318931527646,
+                  "l1_speed_per_day": 0.3522318931527646,
+                  "signed_family_velocity_per_day": {
+                    "code": 0.1761159465763823,
+                    "research": -0.1761159465763823
+                  }
+                }
+              ],
+              "accelerations": [
+                {
+                  "at_observation_index": 1,
+                  "at_observation_id": "obs:later",
+                  "effective_elapsed_days": 1.0,
+                  "signed_family_acceleration_per_day2": {
+                    "code": 0.3522318931527646,
+                    "research": -0.3522318931527646
+                  },
+                  "l1_speed_change_per_day2": 0.0
+                }
+              ],
+              "velocity_direction_reversal_count_by_family": {
+                "code": 1,
+                "research": 1
+              },
+              "total_path_l1": 0.7044637863055292,
+              "net_signed_displacement": {
+                "code": 0.0,
+                "research": 0.0
+              }
+            }
+          ]
+        },
+        "negative": {
+          "matching_is_descriptive_not_identity": true,
+          "lineage_count": 0,
+          "spans_all_observations_count": 0,
+          "lineages": []
+        }
+      },
+      "component_trajectories": {
+        "lineage_identity_is_descriptive": true,
+        "lineage_count": 1,
+        "spans_all_observations_count": 1,
+        "maximum_lifespan_days": 2.0,
+        "lineages": [
+          {
+            "first_observation_index": 0,
+            "last_observation_index": 2,
+            "observation_count": 3,
+            "lifespan_days": 2.0,
+            "spans_all_observations": true,
+            "split_event_count": 0,
+            "merge_event_count": 0,
+            "nodes": [
+              {
+                "observation_index": 0,
+                "observation_id": "obs:current",
+                "component_id": "supported:0000",
+                "members": [
+                  "code=0.1|research=0.9",
+                  "code=0.2|research=0.8",
+                  "code=0.3|research=0.7",
+                  "code=0.4|research=0.6",
+                  "code=0.5|research=0.5",
+                  "code=0.6|research=0.4"
+                ]
+              },
+              {
+                "observation_index": 1,
+                "observation_id": "obs:later",
+                "component_id": "supported:0000",
+                "members": [
+                  "code=0.1|research=0.9",
+                  "code=0.2|research=0.8",
+                  "code=0.3|research=0.7",
+                  "code=0.4|research=0.6",
+                  "code=0.5|research=0.5",
+                  "code=0.6|research=0.4",
+                  "code=0.7|research=0.3",
+                  "code=0.8|research=0.2"
+                ]
+              },
+              {
+                "observation_index": 2,
+                "observation_id": "obs:regressed",
+                "component_id": "supported:0000",
+                "members": [
+                  "code=0.1|research=0.9",
+                  "code=0.2|research=0.8",
+                  "code=0.3|research=0.7",
+                  "code=0.4|research=0.6",
+                  "code=0.5|research=0.5",
+                  "code=0.6|research=0.4"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "sign_region_persistence": {
+        "union_cell_count": 8,
+        "supported_all_observations_count": 6,
+        "positive_all_observations_count": 1,
+        "status_change_cell_count": 4,
+        "support_excursion_cell_count": 2,
+        "cell_trajectories": [
+          {
+            "cell_key": "code=0.1|research=0.9",
+            "status_sequence": [
+              "crosses_zero",
+              "crosses_zero",
+              "crosses_zero"
+            ],
+            "supported_observation_count": 3,
+            "positive_observation_count": 0,
+            "supported_all_observations": true,
+            "positive_all_observations": false,
+            "status_change_count": 0,
+            "support_excursion": false,
+            "maximum_consecutive_positive_band_run": 0
+          },
+          {
+            "cell_key": "code=0.2|research=0.8",
+            "status_sequence": [
+              "crosses_zero",
+              "crosses_zero",
+              "crosses_zero"
+            ],
+            "supported_observation_count": 3,
+            "positive_observation_count": 0,
+            "supported_all_observations": true,
+            "positive_all_observations": false,
+            "status_change_count": 0,
+            "support_excursion": false,
+            "maximum_consecutive_positive_band_run": 0
+          },
+          {
+            "cell_key": "code=0.3|research=0.7",
+            "status_sequence": [
+              "crosses_zero",
+              "crosses_zero",
+              "crosses_zero"
+            ],
+            "supported_observation_count": 3,
+            "positive_observation_count": 0,
+            "supported_all_observations": true,
+            "positive_all_observations": false,
+            "status_change_count": 0,
+            "support_excursion": false,
+            "maximum_consecutive_positive_band_run": 0
+          },
+          {
+            "cell_key": "code=0.4|research=0.6",
+            "status_sequence": [
+              "crosses_zero",
+              "positive_band",
+              "crosses_zero"
+            ],
+            "supported_observation_count": 3,
+            "positive_observation_count": 1,
+            "supported_all_observations": true,
+            "positive_all_observations": false,
+            "status_change_count": 2,
+            "support_excursion": false,
+            "maximum_consecutive_positive_band_run": 1
+          },
+          {
+            "cell_key": "code=0.5|research=0.5",
+            "status_sequence": [
+              "crosses_zero",
+              "positive_band",
+              "crosses_zero"
+            ],
+            "supported_observation_count": 3,
+            "positive_observation_count": 1,
+            "supported_all_observations": true,
+            "positive_all_observations": false,
+            "status_change_count": 2,
+            "support_excursion": false,
+            "maximum_consecutive_positive_band_run": 1
+          },
+          {
+            "cell_key": "code=0.6|research=0.4",
+            "status_sequence": [
+              "positive_band",
+              "positive_band",
+              "positive_band"
+            ],
+            "supported_observation_count": 3,
+            "positive_observation_count": 3,
+            "supported_all_observations": true,
+            "positive_all_observations": true,
+            "status_change_count": 0,
+            "support_excursion": false,
+            "maximum_consecutive_positive_band_run": 3
+          },
+          {
+            "cell_key": "code=0.7|research=0.3",
+            "status_sequence": [
+              "unsupported",
+              "positive_band",
+              "unsupported"
+            ],
+            "supported_observation_count": 1,
+            "positive_observation_count": 1,
+            "supported_all_observations": false,
+            "positive_all_observations": false,
+            "status_change_count": 2,
+            "support_excursion": true,
+            "maximum_consecutive_positive_band_run": 1
+          },
+          {
+            "cell_key": "code=0.8|research=0.2",
+            "status_sequence": [
+              "unsupported",
+              "positive_band",
+              "unsupported"
+            ],
+            "supported_observation_count": 1,
+            "positive_observation_count": 1,
+            "supported_all_observations": false,
+            "positive_all_observations": false,
+            "status_change_count": 2,
+            "support_excursion": true,
+            "maximum_consecutive_positive_band_run": 1
+          }
+        ]
+      },
+      "local_gradient_trajectories": {
+        "edge_trajectory_count": 7,
+        "persistent_all_observations_count": 5,
+        "presence_excursion_count": 2,
+        "mean_absolute_step_change": 0.555555555555559,
+        "max_absolute_step_change": 1.0000000000000235,
+        "edge_trajectories": [
+          {
+            "edge_key": "code=0.1|research=0.9<>code=0.2|research=0.8",
+            "presence_sequence": [
+              true,
+              true,
+              true
+            ],
+            "point_estimate_slope_sequence": [
+              0.6018272914824774,
+              0.8796050692602543,
+              0.6018272914824774
+            ],
+            "persistent_all_observations": true,
+            "presence_excursion": false,
+            "step_changes": [
+              {
+                "from_observation_index": 0,
+                "to_observation_index": 1,
+                "point_estimate_slope_change": 0.2777777777777769
+              },
+              {
+                "from_observation_index": 1,
+                "to_observation_index": 2,
+                "point_estimate_slope_change": -0.2777777777777769
+              }
+            ],
+            "slope_change_direction_reversal_count": 1
+          },
+          {
+            "edge_key": "code=0.2|research=0.8<>code=0.3|research=0.7",
+            "presence_sequence": [
+              true,
+              true,
+              true
+            ],
+            "point_estimate_slope_sequence": [
+              0.7864309603439865,
+              1.1435738174868422,
+              0.7864309603439865
+            ],
+            "persistent_all_observations": true,
+            "presence_excursion": false,
+            "step_changes": [
+              {
+                "from_observation_index": 0,
+                "to_observation_index": 1,
+                "point_estimate_slope_change": 0.35714285714285565
+              },
+              {
+                "from_observation_index": 1,
+                "to_observation_index": 2,
+                "point_estimate_slope_change": -0.35714285714285565
+              }
+            ],
+            "slope_change_direction_reversal_count": 1
+          },
+          {
+            "edge_key": "code=0.3|research=0.7<>code=0.4|research=0.6",
+            "presence_sequence": [
+              true,
+              true,
+              true
+            ],
+            "point_estimate_slope_sequence": [
+              1.0699792960662702,
+              1.5461697722567358,
+              1.0699792960662702
+            ],
+            "persistent_all_observations": true,
+            "presence_excursion": false,
+            "step_changes": [
+              {
+                "from_observation_index": 0,
+                "to_observation_index": 1,
+                "point_estimate_slope_change": 0.4761904761904656
+              },
+              {
+                "from_observation_index": 1,
+                "to_observation_index": 2,
+                "point_estimate_slope_change": -0.4761904761904656
+              }
+            ],
+            "slope_change_direction_reversal_count": 1
+          },
+          {
+            "edge_key": "code=0.4|research=0.6<>code=0.5|research=0.5",
+            "presence_sequence": [
+              true,
+              true,
+              true
+            ],
+            "point_estimate_slope_sequence": [
+              1.537254901960781,
+              2.2039215686274543,
+              1.537254901960781
+            ],
+            "persistent_all_observations": true,
+            "presence_excursion": false,
+            "step_changes": [
+              {
+                "from_observation_index": 0,
+                "to_observation_index": 1,
+                "point_estimate_slope_change": 0.6666666666666732
+              },
+              {
+                "from_observation_index": 1,
+                "to_observation_index": 2,
+                "point_estimate_slope_change": -0.6666666666666732
+              }
+            ],
+            "slope_change_direction_reversal_count": 1
+          },
+          {
+            "edge_key": "code=0.5|research=0.5<>code=0.6|research=0.4",
+            "presence_sequence": [
+              true,
+              true,
+              true
+            ],
+            "point_estimate_slope_sequence": [
+              2.3865546218487226,
+              3.386554621848746,
+              2.3865546218487226
+            ],
+            "persistent_all_observations": true,
+            "presence_excursion": false,
+            "step_changes": [
+              {
+                "from_observation_index": 0,
+                "to_observation_index": 1,
+                "point_estimate_slope_change": 1.0000000000000235
+              },
+              {
+                "from_observation_index": 1,
+                "to_observation_index": 2,
+                "point_estimate_slope_change": -1.0000000000000235
+              }
+            ],
+            "slope_change_direction_reversal_count": 1
+          },
+          {
+            "edge_key": "code=0.6|research=0.4<>code=0.7|research=0.3",
+            "presence_sequence": [
+              false,
+              true,
+              false
+            ],
+            "point_estimate_slope_sequence": [
+              null,
+              1.9509379509379432,
+              null
+            ],
+            "persistent_all_observations": false,
+            "presence_excursion": true,
+            "step_changes": [],
+            "slope_change_direction_reversal_count": 0
+          },
+          {
+            "edge_key": "code=0.7|research=0.3<>code=0.8|research=0.2",
+            "presence_sequence": [
+              false,
+              true,
+              false
+            ],
+            "point_estimate_slope_sequence": [
+              null,
+              4.525252525252535,
+              null
+            ],
+            "persistent_all_observations": false,
+            "presence_excursion": true,
+            "step_changes": [],
+            "slope_change_direction_reversal_count": 0
+          }
+        ]
+      }
+    },
+    "governance": {
+      "supported_domain_trajectory": {
+        "supported_cell_counts": [
+          6,
+          8,
+          6
+        ],
+        "step_changes": [
+          2,
+          -2
+        ],
+        "step_directions": [
+          "expansion",
+          "contraction"
+        ],
+        "direction_reversal_count": 1,
+        "net_supported_cell_change": 0,
+        "minimum_supported_cell_count": 6,
+        "maximum_supported_cell_count": 8
+      },
+      "stability_boundary_trajectories": {
+        "positive": {
+          "matching_is_descriptive_not_identity": true,
+          "lineage_count": 1,
+          "spans_all_observations_count": 1,
+          "lineages": [
+            {
+              "first_observation_index": 0,
+              "last_observation_index": 2,
+              "observation_count": 3,
+              "lifespan_days": 2.0,
+              "spans_all_observations": true,
+              "points": [
+                {
+                  "observation_index": 0,
+                  "observation_id": "obs:current",
+                  "observed_at": "2026-08-23T00:00:00+00:00",
+                  "reference_family_weights": {
+                    "code": 0.5,
+                    "research": 0.5
+                  }
+                },
+                {
+                  "observation_index": 1,
+                  "observation_id": "obs:later",
+                  "observed_at": "2026-08-24T00:00:00+00:00",
+                  "reference_family_weights": {
+                    "code": 0.35854728749637416,
+                    "research": 0.6414527125036258
+                  }
+                },
+                {
+                  "observation_index": 2,
+                  "observation_id": "obs:regressed",
+                  "observed_at": "2026-08-25T00:00:00+00:00",
+                  "reference_family_weights": {
+                    "code": 0.5,
+                    "research": 0.5
+                  }
+                }
+              ],
+              "velocities": [
+                {
+                  "from_observation_index": 0,
+                  "to_observation_index": 1,
+                  "from_observation_id": "obs:current",
+                  "to_observation_id": "obs:later",
+                  "elapsed_days": 1.0,
+                  "l1_displacement": 0.28290542500725163,
+                  "l1_speed_per_day": 0.28290542500725163,
+                  "signed_family_velocity_per_day": {
+                    "code": -0.14145271250362584,
+                    "research": 0.1414527125036258
+                  }
+                },
+                {
+                  "from_observation_index": 1,
+                  "to_observation_index": 2,
+                  "from_observation_id": "obs:later",
+                  "to_observation_id": "obs:regressed",
+                  "elapsed_days": 1.0,
+                  "l1_displacement": 0.28290542500725163,
+                  "l1_speed_per_day": 0.28290542500725163,
+                  "signed_family_velocity_per_day": {
+                    "code": 0.14145271250362584,
+                    "research": -0.1414527125036258
+                  }
+                }
+              ],
+              "accelerations": [
+                {
+                  "at_observation_index": 1,
+                  "at_observation_id": "obs:later",
+                  "effective_elapsed_days": 1.0,
+                  "signed_family_acceleration_per_day2": {
+                    "code": 0.2829054250072517,
+                    "research": -0.2829054250072516
+                  },
+                  "l1_speed_change_per_day2": 0.0
+                }
+              ],
+              "velocity_direction_reversal_count_by_family": {
+                "code": 1,
+                "research": 1
+              },
+              "total_path_l1": 0.5658108500145033,
+              "net_signed_displacement": {
+                "code": 0.0,
+                "research": 0.0
+              }
+            }
+          ]
+        },
+        "negative": {
+          "matching_is_descriptive_not_identity": true,
+          "lineage_count": 0,
+          "spans_all_observations_count": 0,
+          "lineages": []
+        }
+      },
+      "component_trajectories": {
+        "lineage_identity_is_descriptive": true,
+        "lineage_count": 1,
+        "spans_all_observations_count": 1,
+        "maximum_lifespan_days": 2.0,
+        "lineages": [
+          {
+            "first_observation_index": 0,
+            "last_observation_index": 2,
+            "observation_count": 3,
+            "lifespan_days": 2.0,
+            "spans_all_observations": true,
+            "split_event_count": 0,
+            "merge_event_count": 0,
+            "nodes": [
+              {
+                "observation_index": 0,
+                "observation_id": "obs:current",
+                "component_id": "supported:0000",
+                "members": [
+                  "code=0.1|research=0.9",
+                  "code=0.2|research=0.8",
+                  "code=0.3|research=0.7",
+                  "code=0.4|research=0.6",
+                  "code=0.5|research=0.5",
+                  "code=0.6|research=0.4"
+                ]
+              },
+              {
+                "observation_index": 1,
+                "observation_id": "obs:later",
+                "component_id": "supported:0000",
+                "members": [
+                  "code=0.1|research=0.9",
+                  "code=0.2|research=0.8",
+                  "code=0.3|research=0.7",
+                  "code=0.4|research=0.6",
+                  "code=0.5|research=0.5",
+                  "code=0.6|research=0.4",
+                  "code=0.7|research=0.3",
+                  "code=0.8|research=0.2"
+                ]
+              },
+              {
+                "observation_index": 2,
+                "observation_id": "obs:regressed",
+                "component_id": "supported:0000",
+                "members": [
+                  "code=0.1|research=0.9",
+                  "code=0.2|research=0.8",
+                  "code=0.3|research=0.7",
+                  "code=0.4|research=0.6",
+                  "code=0.5|research=0.5",
+                  "code=0.6|research=0.4"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "sign_region_persistence": {
+        "union_cell_count": 8,
+        "supported_all_observations_count": 6,
+        "positive_all_observations_count": 1,
+        "status_change_cell_count": 4,
+        "support_excursion_cell_count": 2,
+        "cell_trajectories": [
+          {
+            "cell_key": "code=0.1|research=0.9",
+            "status_sequence": [
+              "crosses_zero",
+              "crosses_zero",
+              "crosses_zero"
+            ],
+            "supported_observation_count": 3,
+            "positive_observation_count": 0,
+            "supported_all_observations": true,
+            "positive_all_observations": false,
+            "status_change_count": 0,
+            "support_excursion": false,
+            "maximum_consecutive_positive_band_run": 0
+          },
+          {
+            "cell_key": "code=0.2|research=0.8",
+            "status_sequence": [
+              "crosses_zero",
+              "crosses_zero",
+              "crosses_zero"
+            ],
+            "supported_observation_count": 3,
+            "positive_observation_count": 0,
+            "supported_all_observations": true,
+            "positive_all_observations": false,
+            "status_change_count": 0,
+            "support_excursion": false,
+            "maximum_consecutive_positive_band_run": 0
+          },
+          {
+            "cell_key": "code=0.3|research=0.7",
+            "status_sequence": [
+              "crosses_zero",
+              "crosses_zero",
+              "crosses_zero"
+            ],
+            "supported_observation_count": 3,
+            "positive_observation_count": 0,
+            "supported_all_observations": true,
+            "positive_all_observations": false,
+            "status_change_count": 0,
+            "support_excursion": false,
+            "maximum_consecutive_positive_band_run": 0
+          },
+          {
+            "cell_key": "code=0.4|research=0.6",
+            "status_sequence": [
+              "crosses_zero",
+              "positive_band",
+              "crosses_zero"
+            ],
+            "supported_observation_count": 3,
+            "positive_observation_count": 1,
+            "supported_all_observations": true,
+            "positive_all_observations": false,
+            "status_change_count": 2,
+            "support_excursion": false,
+            "maximum_consecutive_positive_band_run": 1
+          },
+          {
+            "cell_key": "code=0.5|research=0.5",
+            "status_sequence": [
+              "crosses_zero",
+              "positive_band",
+              "crosses_zero"
+            ],
+            "supported_observation_count": 3,
+            "positive_observation_count": 1,
+            "supported_all_observations": true,
+            "positive_all_observations": false,
+            "status_change_count": 2,
+            "support_excursion": false,
+            "maximum_consecutive_positive_band_run": 1
+          },
+          {
+            "cell_key": "code=0.6|research=0.4",
+            "status_sequence": [
+              "positive_band",
+              "positive_band",
+              "positive_band"
+            ],
+            "supported_observation_count": 3,
+            "positive_observation_count": 3,
+            "supported_all_observations": true,
+            "positive_all_observations": true,
+            "status_change_count": 0,
+            "support_excursion": false,
+            "maximum_consecutive_positive_band_run": 3
+          },
+          {
+            "cell_key": "code=0.7|research=0.3",
+            "status_sequence": [
+              "unsupported",
+              "positive_band",
+              "unsupported"
+            ],
+            "supported_observation_count": 1,
+            "positive_observation_count": 1,
+            "supported_all_observations": false,
+            "positive_all_observations": false,
+            "status_change_count": 2,
+            "support_excursion": true,
+            "maximum_consecutive_positive_band_run": 1
+          },
+          {
+            "cell_key": "code=0.8|research=0.2",
+            "status_sequence": [
+              "unsupported",
+              "positive_band",
+              "unsupported"
+            ],
+            "supported_observation_count": 1,
+            "positive_observation_count": 1,
+            "supported_all_observations": false,
+            "positive_all_observations": false,
+            "status_change_count": 2,
+            "support_excursion": true,
+            "maximum_consecutive_positive_band_run": 1
+          }
+        ]
+      },
+      "local_gradient_trajectories": {
+        "edge_trajectory_count": 7,
+        "persistent_all_observations_count": 5,
+        "presence_excursion_count": 2,
+        "mean_absolute_step_change": 0.555555555555559,
+        "max_absolute_step_change": 1.0000000000000147,
+        "edge_trajectories": [
+          {
+            "edge_key": "code=0.1|research=0.9<>code=0.2|research=0.8",
+            "presence_sequence": [
+              true,
+              true,
+              true
+            ],
+            "point_estimate_slope_sequence": [
+              0.6617570575630971,
+              0.939534835340874,
+              0.6617570575630971
+            ],
+            "persistent_all_observations": true,
+            "presence_excursion": false,
+            "step_changes": [
+              {
+                "from_observation_index": 0,
+                "to_observation_index": 1,
+                "point_estimate_slope_change": 0.2777777777777769
+              },
+              {
+                "from_observation_index": 1,
+                "to_observation_index": 2,
+                "point_estimate_slope_change": -0.2777777777777769
+              }
+            ],
+            "slope_change_direction_reversal_count": 1
+          },
+          {
+            "edge_key": "code=0.2|research=0.8<>code=0.3|research=0.7",
+            "presence_sequence": [
+              true,
+              true,
+              true
+            ],
+            "point_estimate_slope_sequence": [
+              0.86558761435608,
+              1.2227304714989446,
+              0.86558761435608
+            ],
+            "persistent_all_observations": true,
+            "presence_excursion": false,
+            "step_changes": [
+              {
+                "from_observation_index": 0,
+                "to_observation_index": 1,
+                "point_estimate_slope_change": 0.35714285714286464
+              },
+              {
+                "from_observation_index": 1,
+                "to_observation_index": 2,
+                "point_estimate_slope_change": -0.35714285714286464
+              }
+            ],
+            "slope_change_direction_reversal_count": 1
+          },
+          {
+            "edge_key": "code=0.3|research=0.7<>code=0.4|research=0.6",
+            "presence_sequence": [
+              true,
+              true,
+              true
+            ],
+            "point_estimate_slope_sequence": [
+              1.1788090916947525,
+              1.654999567885218,
+              1.1788090916947525
+            ],
+            "persistent_all_observations": true,
+            "presence_excursion": false,
+            "step_changes": [
+              {
+                "from_observation_index": 0,
+                "to_observation_index": 1,
+                "point_estimate_slope_change": 0.4761904761904656
+              },
+              {
+                "from_observation_index": 1,
+                "to_observation_index": 2,
+                "point_estimate_slope_change": -0.4761904761904656
+              }
+            ],
+            "slope_change_direction_reversal_count": 1
+          },
+          {
+            "edge_key": "code=0.4|research=0.6<>code=0.5|research=0.5",
+            "presence_sequence": [
+              true,
+              true,
+              true
+            ],
+            "point_estimate_slope_sequence": [
+              1.6950067476383261,
+              2.3616734143049993,
+              1.6950067476383261
+            ],
+            "persistent_all_observations": true,
+            "presence_excursion": false,
+            "step_changes": [
+              {
+                "from_observation_index": 0,
+                "to_observation_index": 1,
+                "point_estimate_slope_change": 0.6666666666666732
+              },
+              {
+                "from_observation_index": 1,
+                "to_observation_index": 2,
+                "point_estimate_slope_change": -0.6666666666666732
+              }
+            ],
+            "slope_change_direction_reversal_count": 1
+          },
+          {
+            "edge_key": "code=0.5|research=0.5<>code=0.6|research=0.4",
+            "presence_sequence": [
+              true,
+              true,
+              true
+            ],
+            "point_estimate_slope_sequence": [
+              2.6324786324786325,
+              3.632478632478647,
+              2.6324786324786325
+            ],
+            "persistent_all_observations": true,
+            "presence_excursion": false,
+            "step_changes": [
+              {
+                "from_observation_index": 0,
+                "to_observation_index": 1,
+                "point_estimate_slope_change": 1.0000000000000147
+              },
+              {
+                "from_observation_index": 1,
+                "to_observation_index": 2,
+                "point_estimate_slope_change": -1.0000000000000147
+              }
+            ],
+            "slope_change_direction_reversal_count": 1
+          },
+          {
+            "edge_key": "code=0.6|research=0.4<>code=0.7|research=0.3",
+            "presence_sequence": [
+              false,
+              true,
+              false
+            ],
+            "point_estimate_slope_sequence": [
+              null,
+              2.377260981912128,
+              null
+            ],
+            "persistent_all_observations": false,
+            "presence_excursion": true,
+            "step_changes": [],
+            "slope_change_direction_reversal_count": 0
+          },
+          {
+            "edge_key": "code=0.7|research=0.3<>code=0.8|research=0.2",
+            "presence_sequence": [
+              false,
+              true,
+              false
+            ],
+            "point_estimate_slope_sequence": [
+              null,
+              5.400516795865638,
+              null
+            ],
+            "persistent_all_observations": false,
+            "presence_excursion": true,
+            "step_changes": [],
+            "slope_change_direction_reversal_count": 0
+          }
+        ]
+      }
+    }
+  },
+  "interpretation_boundary": [
+    "Geometry Trajectory != Causal Mechanism",
+    "Finite-Difference Boundary Velocity != Capability Velocity",
+    "Finite-Difference Boundary Acceleration != Physical Acceleration",
+    "Support Reversal != Universal System Regression",
+    "Boundary Lineage != Persistent Boundary Identity",
+    "Component Lineage != Persistent Component Identity",
+    "Gradient Trajectory != Global Derivative Field",
+    "Trajectory Report != Authority"
+  ],
+  "non_authoritative": true
+}

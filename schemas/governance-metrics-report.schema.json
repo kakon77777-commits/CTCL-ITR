@@ -1,0 +1,648 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://evemisslab.example/schemas/itr/governance-metrics-report-v0.2.5.json",
+  "title": "CTCL-ITR Governance Metrics Report v0.2.5",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "observed_at",
+    "policy",
+    "human_intervention_density",
+    "effective_oversight_density",
+    "escalation_latency",
+    "intervention_timing",
+    "oversight_debt",
+    "human_time",
+    "risk_coverage",
+    "counts"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.2.5"
+    },
+    "observed_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "risk_weights",
+        "debt_multipliers",
+        "effective_transition_types",
+        "closing_decisions"
+      ],
+      "properties": {
+        "risk_weights": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "low",
+            "medium",
+            "high",
+            "critical"
+          ],
+          "properties": {
+            "low": {
+              "type": "number",
+              "minimum": 0
+            },
+            "medium": {
+              "type": "number",
+              "minimum": 0
+            },
+            "high": {
+              "type": "number",
+              "minimum": 0
+            },
+            "critical": {
+              "type": "number",
+              "minimum": 0
+            }
+          }
+        },
+        "debt_multipliers": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "unresolved",
+            "overdue",
+            "deferred",
+            "stale_authority"
+          ],
+          "properties": {
+            "unresolved": {
+              "type": "number",
+              "minimum": 0
+            },
+            "overdue": {
+              "type": "number",
+              "minimum": 0
+            },
+            "deferred": {
+              "type": "number",
+              "minimum": 0
+            },
+            "stale_authority": {
+              "type": "number",
+              "minimum": 0
+            }
+          }
+        },
+        "effective_transition_types": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+        "closing_decisions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "human_intervention_density": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "value",
+        "human_intervention_count",
+        "effective_transition_count"
+      ],
+      "properties": {
+        "value": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "human_intervention_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "effective_transition_count": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "effective_oversight_density": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "value",
+        "effective_weight",
+        "opportunity_weight",
+        "effective_approval_ids"
+      ],
+      "properties": {
+        "value": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "effective_weight": {
+          "type": "number",
+          "minimum": 0
+        },
+        "opportunity_weight": {
+          "type": "number",
+          "minimum": 0
+        },
+        "effective_approval_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "escalation_latency": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "count",
+        "mean_ms",
+        "p50_ms",
+        "p95_ms",
+        "max_ms"
+      ],
+      "properties": {
+        "count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "mean_ms": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "p50_ms": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "p95_ms": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "max_ms": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        }
+      }
+    },
+    "intervention_timing": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "timely_count",
+        "late_count",
+        "open_count",
+        "items"
+      ],
+      "properties": {
+        "timely_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "late_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "open_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "approval_id",
+              "decision_id",
+              "decision",
+              "risk_class",
+              "requested_at",
+              "deadline_at",
+              "timing_basis",
+              "latency_ms",
+              "timing_ratio",
+              "margin_ms",
+              "timely",
+              "open_age_ms"
+            ],
+            "properties": {
+              "approval_id": {
+                "type": "string"
+              },
+              "decision_id": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "decision": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "risk_class": {
+                "enum": [
+                  "low",
+                  "medium",
+                  "high",
+                  "critical"
+                ]
+              },
+              "requested_at": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "deadline_at": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "timing_basis": {
+                "enum": [
+                  "explicit_intervention_deadline",
+                  "approval_expiry_proxy"
+                ]
+              },
+              "latency_ms": {
+                "type": [
+                  "integer",
+                  "null"
+                ]
+              },
+              "timing_ratio": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "margin_ms": {
+                "type": [
+                  "integer",
+                  "null"
+                ]
+              },
+              "timely": {
+                "type": "boolean"
+              },
+              "open_age_ms": {
+                "type": [
+                  "integer",
+                  "null"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "oversight_debt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "unresolved_weight",
+        "overdue_weight",
+        "deferred_weight",
+        "stale_authority_weight",
+        "total_weight",
+        "unresolved_approval_ids",
+        "overdue_approval_ids",
+        "deferred_approval_ids",
+        "stale_authority_refs"
+      ],
+      "properties": {
+        "unresolved_weight": {
+          "type": "number",
+          "minimum": 0
+        },
+        "overdue_weight": {
+          "type": "number",
+          "minimum": 0
+        },
+        "deferred_weight": {
+          "type": "number",
+          "minimum": 0
+        },
+        "stale_authority_weight": {
+          "type": "number",
+          "minimum": 0
+        },
+        "total_weight": {
+          "type": "number",
+          "minimum": 0
+        },
+        "unresolved_approval_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "overdue_approval_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "deferred_approval_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "stale_authority_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "human_time": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "decision_count",
+        "human_governance_ms_total",
+        "human_governance_ms_mean",
+        "human_active_ms_total",
+        "human_active_ms_mean"
+      ],
+      "properties": {
+        "decision_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "human_governance_ms_total": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "human_governance_ms_mean": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "human_active_ms_total": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "human_active_ms_mean": {
+          "type": [
+            "number",
+            "null"
+          ]
+        }
+      }
+    },
+    "risk_coverage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "low",
+        "medium",
+        "high",
+        "critical"
+      ],
+      "properties": {
+        "low": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "opportunities",
+            "effective",
+            "closed",
+            "open",
+            "opportunity_weight",
+            "effective_weight",
+            "weighted_coverage"
+          ],
+          "properties": {
+            "opportunities": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "effective": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "closed": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "open": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "opportunity_weight": {
+              "type": "number",
+              "minimum": 0
+            },
+            "effective_weight": {
+              "type": "number",
+              "minimum": 0
+            },
+            "weighted_coverage": {
+              "type": [
+                "number",
+                "null"
+              ]
+            }
+          }
+        },
+        "medium": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "opportunities",
+            "effective",
+            "closed",
+            "open",
+            "opportunity_weight",
+            "effective_weight",
+            "weighted_coverage"
+          ],
+          "properties": {
+            "opportunities": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "effective": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "closed": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "open": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "opportunity_weight": {
+              "type": "number",
+              "minimum": 0
+            },
+            "effective_weight": {
+              "type": "number",
+              "minimum": 0
+            },
+            "weighted_coverage": {
+              "type": [
+                "number",
+                "null"
+              ]
+            }
+          }
+        },
+        "high": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "opportunities",
+            "effective",
+            "closed",
+            "open",
+            "opportunity_weight",
+            "effective_weight",
+            "weighted_coverage"
+          ],
+          "properties": {
+            "opportunities": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "effective": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "closed": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "open": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "opportunity_weight": {
+              "type": "number",
+              "minimum": 0
+            },
+            "effective_weight": {
+              "type": "number",
+              "minimum": 0
+            },
+            "weighted_coverage": {
+              "type": [
+                "number",
+                "null"
+              ]
+            }
+          }
+        },
+        "critical": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "opportunities",
+            "effective",
+            "closed",
+            "open",
+            "opportunity_weight",
+            "effective_weight",
+            "weighted_coverage"
+          ],
+          "properties": {
+            "opportunities": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "effective": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "closed": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "open": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "opportunity_weight": {
+              "type": "number",
+              "minimum": 0
+            },
+            "effective_weight": {
+              "type": "number",
+              "minimum": 0
+            },
+            "weighted_coverage": {
+              "type": [
+                "number",
+                "null"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "counts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "approval_requests",
+        "decision_receipts",
+        "authority_grants",
+        "events",
+        "closing_decisions",
+        "open_obligations"
+      ],
+      "properties": {
+        "approval_requests": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "decision_receipts": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "authority_grants": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "events": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "closing_decisions": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "open_obligations": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    }
+  }
+}

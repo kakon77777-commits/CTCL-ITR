@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://evemisslab.example/schemas/itr/ledger-anchor-v0.2.2.json",
+  "title": "CTCL-ITR LedgerAnchor v0.2.2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "run_id", "event_count", "first_event_id",
+    "last_event_id", "hash_algorithm", "record_encoding", "final_chain_digest"
+  ],
+  "properties": {
+    "schema_version": {"const": "0.2.2"},
+    "run_id": {"type": "string", "minLength": 1},
+    "event_count": {"type": "integer", "minimum": 1},
+    "first_event_id": {"type": "string", "minLength": 1},
+    "last_event_id": {"type": "string", "minLength": 1},
+    "hash_algorithm": {"const": "sha256"},
+    "record_encoding": {"const": "atl-jsonl-record-v1"},
+    "final_chain_digest": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"}
+  }
+}

@@ -1,0 +1,201 @@
+{
+  "schema_version": "0.2.7",
+  "calibration_id": "calibration:reference",
+  "calibrated_at": "2026-08-22T00:00:00+00:00",
+  "measurement_contract": {
+    "unit": "interaction_depth",
+    "reliability_p": 0.9,
+    "scope_id": "reference-governance-scope",
+    "assessment_method": "monotone_binomial_pava_v1"
+  },
+  "evidence_confidence_p": 0.9,
+  "minimums": {
+    "min_distinct_depths": 4,
+    "min_total_trials": 80,
+    "min_trials_per_depth": 20
+  },
+  "subjects": {
+    "autonomy": {
+      "method": "monotone_binomial_pava_v1",
+      "target_reliability": 0.9,
+      "evidence_confidence_p": 0.9,
+      "minimums": {
+        "min_distinct_depths": 4,
+        "min_total_trials": 80,
+        "min_trials_per_depth": 20
+      },
+      "distinct_depths": 4,
+      "total_trials": 80,
+      "total_successes": 67,
+      "support_status": "supported",
+      "support_reasons": [],
+      "horizon_depth": 12.0,
+      "crossing_bracket": {
+        "lower_depth": 12.0,
+        "upper_depth": 16.0,
+        "lower_probability": 0.9,
+        "upper_probability": 0.5
+      },
+      "points": [
+        {
+          "depth": 4.0,
+          "trials": 20,
+          "successes": 20,
+          "evidence_refs": [
+            "evidence:autonomy:4"
+          ],
+          "empirical_success_rate": 1.0,
+          "wilson_lower": 0.8808421626390356,
+          "wilson_upper": 0.9999999999999999,
+          "fitted_success_rate": 1.0
+        },
+        {
+          "depth": 8.0,
+          "trials": 20,
+          "successes": 19,
+          "evidence_refs": [
+            "evidence:autonomy:8"
+          ],
+          "empirical_success_rate": 0.95,
+          "wilson_lower": 0.8039927632259836,
+          "wilson_upper": 0.9887651831491482,
+          "fitted_success_rate": 0.95
+        },
+        {
+          "depth": 12.0,
+          "trials": 20,
+          "successes": 18,
+          "evidence_refs": [
+            "evidence:autonomy:12"
+          ],
+          "empirical_success_rate": 0.9,
+          "wilson_lower": 0.7383369536731332,
+          "wilson_upper": 0.9663367764380952,
+          "fitted_success_rate": 0.9
+        },
+        {
+          "depth": 16.0,
+          "trials": 20,
+          "successes": 10,
+          "evidence_refs": [
+            "evidence:autonomy:16"
+          ],
+          "empirical_success_rate": 0.5,
+          "wilson_lower": 0.327403767885156,
+          "wilson_upper": 0.672596232114844,
+          "fitted_success_rate": 0.5
+        }
+      ],
+      "evidence_refs": [
+        "evidence:autonomy:12",
+        "evidence:autonomy:16",
+        "evidence:autonomy:4",
+        "evidence:autonomy:8"
+      ],
+      "non_authoritative": true
+    },
+    "governance": {
+      "method": "monotone_binomial_pava_v1",
+      "target_reliability": 0.9,
+      "evidence_confidence_p": 0.9,
+      "minimums": {
+        "min_distinct_depths": 4,
+        "min_total_trials": 80,
+        "min_trials_per_depth": 20
+      },
+      "distinct_depths": 4,
+      "total_trials": 80,
+      "total_successes": 67,
+      "support_status": "supported",
+      "support_reasons": [],
+      "horizon_depth": 9.0,
+      "crossing_bracket": {
+        "lower_depth": 9.0,
+        "upper_depth": 12.0,
+        "lower_probability": 0.9,
+        "upper_probability": 0.5
+      },
+      "points": [
+        {
+          "depth": 3.0,
+          "trials": 20,
+          "successes": 20,
+          "evidence_refs": [
+            "evidence:governance:3"
+          ],
+          "empirical_success_rate": 1.0,
+          "wilson_lower": 0.8808421626390356,
+          "wilson_upper": 0.9999999999999999,
+          "fitted_success_rate": 1.0
+        },
+        {
+          "depth": 6.0,
+          "trials": 20,
+          "successes": 19,
+          "evidence_refs": [
+            "evidence:governance:6"
+          ],
+          "empirical_success_rate": 0.95,
+          "wilson_lower": 0.8039927632259836,
+          "wilson_upper": 0.9887651831491482,
+          "fitted_success_rate": 0.95
+        },
+        {
+          "depth": 9.0,
+          "trials": 20,
+          "successes": 18,
+          "evidence_refs": [
+            "evidence:governance:9"
+          ],
+          "empirical_success_rate": 0.9,
+          "wilson_lower": 0.7383369536731332,
+          "wilson_upper": 0.9663367764380952,
+          "fitted_success_rate": 0.9
+        },
+        {
+          "depth": 12.0,
+          "trials": 20,
+          "successes": 10,
+          "evidence_refs": [
+            "evidence:governance:12"
+          ],
+          "empirical_success_rate": 0.5,
+          "wilson_lower": 0.327403767885156,
+          "wilson_upper": 0.672596232114844,
+          "fitted_success_rate": 0.5
+        }
+      ],
+      "evidence_refs": [
+        "evidence:governance:12",
+        "evidence:governance:3",
+        "evidence:governance:6",
+        "evidence:governance:9"
+      ],
+      "non_authoritative": true
+    }
+  },
+  "derived_assessment": {
+    "schema_version": "0.2.6",
+    "assessment_id": "horizon:calibration:reference",
+    "assessed_at": "2026-08-22T00:00:00+00:00",
+    "measurement_contract": {
+      "unit": "interaction_depth",
+      "reliability_p": 0.9,
+      "scope_id": "reference-governance-scope",
+      "assessment_method": "monotone_binomial_pava_v1"
+    },
+    "autonomy_horizon_depth": 12.0,
+    "governance_horizon_depth": 9.0,
+    "evidence_refs": [
+      "evidence:autonomy:12",
+      "evidence:autonomy:16",
+      "evidence:autonomy:4",
+      "evidence:autonomy:8",
+      "evidence:governance:12",
+      "evidence:governance:3",
+      "evidence:governance:6",
+      "evidence:governance:9"
+    ]
+  },
+  "non_authoritative": true
+}

@@ -1,0 +1,795 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://evemisslab.com/ctcl-itr/schemas/calibration-geometry-drift-report.schema.json",
+  "title": "CTCL-ITR Calibration Geometry Drift Report",
+  "$defs": {
+    "nullableNumber": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "stringArray": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "weights": {
+      "type": "object",
+      "minProperties": 2,
+      "additionalProperties": {
+        "type": "number"
+      }
+    },
+    "classBucket": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "count",
+        "cells"
+      ],
+      "properties": {
+        "count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "cells": {
+          "$ref": "#/$defs/stringArray"
+        }
+      }
+    },
+    "classBuckets": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "positive_band",
+        "negative_band",
+        "crosses_zero",
+        "zero_band"
+      ],
+      "properties": {
+        "positive_band": {
+          "$ref": "#/$defs/classBucket"
+        },
+        "negative_band": {
+          "$ref": "#/$defs/classBucket"
+        },
+        "crosses_zero": {
+          "$ref": "#/$defs/classBucket"
+        },
+        "zero_band": {
+          "$ref": "#/$defs/classBucket"
+        }
+      }
+    },
+    "boundaryMatch": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "base_weights",
+        "current_weights",
+        "l1_displacement",
+        "signed_family_displacement"
+      ],
+      "properties": {
+        "base_weights": {
+          "$ref": "#/$defs/weights"
+        },
+        "current_weights": {
+          "$ref": "#/$defs/weights"
+        },
+        "l1_displacement": {
+          "type": "number",
+          "minimum": 0
+        },
+        "signed_family_displacement": {
+          "$ref": "#/$defs/weights"
+        }
+      }
+    },
+    "pointMotion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "base_count",
+        "current_count",
+        "matched_count",
+        "appeared_count",
+        "disappeared_count",
+        "matches",
+        "appeared_weights",
+        "disappeared_weights",
+        "mean_l1_displacement",
+        "max_l1_displacement"
+      ],
+      "properties": {
+        "base_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "current_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "matched_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "appeared_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "disappeared_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "matches": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/boundaryMatch"
+          }
+        },
+        "appeared_weights": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/weights"
+          }
+        },
+        "disappeared_weights": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/weights"
+          }
+        },
+        "mean_l1_displacement": {
+          "$ref": "#/$defs/nullableNumber"
+        },
+        "max_l1_displacement": {
+          "$ref": "#/$defs/nullableNumber"
+        }
+      }
+    },
+    "supportedDomain": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "base_supported_cell_count",
+        "current_supported_cell_count",
+        "persistent_supported_cell_count",
+        "gained_supported_cell_count",
+        "lost_supported_cell_count",
+        "net_supported_cell_change",
+        "persistent_supported_cells",
+        "gained_supported_cells",
+        "lost_supported_cells",
+        "union_supported_cell_count",
+        "jaccard_overlap"
+      ],
+      "properties": {
+        "base_supported_cell_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "current_supported_cell_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "persistent_supported_cell_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "gained_supported_cell_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "lost_supported_cell_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "union_supported_cell_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "net_supported_cell_change": {
+          "type": "integer"
+        },
+        "persistent_supported_cells": {
+          "$ref": "#/$defs/stringArray"
+        },
+        "gained_supported_cells": {
+          "$ref": "#/$defs/stringArray"
+        },
+        "lost_supported_cells": {
+          "$ref": "#/$defs/stringArray"
+        },
+        "jaccard_overlap": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      }
+    },
+    "overlapLink": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "base_component_id",
+        "current_component_id",
+        "shared_member_count",
+        "shared_members"
+      ],
+      "properties": {
+        "base_component_id": {
+          "type": "string"
+        },
+        "current_component_id": {
+          "type": "string"
+        },
+        "shared_member_count": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "shared_members": {
+          "$ref": "#/$defs/stringArray"
+        }
+      }
+    },
+    "splitEvent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "base_component_id",
+        "current_component_ids",
+        "overlap_count"
+      ],
+      "properties": {
+        "base_component_id": {
+          "type": "string"
+        },
+        "current_component_ids": {
+          "$ref": "#/$defs/stringArray"
+        },
+        "overlap_count": {
+          "type": "integer",
+          "minimum": 2
+        }
+      }
+    },
+    "mergeEvent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "current_component_id",
+        "base_component_ids",
+        "overlap_count"
+      ],
+      "properties": {
+        "current_component_id": {
+          "type": "string"
+        },
+        "base_component_ids": {
+          "$ref": "#/$defs/stringArray"
+        },
+        "overlap_count": {
+          "type": "integer",
+          "minimum": 2
+        }
+      }
+    },
+    "componentMotion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "base_component_count",
+        "current_component_count",
+        "overlap_link_count",
+        "overlap_links",
+        "split_count",
+        "merge_count",
+        "split_events",
+        "merge_events",
+        "base_components_without_current_overlap",
+        "current_components_without_base_overlap"
+      ],
+      "properties": {
+        "base_component_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "current_component_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "overlap_link_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "overlap_links": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/overlapLink"
+          }
+        },
+        "split_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "merge_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "split_events": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/splitEvent"
+          }
+        },
+        "merge_events": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/mergeEvent"
+          }
+        },
+        "base_components_without_current_overlap": {
+          "$ref": "#/$defs/stringArray"
+        },
+        "current_components_without_base_overlap": {
+          "$ref": "#/$defs/stringArray"
+        }
+      }
+    },
+    "transition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "from_class",
+        "to_class",
+        "count",
+        "cells"
+      ],
+      "properties": {
+        "from_class": {
+          "enum": [
+            "positive_band",
+            "negative_band",
+            "crosses_zero",
+            "zero_band"
+          ]
+        },
+        "to_class": {
+          "enum": [
+            "positive_band",
+            "negative_band",
+            "crosses_zero",
+            "zero_band"
+          ]
+        },
+        "count": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "cells": {
+          "$ref": "#/$defs/stringArray"
+        }
+      }
+    },
+    "signMigration": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "persistent_cell_count",
+        "persistent_transitions",
+        "gained_by_current_class",
+        "lost_by_base_class"
+      ],
+      "properties": {
+        "persistent_cell_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "persistent_transitions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/transition"
+          }
+        },
+        "gained_by_current_class": {
+          "$ref": "#/$defs/classBuckets"
+        },
+        "lost_by_base_class": {
+          "$ref": "#/$defs/classBuckets"
+        }
+      }
+    },
+    "stabilityMotion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "matching_method",
+        "matching_is_descriptive_not_identity",
+        "positive",
+        "negative"
+      ],
+      "properties": {
+        "matching_method": {
+          "const": "greedy_l1_nearest_v1"
+        },
+        "matching_is_descriptive_not_identity": {
+          "const": true
+        },
+        "positive": {
+          "$ref": "#/$defs/pointMotion"
+        },
+        "negative": {
+          "$ref": "#/$defs/pointMotion"
+        }
+      }
+    },
+    "supportFrontier": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "base_edge_count",
+        "current_edge_count",
+        "persistent_edges",
+        "appeared_edges",
+        "disappeared_edges",
+        "matched_supported_endpoint_count",
+        "matched_supported_endpoints",
+        "mean_supported_endpoint_l1_displacement",
+        "max_supported_endpoint_l1_displacement",
+        "unsupported_region_interpolated"
+      ],
+      "properties": {
+        "base_edge_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "current_edge_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "persistent_edges": {
+          "$ref": "#/$defs/stringArray"
+        },
+        "appeared_edges": {
+          "$ref": "#/$defs/stringArray"
+        },
+        "disappeared_edges": {
+          "$ref": "#/$defs/stringArray"
+        },
+        "matched_supported_endpoint_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "matched_supported_endpoints": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/boundaryMatch"
+          }
+        },
+        "mean_supported_endpoint_l1_displacement": {
+          "$ref": "#/$defs/nullableNumber"
+        },
+        "max_supported_endpoint_l1_displacement": {
+          "$ref": "#/$defs/nullableNumber"
+        },
+        "unsupported_region_interpolated": {
+          "const": false
+        }
+      }
+    },
+    "gradientMatch": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "edge_key",
+        "base_point_estimate_slope",
+        "current_point_estimate_slope",
+        "point_estimate_slope_change",
+        "absolute_point_estimate_slope_change",
+        "band_lower_slope_change",
+        "band_upper_slope_change"
+      ],
+      "properties": {
+        "edge_key": {
+          "type": "string"
+        },
+        "base_point_estimate_slope": {
+          "type": "number"
+        },
+        "current_point_estimate_slope": {
+          "type": "number"
+        },
+        "point_estimate_slope_change": {
+          "type": "number"
+        },
+        "absolute_point_estimate_slope_change": {
+          "type": "number",
+          "minimum": 0
+        },
+        "band_lower_slope_change": {
+          "type": "number"
+        },
+        "band_upper_slope_change": {
+          "type": "number"
+        }
+      }
+    },
+    "gradientDrift": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "matched_edge_count",
+        "appeared_edge_count",
+        "disappeared_edge_count",
+        "matched_edges",
+        "appeared_edges",
+        "disappeared_edges",
+        "mean_absolute_point_estimate_slope_change",
+        "max_absolute_point_estimate_slope_change",
+        "gradients_synthesized_for_missing_edges"
+      ],
+      "properties": {
+        "matched_edge_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "appeared_edge_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "disappeared_edge_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "matched_edges": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/gradientMatch"
+          }
+        },
+        "appeared_edges": {
+          "$ref": "#/$defs/stringArray"
+        },
+        "disappeared_edges": {
+          "$ref": "#/$defs/stringArray"
+        },
+        "mean_absolute_point_estimate_slope_change": {
+          "$ref": "#/$defs/nullableNumber"
+        },
+        "max_absolute_point_estimate_slope_change": {
+          "$ref": "#/$defs/nullableNumber"
+        },
+        "gradients_synthesized_for_missing_edges": {
+          "const": false
+        }
+      }
+    },
+    "motionSummary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "net_supported_cell_change",
+        "split_count",
+        "merge_count",
+        "positive_boundary_matched_count",
+        "positive_boundary_mean_l1_displacement",
+        "support_frontier_mean_l1_displacement",
+        "matched_gradient_edge_count",
+        "max_absolute_point_estimate_slope_change"
+      ],
+      "properties": {
+        "net_supported_cell_change": {
+          "type": "integer"
+        },
+        "split_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "merge_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "positive_boundary_matched_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "positive_boundary_mean_l1_displacement": {
+          "$ref": "#/$defs/nullableNumber"
+        },
+        "support_frontier_mean_l1_displacement": {
+          "$ref": "#/$defs/nullableNumber"
+        },
+        "matched_gradient_edge_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "max_absolute_point_estimate_slope_change": {
+          "$ref": "#/$defs/nullableNumber"
+        }
+      }
+    },
+    "subject": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "supported_domain_motion",
+        "component_motion",
+        "sign_region_migration",
+        "stability_boundary_motion",
+        "support_frontier_motion",
+        "local_gradient_drift",
+        "motion_summary"
+      ],
+      "properties": {
+        "supported_domain_motion": {
+          "$ref": "#/$defs/supportedDomain"
+        },
+        "component_motion": {
+          "$ref": "#/$defs/componentMotion"
+        },
+        "sign_region_migration": {
+          "$ref": "#/$defs/signMigration"
+        },
+        "stability_boundary_motion": {
+          "$ref": "#/$defs/stabilityMotion"
+        },
+        "support_frontier_motion": {
+          "$ref": "#/$defs/supportFrontier"
+        },
+        "local_gradient_drift": {
+          "$ref": "#/$defs/gradientDrift"
+        },
+        "motion_summary": {
+          "$ref": "#/$defs/motionSummary"
+        }
+      }
+    },
+    "geometryRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "geometry_id",
+        "source_surface"
+      ],
+      "properties": {
+        "geometry_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_surface": {
+          "anyOf": [
+            {
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "drift_id",
+    "generated_at",
+    "method",
+    "boundary_match_method",
+    "base_geometry",
+    "current_geometry",
+    "measurement_contract",
+    "families",
+    "grid",
+    "boundary_interpolation",
+    "conditioning",
+    "subjects",
+    "interpretation_boundary",
+    "non_authoritative"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.2.13"
+    },
+    "drift_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "method": {
+      "const": "surface_geometry_drift_v1"
+    },
+    "boundary_match_method": {
+      "const": "greedy_l1_nearest_v1"
+    },
+    "base_geometry": {
+      "$ref": "#/$defs/geometryRef"
+    },
+    "current_geometry": {
+      "$ref": "#/$defs/geometryRef"
+    },
+    "measurement_contract": {
+      "type": "object"
+    },
+    "families": {
+      "type": "array",
+      "minItems": 2,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "grid": {
+      "type": "object"
+    },
+    "boundary_interpolation": {
+      "type": "object"
+    },
+    "conditioning": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "compatible_geometry_contract_required",
+        "support_gain_loss_separate_from_sign_migration",
+        "unsupported_region_interpolated",
+        "boundary_matching_is_descriptive_not_identity",
+        "gradient_drift_matched_supported_edges_only"
+      ],
+      "properties": {
+        "compatible_geometry_contract_required": {
+          "const": true
+        },
+        "support_gain_loss_separate_from_sign_migration": {
+          "const": true
+        },
+        "unsupported_region_interpolated": {
+          "const": false
+        },
+        "boundary_matching_is_descriptive_not_identity": {
+          "const": true
+        },
+        "gradient_drift_matched_supported_edges_only": {
+          "const": true
+        }
+      }
+    },
+    "subjects": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "autonomy",
+        "governance"
+      ],
+      "properties": {
+        "autonomy": {
+          "$ref": "#/$defs/subject"
+        },
+        "governance": {
+          "$ref": "#/$defs/subject"
+        }
+      }
+    },
+    "interpretation_boundary": {
+      "type": "array",
+      "minItems": 7,
+      "items": {
+        "type": "string"
+      }
+    },
+    "non_authoritative": {
+      "const": true
+    }
+  }
+}

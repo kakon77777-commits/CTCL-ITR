@@ -1,0 +1,148 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://evemisslab.com/schemas/ctcl-itr/calibration-geometry-trajectory-report.schema.json",
+  "title": "CTCL-ITR Geometry Trajectory Report v0.2.14",
+  "$defs": {
+    "numberOrNull": {"type": ["number", "null"]},
+    "weights": {"type": "object", "minProperties": 2, "additionalProperties": {"type": "number"}},
+    "supportTrajectory": {
+      "type": "object",
+      "required": ["supported_cell_counts", "step_changes", "step_directions", "direction_reversal_count", "net_supported_cell_change"],
+      "properties": {
+        "supported_cell_counts": {"type": "array", "minItems": 3, "items": {"type": "integer", "minimum": 0}},
+        "step_changes": {"type": "array", "minItems": 2, "items": {"type": "integer"}},
+        "step_directions": {"type": "array", "minItems": 2, "items": {"enum": ["expansion", "contraction", "flat"]}},
+        "direction_reversal_count": {"type": "integer", "minimum": 0},
+        "net_supported_cell_change": {"type": "integer"},
+        "minimum_supported_cell_count": {"type": "integer", "minimum": 0},
+        "maximum_supported_cell_count": {"type": "integer", "minimum": 0}
+      },
+      "additionalProperties": true
+    },
+    "boundaryPoint": {
+      "type": "object",
+      "required": ["observation_index", "observation_id", "observed_at", "reference_family_weights"],
+      "properties": {
+        "observation_index": {"type": "integer", "minimum": 0},
+        "observation_id": {"type": "string"},
+        "observed_at": {"type": "string", "format": "date-time"},
+        "reference_family_weights": {"$ref": "#/$defs/weights"}
+      },
+      "additionalProperties": true
+    },
+    "boundaryLineage": {
+      "type": "object",
+      "required": ["observation_count", "lifespan_days", "spans_all_observations", "points", "velocities", "accelerations", "velocity_direction_reversal_count_by_family", "total_path_l1", "net_signed_displacement"],
+      "properties": {
+        "observation_count": {"type": "integer", "minimum": 1},
+        "lifespan_days": {"type": "number", "minimum": 0},
+        "spans_all_observations": {"type": "boolean"},
+        "points": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/boundaryPoint"}},
+        "velocities": {"type": "array", "items": {"type": "object"}},
+        "accelerations": {"type": "array", "items": {"type": "object"}},
+        "velocity_direction_reversal_count_by_family": {"type": "object", "additionalProperties": {"type": "integer", "minimum": 0}},
+        "total_path_l1": {"type": "number", "minimum": 0},
+        "net_signed_displacement": {"$ref": "#/$defs/weights"}
+      },
+      "additionalProperties": true
+    },
+    "boundaryTrajectories": {
+      "type": "object",
+      "required": ["matching_is_descriptive_not_identity", "lineage_count", "spans_all_observations_count", "lineages"],
+      "properties": {
+        "matching_is_descriptive_not_identity": {"const": true},
+        "lineage_count": {"type": "integer", "minimum": 0},
+        "spans_all_observations_count": {"type": "integer", "minimum": 0},
+        "lineages": {"type": "array", "items": {"$ref": "#/$defs/boundaryLineage"}}
+      },
+      "additionalProperties": true
+    },
+    "componentTrajectories": {
+      "type": "object",
+      "required": ["lineage_identity_is_descriptive", "lineage_count", "spans_all_observations_count", "maximum_lifespan_days", "lineages"],
+      "properties": {
+        "lineage_identity_is_descriptive": {"const": true},
+        "lineage_count": {"type": "integer", "minimum": 0},
+        "spans_all_observations_count": {"type": "integer", "minimum": 0},
+        "maximum_lifespan_days": {"type": "number", "minimum": 0},
+        "lineages": {"type": "array", "items": {"type": "object"}}
+      },
+      "additionalProperties": true
+    },
+    "signPersistence": {
+      "type": "object",
+      "required": ["union_cell_count", "supported_all_observations_count", "positive_all_observations_count", "status_change_cell_count", "support_excursion_cell_count", "cell_trajectories"],
+      "properties": {
+        "union_cell_count": {"type": "integer", "minimum": 0},
+        "supported_all_observations_count": {"type": "integer", "minimum": 0},
+        "positive_all_observations_count": {"type": "integer", "minimum": 0},
+        "status_change_cell_count": {"type": "integer", "minimum": 0},
+        "support_excursion_cell_count": {"type": "integer", "minimum": 0},
+        "cell_trajectories": {"type": "array", "items": {"type": "object"}}
+      },
+      "additionalProperties": true
+    },
+    "gradientTrajectories": {
+      "type": "object",
+      "required": ["edge_trajectory_count", "persistent_all_observations_count", "presence_excursion_count", "edge_trajectories"],
+      "properties": {
+        "edge_trajectory_count": {"type": "integer", "minimum": 0},
+        "persistent_all_observations_count": {"type": "integer", "minimum": 0},
+        "presence_excursion_count": {"type": "integer", "minimum": 0},
+        "mean_absolute_step_change": {"$ref": "#/$defs/numberOrNull"},
+        "max_absolute_step_change": {"$ref": "#/$defs/numberOrNull"},
+        "edge_trajectories": {"type": "array", "items": {"type": "object"}}
+      },
+      "additionalProperties": true
+    },
+    "subjectTrajectory": {
+      "type": "object",
+      "required": ["supported_domain_trajectory", "stability_boundary_trajectories", "component_trajectories", "sign_region_persistence", "local_gradient_trajectories"],
+      "properties": {
+        "supported_domain_trajectory": {"$ref": "#/$defs/supportTrajectory"},
+        "stability_boundary_trajectories": {
+          "type": "object",
+          "required": ["positive", "negative"],
+          "properties": {
+            "positive": {"$ref": "#/$defs/boundaryTrajectories"},
+            "negative": {"$ref": "#/$defs/boundaryTrajectories"}
+          },
+          "additionalProperties": false
+        },
+        "component_trajectories": {"$ref": "#/$defs/componentTrajectories"},
+        "sign_region_persistence": {"$ref": "#/$defs/signPersistence"},
+        "local_gradient_trajectories": {"$ref": "#/$defs/gradientTrajectories"}
+      },
+      "additionalProperties": true
+    }
+  },
+  "type": "object",
+  "required": ["schema_version", "trajectory_id", "generated_at", "method", "time_unit", "observation_count", "observations", "measurement_contract", "families", "grid", "conditioning", "steps", "subjects", "interpretation_boundary", "non_authoritative"],
+  "properties": {
+    "schema_version": {"const": "0.2.14"},
+    "trajectory_id": {"type": "string", "minLength": 1},
+    "generated_at": {"type": "string", "format": "date-time"},
+    "method": {"const": "surface_geometry_trajectory_v1"},
+    "time_unit": {"const": "day"},
+    "observation_count": {"type": "integer", "minimum": 3},
+    "observations": {"type": "array", "minItems": 3, "items": {"type": "object"}},
+    "measurement_contract": {"type": "object"},
+    "families": {"type": "array", "minItems": 2, "items": {"type": "string"}, "uniqueItems": true},
+    "grid": {"type": "object"},
+    "boundary_interpolation": {"type": "object"},
+    "conditioning": {"type": "object"},
+    "steps": {"type": "array", "minItems": 2, "items": {"type": "object"}},
+    "subjects": {
+      "type": "object",
+      "required": ["autonomy", "governance"],
+      "properties": {
+        "autonomy": {"$ref": "#/$defs/subjectTrajectory"},
+        "governance": {"$ref": "#/$defs/subjectTrajectory"}
+      },
+      "additionalProperties": false
+    },
+    "interpretation_boundary": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+    "non_authoritative": {"const": true}
+  },
+  "additionalProperties": false
+}

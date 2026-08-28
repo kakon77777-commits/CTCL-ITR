@@ -1,0 +1,64 @@
+{
+  "release": "CTCL-ITR v0.2.11 Joint Sampling × Mixture Sensitivity Surface",
+  "date": "2026-08-23",
+  "verification": {
+    "pytest_segmented_full_suite": {
+      "groups": [
+        {"name": "legacy_governance_observability", "passed": 43, "failed": 0},
+        {"name": "legacy_signals_integrity_topology", "passed": 34, "failed": 0},
+        {"name": "v0.2.7_horizon_calibration", "passed": 20, "failed": 0},
+        {"name": "v0.2.8_calibration_robustness", "passed": 18, "failed": 0},
+        {"name": "v0.2.9_calibration_uncertainty", "passed": 17, "failed": 0},
+        {"name": "v0.2.10_mixture_sensitivity", "passed": 10, "failed": 0},
+        {"name": "v0.2.11_joint_surface", "passed": 13, "failed": 0}
+      ],
+      "total_passed": 155,
+      "total_failed": 0
+    },
+    "validators": {
+      "validate_pack": "PASS",
+      "validate_metrics": "PASS",
+      "validate_signals": "PASS",
+      "validate_calibration": "PASS",
+      "validate_robustness": "PASS",
+      "validate_uncertainty": "PASS",
+      "validate_mixture_sensitivity": "PASS",
+      "validate_joint_surface": "PASS"
+    },
+    "compileall": {
+      "command": "python -m compileall -q src validator",
+      "returncode": 0
+    },
+    "editable_install": {
+      "installed_version": "0.2.11",
+      "installed_cli_exact_reference": true
+    }
+  },
+  "reference": {
+    "replicates": 256,
+    "grid_points": 9,
+    "autonomy": {
+      "resampling_supported_cells": 6,
+      "positive_band_cells": 1,
+      "crosses_zero_cells": 5,
+      "unsupported_cells": 3
+    },
+    "governance": {
+      "resampling_supported_cells": 6,
+      "positive_band_cells": 1,
+      "crosses_zero_cells": 5,
+      "unsupported_cells": 3
+    },
+    "surface_cells_are_independent": false,
+    "non_authoritative": true
+  },
+  "compatibility": {
+    "v0.2.10_mixture_sensitivity_preserved": true,
+    "v0.2.9_resampling_preserved": true,
+    "v0.2.8_robustness_preserved": true,
+    "v0.2.7_calibration_preserved": true,
+    "governance_authorization_semantics_changed": false,
+    "new_runtime_dependency": false
+  },
+  "all_passed": true
+}

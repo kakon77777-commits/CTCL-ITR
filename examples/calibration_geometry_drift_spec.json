@@ -1,0 +1,7 @@
+{
+  "schema_version": "0.2.13",
+  "drift_id": "geometry-drift:reference-current-to-later",
+  "generated_at": "2026-08-24T01:00:00+00:00",
+  "method": "surface_geometry_drift_v1",
+  "boundary_match_method": "greedy_l1_nearest_v1"
+}

@@ -1,0 +1,43 @@
+{
+  "release": "CTCL-ITR v0.2.3 Governance Core",
+  "date": "2026-08-20",
+  "all_passed": true,
+  "verification": {
+    "pytest": {
+      "command": "python -m pytest -q -p no:cacheprovider",
+      "returncode": 0,
+      "output": "47 passed in 15.20s"
+    },
+    "pack_validator": {
+      "command": "python validator/validate_pack.py",
+      "returncode": 0,
+      "output": "ITR/ATL v0.2.3 governance core pack: PASS | governance_events=5 | governance_resume_eligible=True | governance_scope_block=scope_mismatch"
+    },
+    "compileall": {
+      "command": "python -m compileall -q src validator",
+      "returncode": 0
+    },
+    "editable_install": {
+      "command": "python -m pip install -e . --no-build-isolation --no-deps",
+      "returncode": 0,
+      "installed_version": "0.2.3"
+    },
+    "governance_cli": {
+      "command": "ctcl-itr-governance-demo demo",
+      "returncode": 0,
+      "decision": "approve",
+      "scope": [
+        "publish"
+      ],
+      "resume_eligible": true,
+      "human_governance_ms": 42000
+    }
+  },
+  "compatibility": {
+    "temporal_event_schema_changed": false,
+    "v0.1_reference_events_valid": true,
+    "v0.2_topology_valid": true,
+    "v0.2.1_observability_valid": true,
+    "v0.2.2_integrity_valid": true
+  }
+}

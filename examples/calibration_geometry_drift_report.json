@@ -1,0 +1,598 @@
+{
+  "schema_version": "0.2.13",
+  "drift_id": "geometry-drift:reference-current-to-later",
+  "generated_at": "2026-08-24T01:00:00+00:00",
+  "method": "surface_geometry_drift_v1",
+  "boundary_match_method": "greedy_l1_nearest_v1",
+  "base_geometry": {
+    "geometry_id": "geometry:reference-base-current",
+    "source_surface": {
+      "schema_version": "0.2.11",
+      "surface_id": "surface:reference-base-current",
+      "method": "joint_empirical_binomial_simplex_surface_v1"
+    }
+  },
+  "current_geometry": {
+    "geometry_id": "geometry:reference-base-later",
+    "source_surface": {
+      "schema_version": "0.2.11",
+      "surface_id": "surface:reference-base-later",
+      "method": "joint_empirical_binomial_simplex_surface_v1"
+    }
+  },
+  "measurement_contract": {
+    "unit": "interaction_depth",
+    "reliability_p": 0.9,
+    "scope_id": "scope:reference",
+    "assessment_method": "monotone_binomial_pava_v1"
+  },
+  "families": [
+    "code",
+    "research"
+  ],
+  "grid": {
+    "grid_step": 0.1,
+    "adjacency_method": "simplex_single_transfer_v1",
+    "adjacency_tolerance": 1e-09
+  },
+  "boundary_interpolation": {
+    "positive_stability": "supported_edge_lower_band_zero_crossing_linear_v1",
+    "negative_stability": "supported_edge_upper_band_zero_crossing_linear_v1",
+    "zero_tolerance": 1e-12
+  },
+  "conditioning": {
+    "compatible_geometry_contract_required": true,
+    "support_gain_loss_separate_from_sign_migration": true,
+    "unsupported_region_interpolated": false,
+    "boundary_matching_is_descriptive_not_identity": true,
+    "gradient_drift_matched_supported_edges_only": true
+  },
+  "subjects": {
+    "autonomy": {
+      "supported_domain_motion": {
+        "base_supported_cell_count": 6,
+        "current_supported_cell_count": 8,
+        "persistent_supported_cell_count": 6,
+        "gained_supported_cell_count": 2,
+        "lost_supported_cell_count": 0,
+        "net_supported_cell_change": 2,
+        "persistent_supported_cells": [
+          "code=0.1|research=0.9",
+          "code=0.2|research=0.8",
+          "code=0.3|research=0.7",
+          "code=0.4|research=0.6",
+          "code=0.5|research=0.5",
+          "code=0.6|research=0.4"
+        ],
+        "gained_supported_cells": [
+          "code=0.7|research=0.3",
+          "code=0.8|research=0.2"
+        ],
+        "lost_supported_cells": [],
+        "union_supported_cell_count": 8,
+        "jaccard_overlap": 0.75
+      },
+      "component_motion": {
+        "base_component_count": 1,
+        "current_component_count": 1,
+        "overlap_link_count": 1,
+        "overlap_links": [
+          {
+            "base_component_id": "supported:0000",
+            "current_component_id": "supported:0000",
+            "shared_member_count": 6,
+            "shared_members": [
+              "code=0.1|research=0.9",
+              "code=0.2|research=0.8",
+              "code=0.3|research=0.7",
+              "code=0.4|research=0.6",
+              "code=0.5|research=0.5",
+              "code=0.6|research=0.4"
+            ]
+          }
+        ],
+        "split_count": 0,
+        "merge_count": 0,
+        "split_events": [],
+        "merge_events": [],
+        "base_components_without_current_overlap": [],
+        "current_components_without_base_overlap": []
+      },
+      "sign_region_migration": {
+        "persistent_cell_count": 6,
+        "persistent_transitions": [
+          {
+            "from_class": "crosses_zero",
+            "to_class": "crosses_zero",
+            "count": 3,
+            "cells": [
+              "code=0.1|research=0.9",
+              "code=0.2|research=0.8",
+              "code=0.3|research=0.7"
+            ]
+          },
+          {
+            "from_class": "crosses_zero",
+            "to_class": "positive_band",
+            "count": 2,
+            "cells": [
+              "code=0.4|research=0.6",
+              "code=0.5|research=0.5"
+            ]
+          },
+          {
+            "from_class": "positive_band",
+            "to_class": "positive_band",
+            "count": 1,
+            "cells": [
+              "code=0.6|research=0.4"
+            ]
+          }
+        ],
+        "gained_by_current_class": {
+          "positive_band": {
+            "count": 2,
+            "cells": [
+              "code=0.7|research=0.3",
+              "code=0.8|research=0.2"
+            ]
+          },
+          "negative_band": {
+            "count": 0,
+            "cells": []
+          },
+          "crosses_zero": {
+            "count": 0,
+            "cells": []
+          },
+          "zero_band": {
+            "count": 0,
+            "cells": []
+          }
+        },
+        "lost_by_base_class": {
+          "positive_band": {
+            "count": 0,
+            "cells": []
+          },
+          "negative_band": {
+            "count": 0,
+            "cells": []
+          },
+          "crosses_zero": {
+            "count": 0,
+            "cells": []
+          },
+          "zero_band": {
+            "count": 0,
+            "cells": []
+          }
+        }
+      },
+      "stability_boundary_motion": {
+        "matching_method": "greedy_l1_nearest_v1",
+        "matching_is_descriptive_not_identity": true,
+        "positive": {
+          "base_count": 1,
+          "current_count": 1,
+          "matched_count": 1,
+          "appeared_count": 0,
+          "disappeared_count": 0,
+          "matches": [
+            {
+              "base_weights": {
+                "code": 0.5528922561345437,
+                "research": 0.44710774386545626
+              },
+              "current_weights": {
+                "code": 0.37677630955816144,
+                "research": 0.6232236904418386
+              },
+              "l1_displacement": 0.3522318931527646,
+              "signed_family_displacement": {
+                "code": -0.1761159465763823,
+                "research": 0.1761159465763823
+              }
+            }
+          ],
+          "appeared_weights": [],
+          "disappeared_weights": [],
+          "mean_l1_displacement": 0.3522318931527646,
+          "max_l1_displacement": 0.3522318931527646
+        },
+        "negative": {
+          "base_count": 0,
+          "current_count": 0,
+          "matched_count": 0,
+          "appeared_count": 0,
+          "disappeared_count": 0,
+          "matches": [],
+          "appeared_weights": [],
+          "disappeared_weights": [],
+          "mean_l1_displacement": null,
+          "max_l1_displacement": null
+        }
+      },
+      "support_frontier_motion": {
+        "base_edge_count": 1,
+        "current_edge_count": 1,
+        "persistent_edges": [],
+        "appeared_edges": [
+          "code=0.8|research=0.2<->code=0.9|research=0.1"
+        ],
+        "disappeared_edges": [
+          "code=0.6|research=0.4<->code=0.7|research=0.3"
+        ],
+        "matched_supported_endpoint_count": 1,
+        "matched_supported_endpoints": [
+          {
+            "base_weights": {
+              "code": 0.6,
+              "research": 0.4
+            },
+            "current_weights": {
+              "code": 0.8,
+              "research": 0.2
+            },
+            "l1_displacement": 0.4000000000000001,
+            "signed_family_displacement": {
+              "code": 0.20000000000000007,
+              "research": -0.2
+            }
+          }
+        ],
+        "mean_supported_endpoint_l1_displacement": 0.4000000000000001,
+        "max_supported_endpoint_l1_displacement": 0.4000000000000001,
+        "unsupported_region_interpolated": false
+      },
+      "local_gradient_drift": {
+        "matched_edge_count": 5,
+        "appeared_edge_count": 2,
+        "disappeared_edge_count": 0,
+        "matched_edges": [
+          {
+            "edge_key": "code=0.1|research=0.9<>code=0.2|research=0.8",
+            "base_point_estimate_slope": 0.6018272914824774,
+            "current_point_estimate_slope": 0.8796050692602543,
+            "point_estimate_slope_change": 0.2777777777777769,
+            "absolute_point_estimate_slope_change": 0.2777777777777769,
+            "band_lower_slope_change": 0.5177042887243355,
+            "band_upper_slope_change": 1.780916575987237
+          },
+          {
+            "edge_key": "code=0.2|research=0.8<>code=0.3|research=0.7",
+            "base_point_estimate_slope": 0.7864309603439865,
+            "current_point_estimate_slope": 1.1435738174868422,
+            "point_estimate_slope_change": 0.35714285714285565,
+            "absolute_point_estimate_slope_change": 0.35714285714285565,
+            "band_lower_slope_change": -0.058904379293270415,
+            "band_upper_slope_change": 0.37503755155891433
+          },
+          {
+            "edge_key": "code=0.3|research=0.7<>code=0.4|research=0.6",
+            "base_point_estimate_slope": 1.0699792960662702,
+            "current_point_estimate_slope": 1.5461697722567358,
+            "point_estimate_slope_change": 0.4761904761904656,
+            "absolute_point_estimate_slope_change": 0.4761904761904656,
+            "band_lower_slope_change": 0.09866997445859704,
+            "band_upper_slope_change": 1.208596215439257
+          },
+          {
+            "edge_key": "code=0.4|research=0.6<>code=0.5|research=0.5",
+            "base_point_estimate_slope": 1.537254901960781,
+            "current_point_estimate_slope": 2.2039215686274543,
+            "point_estimate_slope_change": 0.6666666666666732,
+            "absolute_point_estimate_slope_change": 0.6666666666666732,
+            "band_lower_slope_change": 1.8829047296789214,
+            "band_upper_slope_change": 0.515627796695919
+          },
+          {
+            "edge_key": "code=0.5|research=0.5<>code=0.6|research=0.4",
+            "base_point_estimate_slope": 2.3865546218487226,
+            "current_point_estimate_slope": 3.386554621848746,
+            "point_estimate_slope_change": 1.0000000000000235,
+            "absolute_point_estimate_slope_change": 1.0000000000000235,
+            "band_lower_slope_change": -0.45546558704452034,
+            "band_upper_slope_change": -0.42734363140499954
+          }
+        ],
+        "appeared_edges": [
+          "code=0.6|research=0.4<>code=0.7|research=0.3",
+          "code=0.7|research=0.3<>code=0.8|research=0.2"
+        ],
+        "disappeared_edges": [],
+        "mean_absolute_point_estimate_slope_change": 0.555555555555559,
+        "max_absolute_point_estimate_slope_change": 1.0000000000000235,
+        "gradients_synthesized_for_missing_edges": false
+      },
+      "motion_summary": {
+        "net_supported_cell_change": 2,
+        "split_count": 0,
+        "merge_count": 0,
+        "positive_boundary_matched_count": 1,
+        "positive_boundary_mean_l1_displacement": 0.3522318931527646,
+        "support_frontier_mean_l1_displacement": 0.4000000000000001,
+        "matched_gradient_edge_count": 5,
+        "max_absolute_point_estimate_slope_change": 1.0000000000000235
+      }
+    },
+    "governance": {
+      "supported_domain_motion": {
+        "base_supported_cell_count": 6,
+        "current_supported_cell_count": 8,
+        "persistent_supported_cell_count": 6,
+        "gained_supported_cell_count": 2,
+        "lost_supported_cell_count": 0,
+        "net_supported_cell_change": 2,
+        "persistent_supported_cells": [
+          "code=0.1|research=0.9",
+          "code=0.2|research=0.8",
+          "code=0.3|research=0.7",
+          "code=0.4|research=0.6",
+          "code=0.5|research=0.5",
+          "code=0.6|research=0.4"
+        ],
+        "gained_supported_cells": [
+          "code=0.7|research=0.3",
+          "code=0.8|research=0.2"
+        ],
+        "lost_supported_cells": [],
+        "union_supported_cell_count": 8,
+        "jaccard_overlap": 0.75
+      },
+      "component_motion": {
+        "base_component_count": 1,
+        "current_component_count": 1,
+        "overlap_link_count": 1,
+        "overlap_links": [
+          {
+            "base_component_id": "supported:0000",
+            "current_component_id": "supported:0000",
+            "shared_member_count": 6,
+            "shared_members": [
+              "code=0.1|research=0.9",
+              "code=0.2|research=0.8",
+              "code=0.3|research=0.7",
+              "code=0.4|research=0.6",
+              "code=0.5|research=0.5",
+              "code=0.6|research=0.4"
+            ]
+          }
+        ],
+        "split_count": 0,
+        "merge_count": 0,
+        "split_events": [],
+        "merge_events": [],
+        "base_components_without_current_overlap": [],
+        "current_components_without_base_overlap": []
+      },
+      "sign_region_migration": {
+        "persistent_cell_count": 6,
+        "persistent_transitions": [
+          {
+            "from_class": "crosses_zero",
+            "to_class": "crosses_zero",
+            "count": 3,
+            "cells": [
+              "code=0.1|research=0.9",
+              "code=0.2|research=0.8",
+              "code=0.3|research=0.7"
+            ]
+          },
+          {
+            "from_class": "crosses_zero",
+            "to_class": "positive_band",
+            "count": 2,
+            "cells": [
+              "code=0.4|research=0.6",
+              "code=0.5|research=0.5"
+            ]
+          },
+          {
+            "from_class": "positive_band",
+            "to_class": "positive_band",
+            "count": 1,
+            "cells": [
+              "code=0.6|research=0.4"
+            ]
+          }
+        ],
+        "gained_by_current_class": {
+          "positive_band": {
+            "count": 2,
+            "cells": [
+              "code=0.7|research=0.3",
+              "code=0.8|research=0.2"
+            ]
+          },
+          "negative_band": {
+            "count": 0,
+            "cells": []
+          },
+          "crosses_zero": {
+            "count": 0,
+            "cells": []
+          },
+          "zero_band": {
+            "count": 0,
+            "cells": []
+          }
+        },
+        "lost_by_base_class": {
+          "positive_band": {
+            "count": 0,
+            "cells": []
+          },
+          "negative_band": {
+            "count": 0,
+            "cells": []
+          },
+          "crosses_zero": {
+            "count": 0,
+            "cells": []
+          },
+          "zero_band": {
+            "count": 0,
+            "cells": []
+          }
+        }
+      },
+      "stability_boundary_motion": {
+        "matching_method": "greedy_l1_nearest_v1",
+        "matching_is_descriptive_not_identity": true,
+        "positive": {
+          "base_count": 1,
+          "current_count": 1,
+          "matched_count": 1,
+          "appeared_count": 0,
+          "disappeared_count": 0,
+          "matches": [
+            {
+              "base_weights": {
+                "code": 0.5,
+                "research": 0.5
+              },
+              "current_weights": {
+                "code": 0.35854728749637416,
+                "research": 0.6414527125036258
+              },
+              "l1_displacement": 0.28290542500725163,
+              "signed_family_displacement": {
+                "code": -0.14145271250362584,
+                "research": 0.1414527125036258
+              }
+            }
+          ],
+          "appeared_weights": [],
+          "disappeared_weights": [],
+          "mean_l1_displacement": 0.28290542500725163,
+          "max_l1_displacement": 0.28290542500725163
+        },
+        "negative": {
+          "base_count": 0,
+          "current_count": 0,
+          "matched_count": 0,
+          "appeared_count": 0,
+          "disappeared_count": 0,
+          "matches": [],
+          "appeared_weights": [],
+          "disappeared_weights": [],
+          "mean_l1_displacement": null,
+          "max_l1_displacement": null
+        }
+      },
+      "support_frontier_motion": {
+        "base_edge_count": 1,
+        "current_edge_count": 1,
+        "persistent_edges": [],
+        "appeared_edges": [
+          "code=0.8|research=0.2<->code=0.9|research=0.1"
+        ],
+        "disappeared_edges": [
+          "code=0.6|research=0.4<->code=0.7|research=0.3"
+        ],
+        "matched_supported_endpoint_count": 1,
+        "matched_supported_endpoints": [
+          {
+            "base_weights": {
+              "code": 0.6,
+              "research": 0.4
+            },
+            "current_weights": {
+              "code": 0.8,
+              "research": 0.2
+            },
+            "l1_displacement": 0.4000000000000001,
+            "signed_family_displacement": {
+              "code": 0.20000000000000007,
+              "research": -0.2
+            }
+          }
+        ],
+        "mean_supported_endpoint_l1_displacement": 0.4000000000000001,
+        "max_supported_endpoint_l1_displacement": 0.4000000000000001,
+        "unsupported_region_interpolated": false
+      },
+      "local_gradient_drift": {
+        "matched_edge_count": 5,
+        "appeared_edge_count": 2,
+        "disappeared_edge_count": 0,
+        "matched_edges": [
+          {
+            "edge_key": "code=0.1|research=0.9<>code=0.2|research=0.8",
+            "base_point_estimate_slope": 0.6617570575630971,
+            "current_point_estimate_slope": 0.939534835340874,
+            "point_estimate_slope_change": 0.2777777777777769,
+            "absolute_point_estimate_slope_change": 0.2777777777777769,
+            "band_lower_slope_change": 0.6047277577924512,
+            "band_upper_slope_change": 0.3202378136191998
+          },
+          {
+            "edge_key": "code=0.2|research=0.8<>code=0.3|research=0.7",
+            "base_point_estimate_slope": 0.86558761435608,
+            "current_point_estimate_slope": 1.2227304714989446,
+            "point_estimate_slope_change": 0.35714285714286464,
+            "absolute_point_estimate_slope_change": 0.35714285714286464,
+            "band_lower_slope_change": 0.372278326279018,
+            "band_upper_slope_change": 0.7762370574701635
+          },
+          {
+            "edge_key": "code=0.3|research=0.7<>code=0.4|research=0.6",
+            "base_point_estimate_slope": 1.1788090916947525,
+            "current_point_estimate_slope": 1.654999567885218,
+            "point_estimate_slope_change": 0.4761904761904656,
+            "absolute_point_estimate_slope_change": 0.4761904761904656,
+            "band_lower_slope_change": -0.4523820783574538,
+            "band_upper_slope_change": 1.040835092623067
+          },
+          {
+            "edge_key": "code=0.4|research=0.6<>code=0.5|research=0.5",
+            "base_point_estimate_slope": 1.6950067476383261,
+            "current_point_estimate_slope": 2.3616734143049993,
+            "point_estimate_slope_change": 0.6666666666666732,
+            "absolute_point_estimate_slope_change": 0.6666666666666732,
+            "band_lower_slope_change": 1.51695878492218,
+            "band_upper_slope_change": -0.7773634570622658
+          },
+          {
+            "edge_key": "code=0.5|research=0.5<>code=0.6|research=0.4",
+            "base_point_estimate_slope": 2.6324786324786325,
+            "current_point_estimate_slope": 3.632478632478647,
+            "point_estimate_slope_change": 1.0000000000000147,
+            "absolute_point_estimate_slope_change": 1.0000000000000147,
+            "band_lower_slope_change": 1.1656099102855844,
+            "band_upper_slope_change": -0.09050387596900134
+          }
+        ],
+        "appeared_edges": [
+          "code=0.6|research=0.4<>code=0.7|research=0.3",
+          "code=0.7|research=0.3<>code=0.8|research=0.2"
+        ],
+        "disappeared_edges": [],
+        "mean_absolute_point_estimate_slope_change": 0.555555555555559,
+        "max_absolute_point_estimate_slope_change": 1.0000000000000147,
+        "gradients_synthesized_for_missing_edges": false
+      },
+      "motion_summary": {
+        "net_supported_cell_change": 2,
+        "split_count": 0,
+        "merge_count": 0,
+        "positive_boundary_matched_count": 1,
+        "positive_boundary_mean_l1_displacement": 0.28290542500725163,
+        "support_frontier_mean_l1_displacement": 0.4000000000000001,
+        "matched_gradient_edge_count": 5,
+        "max_absolute_point_estimate_slope_change": 1.0000000000000147
+      }
+    }
+  },
+  "interpretation_boundary": [
+    "Geometry Drift != Causal Mechanism",
+    "Boundary Motion != Capability Velocity",
+    "Support Expansion != Universal Capability Expansion",
+    "Component Split/Merge != Physical Phase Transition",
+    "Nearest Boundary Match != Persistent Boundary Identity",
+    "Gradient Drift != Global Derivative Drift",
+    "Geometry Drift Report != Authority"
+  ],
+  "non_authoritative": true
+}

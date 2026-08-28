@@ -1,0 +1,62 @@
+{
+  "release": "CTCL-ITR v0.2.7 Horizon Calibration & Evidence Profiles",
+  "date": "2026-08-22",
+  "verification": {
+    "pytest_split_full_suite": {
+      "returncode": 0,
+      "groups": [
+        {"name": "legacy_governance_observability", "passed": 35},
+        {"name": "legacy_signals_integrity_topology", "passed": 42},
+        {"name": "horizon_calibration", "passed": 20}
+      ],
+      "total_passed": 97,
+      "failures": 0
+    },
+    "validators": {
+      "pack": "PASS",
+      "metrics": "PASS",
+      "signals": "PASS",
+      "calibration": "PASS"
+    },
+    "compileall": {
+      "command": "python -m compileall -q src validator",
+      "returncode": 0
+    },
+    "editable_install": {
+      "command": "python -m pip install -e . --no-build-isolation --no-deps",
+      "returncode": 0,
+      "installed_version": "0.2.7"
+    },
+    "installed_cli": {
+      "command": "ctcl-itr-horizon-calibrate --suite examples/horizon_calibration_suite.json",
+      "returncode": 0,
+      "calibration_method": "monotone_binomial_pava_v1",
+      "target_reliability": 0.9,
+      "autonomy_horizon": 12.0,
+      "governance_horizon": 9.0,
+      "autonomy_trials": 80,
+      "governance_trials": 80,
+      "autonomy_support": "supported",
+      "governance_support": "supported",
+      "non_authoritative": true
+    }
+  },
+  "methodology": {
+    "reference_method": "monotone_binomial_pava_v1",
+    "point_uncertainty": "Wilson score interval",
+    "horizon_extrapolation": false,
+    "derived_assessment_schema_version": "0.2.6"
+  },
+  "compatibility": {
+    "temporal_event_schema_changed": false,
+    "governance_object_schemas_changed": false,
+    "durable_governance_mutation_semantics_changed": false,
+    "v0.2.6_signal_contract_preserved": true,
+    "v0.2.5_metrics_contract_preserved": true,
+    "v0.2.4_store_compatible": true,
+    "v0.2.2_integrity_compatible": true,
+    "v0.2.1_observability_compatible": true,
+    "v0.2.0_topology_compatible": true
+  },
+  "all_passed": true
+}

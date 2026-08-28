@@ -1,0 +1,153 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://evemisslab.example/schemas/itr/calibration-robustness-report-v0.2.8.json",
+  "title": "CTCL-ITR CalibrationRobustnessReport v0.2.8",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "comparison_id", "generated_at", "base_snapshot_id", "current_snapshot_id", "measurement_contract", "reference_family_weights", "elapsed_seconds", "context_diagnostics", "subjects", "attribution_boundary", "non_authoritative"],
+  "$defs": {
+    "contract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["unit", "reliability_p", "scope_id", "assessment_method"],
+      "properties": {
+        "unit": {"const": "interaction_depth"},
+        "reliability_p": {"type": "number", "exclusiveMinimum": 0, "maximum": 1},
+        "scope_id": {"type": "string", "minLength": 1},
+        "assessment_method": {"const": "monotone_binomial_pava_v1"}
+      }
+    },
+    "weights": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {"type": "number", "minimum": 0, "maximum": 1}
+    },
+    "curve_point": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["depth", "success_probability"],
+      "properties": {
+        "depth": {"type": "number", "minimum": 0},
+        "success_probability": {"type": "number", "minimum": 0, "maximum": 1}
+      }
+    },
+    "bracket": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["lower_depth", "upper_depth", "lower_probability", "upper_probability"],
+      "properties": {
+        "lower_depth": {"type": "number", "minimum": 0},
+        "upper_depth": {"type": "number", "minimum": 0},
+        "lower_probability": {"type": "number", "minimum": 0, "maximum": 1},
+        "upper_probability": {"type": "number", "minimum": 0, "maximum": 1}
+      }
+    },
+    "mix": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["support_status", "support_reasons", "horizon_depth"],
+      "properties": {
+        "support_status": {"enum": ["supported", "unsupported"]},
+        "support_reasons": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+        "horizon_depth": {"type": ["number", "null"], "minimum": 0},
+        "common_support": {
+          "oneOf": [
+            {"type": "null"},
+            {"type": "array", "prefixItems": [{"type": "number"}, {"type": "number"}], "minItems": 2, "maxItems": 2}
+          ]
+        },
+        "crossing_bracket": {"oneOf": [{"type": "null"}, {"$ref": "#/$defs/bracket"}]},
+        "curve": {"type": "array", "items": {"$ref": "#/$defs/curve_point"}},
+        "weights": {"$ref": "#/$defs/weights"}
+      }
+    },
+    "family_delta": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["base_horizon_depth", "current_horizon_depth", "delta", "base_support_status", "current_support_status"],
+      "properties": {
+        "base_horizon_depth": {"type": ["number", "null"]},
+        "current_horizon_depth": {"type": ["number", "null"]},
+        "delta": {"type": ["number", "null"]},
+        "base_support_status": {"type": "string"},
+        "current_support_status": {"type": "string"}
+      }
+    },
+    "subject": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["support_status", "support_reasons", "observed_family_weights", "reference_family_weights", "composition_total_variation", "observed_mix", "reference_mix", "observed_mix_delta", "composition_adjusted_delta", "composition_residual", "composition_adjusted_delta_per_day", "family_horizon_deltas", "supported_family_fraction", "family_direction_agreement", "base_family_horizon_range", "current_family_horizon_range", "max_abs_family_delta"],
+      "properties": {
+        "support_status": {"enum": ["supported", "unsupported"]},
+        "support_reasons": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+        "observed_family_weights": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["base", "current"],
+          "properties": {
+            "base": {"oneOf": [{"type": "null"}, {"$ref": "#/$defs/weights"}]},
+            "current": {"oneOf": [{"type": "null"}, {"$ref": "#/$defs/weights"}]}
+          }
+        },
+        "reference_family_weights": {"$ref": "#/$defs/weights"},
+        "composition_total_variation": {"type": ["number", "null"], "minimum": 0, "maximum": 1},
+        "observed_mix": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["base", "current"],
+          "properties": {"base": {"$ref": "#/$defs/mix"}, "current": {"$ref": "#/$defs/mix"}}
+        },
+        "reference_mix": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["base", "current"],
+          "properties": {"base": {"$ref": "#/$defs/mix"}, "current": {"$ref": "#/$defs/mix"}}
+        },
+        "observed_mix_delta": {"type": ["number", "null"]},
+        "composition_adjusted_delta": {"type": ["number", "null"]},
+        "composition_residual": {"type": ["number", "null"]},
+        "composition_adjusted_delta_per_day": {"type": ["number", "null"]},
+        "family_horizon_deltas": {"type": "object", "additionalProperties": {"$ref": "#/$defs/family_delta"}},
+        "supported_family_fraction": {"type": "number", "minimum": 0, "maximum": 1},
+        "family_direction_agreement": {"type": ["number", "null"], "minimum": 0, "maximum": 1},
+        "base_family_horizon_range": {
+          "oneOf": [{"type": "null"}, {"type": "array", "prefixItems": [{"type": "number"}, {"type": "number"}], "minItems": 2, "maxItems": 2}]
+        },
+        "current_family_horizon_range": {
+          "oneOf": [{"type": "null"}, {"type": "array", "prefixItems": [{"type": "number"}, {"type": "number"}], "minItems": 2, "maxItems": 2}]
+        },
+        "max_abs_family_delta": {"type": ["number", "null"], "minimum": 0}
+      }
+    }
+  },
+  "properties": {
+    "schema_version": {"const": "0.2.8"},
+    "comparison_id": {"type": "string", "minLength": 1},
+    "generated_at": {"type": "string", "format": "date-time"},
+    "base_snapshot_id": {"type": "string", "minLength": 1},
+    "current_snapshot_id": {"type": "string", "minLength": 1},
+    "measurement_contract": {"$ref": "#/$defs/contract"},
+    "reference_family_weights": {"$ref": "#/$defs/weights"},
+    "elapsed_seconds": {"type": "number", "minimum": 0},
+    "context_diagnostics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["backend_changed", "benchmark_version_changed", "agent_config_changed", "family_set_changed", "comparison_kind"],
+      "properties": {
+        "backend_changed": {"type": "boolean"},
+        "benchmark_version_changed": {"type": "boolean"},
+        "agent_config_changed": {"type": "boolean"},
+        "family_set_changed": {"type": "boolean"},
+        "comparison_kind": {"enum": ["longitudinal_same_configuration", "cross_backend", "mixed_configuration_change"]}
+      }
+    },
+    "subjects": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["autonomy", "governance"],
+      "properties": {"autonomy": {"$ref": "#/$defs/subject"}, "governance": {"$ref": "#/$defs/subject"}}
+    },
+    "attribution_boundary": {"const": "composition_standardization_only"},
+    "non_authoritative": {"const": true}
+  }
+}

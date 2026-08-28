@@ -1,0 +1,96 @@
+{
+  "release": "CTCL-ITR v0.2.0 Topology Core",
+  "date": "2026-08-20",
+  "verification": {
+    "pytest": {
+      "command": "python -m pytest -q -p no:cacheprovider",
+      "returncode": 0,
+      "output": "...........                                                              [100%]\n11 passed in 16.51s"
+    },
+    "pack_validator": {
+      "command": "python validator/validate_pack.py",
+      "returncode": 0,
+      "output": "ITR/ATL v0.2 topology pack: PASS\nlegacy_events=18\nmulti_agent_events=12\nmachine_work=1850.0\nmachine_depth=1100.0\nposet_width=3"
+    },
+    "compileall": {
+      "command": "python -m compileall -q src validator",
+      "returncode": 0
+    },
+    "cli_machine_runtime": {
+      "returncode": 0,
+      "result": {
+        "branch_nodes": [
+          "evt_004"
+        ],
+        "critical_path": [
+          "evt_001",
+          "evt_002",
+          "evt_003",
+          "evt_004",
+          "evt_006",
+          "evt_008",
+          "evt_009",
+          "evt_010",
+          "evt_011"
+        ],
+        "depth": 1100.0,
+        "edge_count": 13,
+        "event_count": 12,
+        "join_nodes": [
+          "evt_008"
+        ],
+        "leaves": [
+          "evt_012"
+        ],
+        "poset_width": 3,
+        "roots": [
+          "evt_001"
+        ],
+        "structural_parallelism": 1.6818181818181819,
+        "weight_contract": "machine_runtime_ms",
+        "work": 1850.0
+      }
+    },
+    "cli_unit": {
+      "returncode": 0,
+      "result": {
+        "branch_nodes": [
+          "evt_004"
+        ],
+        "critical_path": [
+          "evt_001",
+          "evt_002",
+          "evt_003",
+          "evt_004",
+          "evt_005",
+          "evt_008",
+          "evt_009",
+          "evt_010",
+          "evt_011",
+          "evt_012"
+        ],
+        "depth": 10.0,
+        "edge_count": 13,
+        "event_count": 12,
+        "join_nodes": [
+          "evt_008"
+        ],
+        "leaves": [
+          "evt_012"
+        ],
+        "poset_width": 3,
+        "roots": [
+          "evt_001"
+        ],
+        "structural_parallelism": 1.2,
+        "weight_contract": "unit",
+        "work": 12.0
+      }
+    }
+  },
+  "compatibility": {
+    "v0.1_reference_events_valid": true,
+    "v0.2_multi_agent_events_valid": true
+  },
+  "all_passed": true
+}

@@ -1,0 +1,907 @@
+{
+  "schema_version": "0.2.11",
+  "surface_id": "surface:reference-base-current",
+  "generated_at": "2026-08-23T03:55:00+08:00",
+  "method": "joint_empirical_binomial_simplex_surface_v1",
+  "base_snapshot_id": "snapshot:base",
+  "current_snapshot_id": "snapshot:current",
+  "comparison_id": "comparison:base-current",
+  "measurement_contract": {
+    "unit": "interaction_depth",
+    "reliability_p": 0.9,
+    "scope_id": "scope:reference",
+    "assessment_method": "monotone_binomial_pava_v1"
+  },
+  "families": [
+    "code",
+    "research"
+  ],
+  "point_reference_family_weights": {
+    "code": 0.5,
+    "research": 0.5
+  },
+  "resampling": {
+    "method": "stratified_empirical_binomial_sha256_v1",
+    "seed": "ctcl-itr-v0.2.11-reference-20260823",
+    "replicates": 256,
+    "interval_p": 0.9,
+    "minimum_supported_fraction": 0.5
+  },
+  "mixture_grid": {
+    "method": "simplex_grid_reference_mixture_v1",
+    "grid_step": 0.1,
+    "minimum_family_weight": 0.1,
+    "max_grid_points": 1000,
+    "total_points": 9
+  },
+  "conditioning": {
+    "outcome_counts_resampled": true,
+    "trial_counts_fixed": true,
+    "observed_family_weights_fixed": true,
+    "reference_mixture_varied": true,
+    "mixture_weights_resampled": false,
+    "same_resampled_outcomes_reused_across_mixture_cells": true,
+    "surface_cells_are_independent": false
+  },
+  "subjects": {
+    "autonomy": {
+      "cells": [
+        {
+          "reference_family_weights": {
+            "code": 0.1,
+            "research": 0.9
+          },
+          "point_estimate": {
+            "support_status": "supported",
+            "support_reasons": [],
+            "composition_adjusted_delta": 0.4475095785440599,
+            "reference_base_horizon": 6.041379310344828,
+            "reference_current_horizon": 6.488888888888888
+          },
+          "resampling": {
+            "supported_replicates": 215,
+            "total_replicates": 256,
+            "supported_fraction": 0.83984375,
+            "support_status": "supported",
+            "band": {
+              "lower": -0.28587928425552717,
+              "median": 0.3770625798212004,
+              "upper": 1.6664876934170851
+            },
+            "mean": 0.4880856209671685,
+            "sign_shares": {
+              "positive": 0.827906976744186,
+              "negative": 0.17209302325581396,
+              "zero": 0.0
+            },
+            "band_sign_class": "crosses_zero",
+            "unsupported_reason_counts": {
+              "base_observed:family_unsupported:research": 2,
+              "base_observed:target_not_bracketed_high": 64,
+              "base_reference:family_unsupported:research": 2,
+              "current_observed:family_unsupported:code": 40,
+              "current_observed:target_not_bracketed_high": 1,
+              "current_reference:family_unsupported:code": 40,
+              "family_unsupported:code": 40,
+              "family_unsupported:research": 2,
+              "target_not_bracketed_high": 65
+            }
+          }
+        },
+        {
+          "reference_family_weights": {
+            "code": 0.2,
+            "research": 0.8
+          },
+          "point_estimate": {
+            "support_status": "supported",
+            "support_reasons": [],
+            "composition_adjusted_delta": 0.5076923076923077,
+            "reference_base_horizon": 6.092307692307692,
+            "reference_current_horizon": 6.6
+          },
+          "resampling": {
+            "supported_replicates": 214,
+            "total_replicates": 256,
+            "supported_fraction": 0.8359375,
+            "support_status": "supported",
+            "band": {
+              "lower": -0.2399068322981354,
+              "median": 0.4358508158508161,
+              "upper": 1.695597768732096
+            },
+            "mean": 0.5422480773640594,
+            "sign_shares": {
+              "positive": 0.8644859813084113,
+              "negative": 0.13551401869158877,
+              "zero": 0.0
+            },
+            "band_sign_class": "crosses_zero",
+            "unsupported_reason_counts": {
+              "base_observed:family_unsupported:research": 2,
+              "base_observed:target_not_bracketed_high": 64,
+              "base_reference:family_unsupported:research": 2,
+              "current_observed:family_unsupported:code": 40,
+              "current_observed:target_not_bracketed_high": 1,
+              "current_reference:family_unsupported:code": 40,
+              "current_reference:target_not_bracketed_high": 1,
+              "family_unsupported:code": 40,
+              "family_unsupported:research": 2,
+              "target_not_bracketed_high": 65
+            }
+          }
+        },
+        {
+          "reference_family_weights": {
+            "code": 0.3,
+            "research": 0.7
+          },
+          "point_estimate": {
+            "support_status": "supported",
+            "support_reasons": [],
+            "composition_adjusted_delta": 0.5863354037267063,
+            "reference_base_horizon": 6.156521739130435,
+            "reference_current_horizon": 6.742857142857141
+          },
+          "resampling": {
+            "supported_replicates": 214,
+            "total_replicates": 256,
+            "supported_fraction": 0.8359375,
+            "support_status": "supported",
+            "band": {
+              "lower": -0.13389155400815522,
+              "median": 0.5090799031476996,
+              "upper": 1.7403064060189826
+            },
+            "mean": 0.6248094892832463,
+            "sign_shares": {
+              "positive": 0.9018691588785047,
+              "negative": 0.09813084112149532,
+              "zero": 0.0
+            },
+            "band_sign_class": "crosses_zero",
+            "unsupported_reason_counts": {
+              "base_observed:family_unsupported:research": 2,
+              "base_observed:target_not_bracketed_high": 64,
+              "base_reference:family_unsupported:research": 2,
+              "current_observed:family_unsupported:code": 40,
+              "current_observed:target_not_bracketed_high": 1,
+              "current_reference:family_unsupported:code": 40,
+              "current_reference:target_not_bracketed_high": 1,
+              "family_unsupported:code": 40,
+              "family_unsupported:research": 2,
+              "target_not_bracketed_high": 65
+            }
+          }
+        },
+        {
+          "reference_family_weights": {
+            "code": 0.4,
+            "research": 0.6
+          },
+          "point_estimate": {
+            "support_status": "supported",
+            "support_reasons": [],
+            "composition_adjusted_delta": 0.6933333333333334,
+            "reference_base_horizon": 6.24,
+            "reference_current_horizon": 6.933333333333334
+          },
+          "resampling": {
+            "supported_replicates": 211,
+            "total_replicates": 256,
+            "supported_fraction": 0.82421875,
+            "support_status": "supported",
+            "band": {
+              "lower": -0.07969987002245049,
+              "median": 0.6363084395871281,
+              "upper": 1.8013565381986432
+            },
+            "mean": 0.7144483962550611,
+            "sign_shares": {
+              "positive": 0.9383886255924171,
+              "negative": 0.061611374407582936,
+              "zero": 0.0
+            },
+            "band_sign_class": "crosses_zero",
+            "unsupported_reason_counts": {
+              "base_observed:family_unsupported:research": 2,
+              "base_observed:target_not_bracketed_high": 64,
+              "base_reference:family_unsupported:research": 2,
+              "current_observed:family_unsupported:code": 40,
+              "current_observed:target_not_bracketed_high": 1,
+              "current_reference:family_unsupported:code": 40,
+              "current_reference:target_not_bracketed_high": 4,
+              "family_unsupported:code": 40,
+              "family_unsupported:research": 2,
+              "target_not_bracketed_high": 67
+            }
+          }
+        },
+        {
+          "reference_family_weights": {
+            "code": 0.5,
+            "research": 0.5
+          },
+          "point_estimate": {
+            "support_status": "supported",
+            "support_reasons": [],
+            "composition_adjusted_delta": 0.8470588235294114,
+            "reference_base_horizon": 6.352941176470588,
+            "reference_current_horizon": 7.199999999999999
+          },
+          "resampling": {
+            "supported_replicates": 193,
+            "total_replicates": 256,
+            "supported_fraction": 0.75390625,
+            "support_status": "supported",
+            "band": {
+              "lower": -0.09468531468531484,
+              "median": 0.7733333333333325,
+              "upper": 1.770461538461536
+            },
+            "mean": 0.7910630520472455,
+            "sign_shares": {
+              "positive": 0.9430051813471503,
+              "negative": 0.05699481865284974,
+              "zero": 0.0
+            },
+            "band_sign_class": "crosses_zero",
+            "unsupported_reason_counts": {
+              "base_observed:family_unsupported:research": 2,
+              "base_observed:target_not_bracketed_high": 64,
+              "base_reference:family_unsupported:research": 2,
+              "current_observed:family_unsupported:code": 40,
+              "current_observed:target_not_bracketed_high": 1,
+              "current_reference:family_unsupported:code": 40,
+              "current_reference:target_not_bracketed_high": 22,
+              "family_unsupported:code": 40,
+              "family_unsupported:research": 2,
+              "target_not_bracketed_high": 81
+            }
+          }
+        },
+        {
+          "reference_family_weights": {
+            "code": 0.6,
+            "research": 0.4
+          },
+          "point_estimate": {
+            "support_status": "supported",
+            "support_reasons": [],
+            "composition_adjusted_delta": 1.0857142857142836,
+            "reference_base_horizon": 6.514285714285714,
+            "reference_current_horizon": 7.599999999999998
+          },
+          "resampling": {
+            "supported_replicates": 150,
+            "total_replicates": 256,
+            "supported_fraction": 0.5859375,
+            "support_status": "supported",
+            "band": {
+              "lower": 0.08433014354066957,
+              "median": 0.9286898839137621,
+              "upper": 1.7834469153515022
+            },
+            "mean": 0.9095297641393262,
+            "sign_shares": {
+              "positive": 0.9666666666666667,
+              "negative": 0.03333333333333333,
+              "zero": 0.0
+            },
+            "band_sign_class": "positive_band",
+            "unsupported_reason_counts": {
+              "base_observed:family_unsupported:research": 2,
+              "base_observed:target_not_bracketed_high": 64,
+              "base_reference:family_unsupported:research": 2,
+              "base_reference:target_not_bracketed_high": 8,
+              "current_observed:family_unsupported:code": 40,
+              "current_observed:target_not_bracketed_high": 1,
+              "current_reference:family_unsupported:code": 40,
+              "current_reference:target_not_bracketed_high": 60,
+              "family_unsupported:code": 40,
+              "family_unsupported:research": 2,
+              "target_not_bracketed_high": 113
+            }
+          }
+        },
+        {
+          "reference_family_weights": {
+            "code": 0.7,
+            "research": 0.3
+          },
+          "point_estimate": {
+            "support_status": "unsupported",
+            "support_reasons": [
+              "current_reference:target_not_bracketed_high",
+              "target_not_bracketed_high"
+            ],
+            "composition_adjusted_delta": null,
+            "reference_base_horizon": 6.763636363636363,
+            "reference_current_horizon": null
+          },
+          "resampling": {
+            "supported_replicates": 56,
+            "total_replicates": 256,
+            "supported_fraction": 0.21875,
+            "support_status": "insufficient_resampling_support",
+            "band": null,
+            "mean": null,
+            "sign_shares": {
+              "positive": 0.9642857142857143,
+              "negative": 0.03571428571428571,
+              "zero": 0.0
+            },
+            "band_sign_class": "unsupported",
+            "unsupported_reason_counts": {
+              "base_observed:family_unsupported:research": 2,
+              "base_observed:target_not_bracketed_high": 64,
+              "base_reference:family_unsupported:research": 2,
+              "base_reference:target_not_bracketed_high": 16,
+              "current_observed:family_unsupported:code": 40,
+              "current_observed:target_not_bracketed_high": 1,
+              "current_reference:family_unsupported:code": 40,
+              "current_reference:target_not_bracketed_high": 151,
+              "family_unsupported:code": 40,
+              "family_unsupported:research": 2,
+              "target_not_bracketed_high": 184
+            }
+          }
+        },
+        {
+          "reference_family_weights": {
+            "code": 0.8,
+            "research": 0.2
+          },
+          "point_estimate": {
+            "support_status": "unsupported",
+            "support_reasons": [
+              "current_reference:target_not_bracketed_high",
+              "target_not_bracketed_high"
+            ],
+            "composition_adjusted_delta": null,
+            "reference_base_horizon": 7.2,
+            "reference_current_horizon": null
+          },
+          "resampling": {
+            "supported_replicates": 0,
+            "total_replicates": 256,
+            "supported_fraction": 0.0,
+            "support_status": "insufficient_resampling_support",
+            "band": null,
+            "mean": null,
+            "sign_shares": null,
+            "band_sign_class": "unsupported",
+            "unsupported_reason_counts": {
+              "base_observed:family_unsupported:research": 2,
+              "base_observed:target_not_bracketed_high": 64,
+              "base_reference:family_unsupported:research": 2,
+              "base_reference:target_not_bracketed_high": 64,
+              "current_observed:family_unsupported:code": 40,
+              "current_observed:target_not_bracketed_high": 1,
+              "current_reference:family_unsupported:code": 40,
+              "current_reference:target_not_bracketed_high": 216,
+              "family_unsupported:code": 40,
+              "family_unsupported:research": 2,
+              "target_not_bracketed_high": 227
+            }
+          }
+        },
+        {
+          "reference_family_weights": {
+            "code": 0.9,
+            "research": 0.1
+          },
+          "point_estimate": {
+            "support_status": "unsupported",
+            "support_reasons": [
+              "base_reference:target_not_bracketed_high",
+              "current_reference:target_not_bracketed_high",
+              "target_not_bracketed_high"
+            ],
+            "composition_adjusted_delta": null,
+            "reference_base_horizon": null,
+            "reference_current_horizon": null
+          },
+          "resampling": {
+            "supported_replicates": 0,
+            "total_replicates": 256,
+            "supported_fraction": 0.0,
+            "support_status": "insufficient_resampling_support",
+            "band": null,
+            "mean": null,
+            "sign_shares": null,
+            "band_sign_class": "unsupported",
+            "unsupported_reason_counts": {
+              "base_observed:family_unsupported:research": 2,
+              "base_observed:target_not_bracketed_high": 64,
+              "base_reference:family_unsupported:research": 2,
+              "base_reference:target_not_bracketed_high": 158,
+              "current_observed:family_unsupported:code": 40,
+              "current_observed:target_not_bracketed_high": 1,
+              "current_reference:family_unsupported:code": 40,
+              "current_reference:target_not_bracketed_high": 216,
+              "family_unsupported:code": 40,
+              "family_unsupported:research": 2,
+              "target_not_bracketed_high": 239
+            }
+          }
+        }
+      ],
+      "surface_summary": {
+        "total_cells": 9,
+        "point_supported_cells": 6,
+        "resampling_supported_cells": 6,
+        "resampling_supported_fraction": 0.6666666666666666,
+        "band_sign_class_counts": {
+          "positive_band": 1,
+          "negative_band": 0,
+          "crosses_zero": 5,
+          "zero_band": 0,
+          "unsupported": 3
+        },
+        "sign_sensitive_to_mixture": true,
+        "support_fraction_range": {
+          "minimum": 0.0,
+          "maximum": 0.83984375
+        },
+        "band_width_range": {
+          "minimum": 1.6991167718108326,
+          "maximum": 1.9523669776726122
+        },
+        "unsupported_reason_counts": {
+          "base_observed:family_unsupported:research": 18,
+          "base_observed:target_not_bracketed_high": 576,
+          "base_reference:family_unsupported:research": 18,
+          "base_reference:target_not_bracketed_high": 246,
+          "current_observed:family_unsupported:code": 360,
+          "current_observed:target_not_bracketed_high": 9,
+          "current_reference:family_unsupported:code": 360,
+          "current_reference:target_not_bracketed_high": 671,
+          "family_unsupported:code": 360,
+          "family_unsupported:research": 18,
+          "target_not_bracketed_high": 1106
+        }
+      }
+    },
+    "governance": {
+      "cells": [
+        {
+          "reference_family_weights": {
+            "code": 0.1,
+            "research": 0.9
+          },
+          "point_estimate": {
+            "support_status": "supported",
+            "support_reasons": [],
+            "composition_adjusted_delta": 0.45219164118246624,
+            "reference_base_horizon": 5.036697247706422,
+            "reference_current_horizon": 5.488888888888888
+          },
+          "resampling": {
+            "supported_replicates": 223,
+            "total_replicates": 256,
+            "supported_fraction": 0.87109375,
+            "support_status": "supported",
+            "band": {
+              "lower": -0.3157028292660482,
+              "median": 0.5127243808225392,
+              "upper": 1.800380625380625
+            },
+            "mean": 0.6532983208509563,
+            "sign_shares": {
+              "positive": 0.8475336322869955,
+              "negative": 0.15246636771300448,
+              "zero": 0.0
+            },
+            "band_sign_class": "crosses_zero",
+            "unsupported_reason_counts": {
+              "base_observed:family_unsupported:research": 1,
+              "base_observed:target_not_bracketed_high": 25,
+              "base_reference:family_unsupported:research": 1,
+              "current_observed:family_unsupported:code": 31,
+              "current_observed:family_unsupported:research": 1,
+              "current_observed:target_not_bracketed_high": 2,
+              "current_reference:family_unsupported:code": 31,
+              "current_reference:family_unsupported:research": 1,
+              "family_unsupported:code": 31,
+              "family_unsupported:research": 2,
+              "target_not_bracketed_high": 26
+            }
+          }
+        },
+        {
+          "reference_family_weights": {
+            "code": 0.2,
+            "research": 0.8
+          },
+          "point_estimate": {
+            "support_status": "supported",
+            "support_reasons": [],
+            "composition_adjusted_delta": 0.518367346938776,
+            "reference_base_horizon": 5.081632653061225,
+            "reference_current_horizon": 5.6000000000000005
+          },
+          "resampling": {
+            "supported_replicates": 221,
+            "total_replicates": 256,
+            "supported_fraction": 0.86328125,
+            "support_status": "supported",
+            "band": {
+              "lower": -0.2769230769230768,
+              "median": 0.583333333333333,
+              "upper": 1.8558558558558547
+            },
+            "mean": 0.7061532192994973,
+            "sign_shares": {
+              "positive": 0.8552036199095022,
+              "negative": 0.14027149321266968,
+              "zero": 0.004524886877828055
+            },
+            "band_sign_class": "crosses_zero",
+            "unsupported_reason_counts": {
+              "base_observed:family_unsupported:research": 1,
+              "base_observed:target_not_bracketed_high": 25,
+              "base_reference:family_unsupported:research": 1,
+              "current_observed:family_unsupported:code": 31,
+              "current_observed:family_unsupported:research": 1,
+              "current_observed:target_not_bracketed_high": 2,
+              "current_reference:family_unsupported:code": 31,
+              "current_reference:family_unsupported:research": 1,
+              "current_reference:target_not_bracketed_high": 2,
+              "family_unsupported:code": 31,
+              "family_unsupported:research": 2,
+              "target_not_bracketed_high": 26
+            }
+          }
+        },
+        {
+          "reference_family_weights": {
+            "code": 0.3,
+            "research": 0.7
+          },
+          "point_estimate": {
+            "support_status": "supported",
+            "support_reasons": [],
+            "composition_adjusted_delta": 0.604926108374384,
+            "reference_base_horizon": 5.137931034482758,
+            "reference_current_horizon": 5.742857142857142
+          },
+          "resampling": {
+            "supported_replicates": 221,
+            "total_replicates": 256,
+            "supported_fraction": 0.86328125,
+            "support_status": "supported",
+            "band": {
+              "lower": -0.20310723758999674,
+              "median": 0.6606653620352239,
+              "upper": 1.8905309250136835
+            },
+            "mean": 0.7876971137495865,
+            "sign_shares": {
+              "positive": 0.8959276018099548,
+              "negative": 0.10407239819004525,
+              "zero": 0.0
+            },
+            "band_sign_class": "crosses_zero",
+            "unsupported_reason_counts": {
+              "base_observed:family_unsupported:research": 1,
+              "base_observed:target_not_bracketed_high": 25,
+              "base_reference:family_unsupported:research": 1,
+              "current_observed:family_unsupported:code": 31,
+              "current_observed:family_unsupported:research": 1,
+              "current_observed:target_not_bracketed_high": 2,
+              "current_reference:family_unsupported:code": 31,
+              "current_reference:family_unsupported:research": 1,
+              "current_reference:target_not_bracketed_high": 2,
+              "family_unsupported:code": 31,
+              "family_unsupported:research": 2,
+              "target_not_bracketed_high": 26
+            }
+          }
+        },
+        {
+          "reference_family_weights": {
+            "code": 0.4,
+            "research": 0.6
+          },
+          "point_estimate": {
+            "support_status": "supported",
+            "support_reasons": [],
+            "composition_adjusted_delta": 0.7228070175438592,
+            "reference_base_horizon": 5.210526315789474,
+            "reference_current_horizon": 5.933333333333334
+          },
+          "resampling": {
+            "supported_replicates": 217,
+            "total_replicates": 256,
+            "supported_fraction": 0.84765625,
+            "support_status": "supported",
+            "band": {
+              "lower": -0.07860487338748165,
+              "median": 0.7701149425287364,
+              "upper": 1.9662893572729638
+            },
+            "mean": 0.8762340897292781,
+            "sign_shares": {
+              "positive": 0.9354838709677419,
+              "negative": 0.06451612903225806,
+              "zero": 0.0
+            },
+            "band_sign_class": "crosses_zero",
+            "unsupported_reason_counts": {
+              "base_observed:family_unsupported:research": 1,
+              "base_observed:target_not_bracketed_high": 25,
+              "base_reference:family_unsupported:research": 1,
+              "current_observed:family_unsupported:code": 31,
+              "current_observed:family_unsupported:research": 1,
+              "current_observed:target_not_bracketed_high": 2,
+              "current_reference:family_unsupported:code": 31,
+              "current_reference:family_unsupported:research": 1,
+              "current_reference:target_not_bracketed_high": 6,
+              "family_unsupported:code": 31,
+              "family_unsupported:research": 2,
+              "target_not_bracketed_high": 30
+            }
+          }
+        },
+        {
+          "reference_family_weights": {
+            "code": 0.5,
+            "research": 0.5
+          },
+          "point_estimate": {
+            "support_status": "supported",
+            "support_reasons": [],
+            "composition_adjusted_delta": 0.8923076923076918,
+            "reference_base_horizon": 5.3076923076923075,
+            "reference_current_horizon": 6.199999999999999
+          },
+          "resampling": {
+            "supported_replicates": 195,
+            "total_replicates": 256,
+            "supported_fraction": 0.76171875,
+            "support_status": "supported",
+            "band": {
+              "lower": 6.217248937900855e-16,
+              "median": 0.8499999999999996,
+              "upper": 2.0151162790697668
+            },
+            "mean": 0.9343830411464974,
+            "sign_shares": {
+              "positive": 0.9435897435897436,
+              "negative": 0.035897435897435895,
+              "zero": 0.020512820512820513
+            },
+            "band_sign_class": "crosses_zero",
+            "unsupported_reason_counts": {
+              "base_observed:family_unsupported:research": 1,
+              "base_observed:target_not_bracketed_high": 25,
+              "base_reference:family_unsupported:research": 1,
+              "current_observed:family_unsupported:code": 31,
+              "current_observed:family_unsupported:research": 1,
+              "current_observed:target_not_bracketed_high": 2,
+              "current_reference:family_unsupported:code": 31,
+              "current_reference:family_unsupported:research": 1,
+              "current_reference:target_not_bracketed_high": 28,
+              "family_unsupported:code": 31,
+              "family_unsupported:research": 2,
+              "target_not_bracketed_high": 51
+            }
+          }
+        },
+        {
+          "reference_family_weights": {
+            "code": 0.6,
+            "research": 0.4
+          },
+          "point_estimate": {
+            "support_status": "supported",
+            "support_reasons": [],
+            "composition_adjusted_delta": 1.155555555555555,
+            "reference_base_horizon": 5.444444444444443,
+            "reference_current_horizon": 6.599999999999998
+          },
+          "resampling": {
+            "supported_replicates": 150,
+            "total_replicates": 256,
+            "supported_fraction": 0.5859375,
+            "support_status": "supported",
+            "band": {
+              "lower": 0.10147769543118258,
+              "median": 1.0212848297213601,
+              "upper": 2.0642857142857145
+            },
+            "mean": 1.0397043926513363,
+            "sign_shares": {
+              "positive": 0.9733333333333334,
+              "negative": 0.02666666666666667,
+              "zero": 0.0
+            },
+            "band_sign_class": "positive_band",
+            "unsupported_reason_counts": {
+              "base_observed:family_unsupported:research": 1,
+              "base_observed:target_not_bracketed_high": 25,
+              "base_reference:family_unsupported:research": 1,
+              "base_reference:target_not_bracketed_high": 1,
+              "current_observed:family_unsupported:code": 31,
+              "current_observed:family_unsupported:research": 1,
+              "current_observed:target_not_bracketed_high": 2,
+              "current_reference:family_unsupported:code": 31,
+              "current_reference:family_unsupported:research": 1,
+              "current_reference:target_not_bracketed_high": 72,
+              "family_unsupported:code": 31,
+              "family_unsupported:research": 2,
+              "target_not_bracketed_high": 91
+            }
+          }
+        },
+        {
+          "reference_family_weights": {
+            "code": 0.7,
+            "research": 0.3
+          },
+          "point_estimate": {
+            "support_status": "unsupported",
+            "support_reasons": [
+              "current_reference:target_not_bracketed_high",
+              "target_not_bracketed_high"
+            ],
+            "composition_adjusted_delta": null,
+            "reference_base_horizon": 5.651162790697673,
+            "reference_current_horizon": null
+          },
+          "resampling": {
+            "supported_replicates": 63,
+            "total_replicates": 256,
+            "supported_fraction": 0.24609375,
+            "support_status": "insufficient_resampling_support",
+            "band": null,
+            "mean": null,
+            "sign_shares": {
+              "positive": 0.9682539682539683,
+              "negative": 0.031746031746031744,
+              "zero": 0.0
+            },
+            "band_sign_class": "unsupported",
+            "unsupported_reason_counts": {
+              "base_observed:family_unsupported:research": 1,
+              "base_observed:target_not_bracketed_high": 25,
+              "base_reference:family_unsupported:research": 1,
+              "base_reference:target_not_bracketed_high": 5,
+              "current_observed:family_unsupported:code": 31,
+              "current_observed:family_unsupported:research": 1,
+              "current_observed:target_not_bracketed_high": 2,
+              "current_reference:family_unsupported:code": 31,
+              "current_reference:family_unsupported:research": 1,
+              "current_reference:target_not_bracketed_high": 160,
+              "family_unsupported:code": 31,
+              "family_unsupported:research": 2,
+              "target_not_bracketed_high": 169
+            }
+          }
+        },
+        {
+          "reference_family_weights": {
+            "code": 0.8,
+            "research": 0.2
+          },
+          "point_estimate": {
+            "support_status": "unsupported",
+            "support_reasons": [
+              "current_reference:target_not_bracketed_high",
+              "target_not_bracketed_high"
+            ],
+            "composition_adjusted_delta": null,
+            "reference_base_horizon": 6.0,
+            "reference_current_horizon": null
+          },
+          "resampling": {
+            "supported_replicates": 0,
+            "total_replicates": 256,
+            "supported_fraction": 0.0,
+            "support_status": "insufficient_resampling_support",
+            "band": null,
+            "mean": null,
+            "sign_shares": null,
+            "band_sign_class": "unsupported",
+            "unsupported_reason_counts": {
+              "base_observed:family_unsupported:research": 1,
+              "base_observed:target_not_bracketed_high": 25,
+              "base_reference:family_unsupported:research": 1,
+              "base_reference:target_not_bracketed_high": 25,
+              "current_observed:family_unsupported:code": 31,
+              "current_observed:family_unsupported:research": 1,
+              "current_observed:target_not_bracketed_high": 2,
+              "current_reference:family_unsupported:code": 31,
+              "current_reference:family_unsupported:research": 1,
+              "current_reference:target_not_bracketed_high": 224,
+              "family_unsupported:code": 31,
+              "family_unsupported:research": 2,
+              "target_not_bracketed_high": 230
+            }
+          }
+        },
+        {
+          "reference_family_weights": {
+            "code": 0.9,
+            "research": 0.1
+          },
+          "point_estimate": {
+            "support_status": "unsupported",
+            "support_reasons": [
+              "current_reference:target_not_bracketed_high",
+              "target_not_bracketed_high"
+            ],
+            "composition_adjusted_delta": null,
+            "reference_base_horizon": 6.714285714285715,
+            "reference_current_horizon": null
+          },
+          "resampling": {
+            "supported_replicates": 0,
+            "total_replicates": 256,
+            "supported_fraction": 0.0,
+            "support_status": "insufficient_resampling_support",
+            "band": null,
+            "mean": null,
+            "sign_shares": null,
+            "band_sign_class": "unsupported",
+            "unsupported_reason_counts": {
+              "base_observed:family_unsupported:research": 1,
+              "base_observed:target_not_bracketed_high": 25,
+              "base_reference:family_unsupported:research": 1,
+              "base_reference:target_not_bracketed_high": 104,
+              "current_observed:family_unsupported:code": 31,
+              "current_observed:family_unsupported:research": 1,
+              "current_observed:target_not_bracketed_high": 2,
+              "current_reference:family_unsupported:code": 31,
+              "current_reference:family_unsupported:research": 1,
+              "current_reference:target_not_bracketed_high": 224,
+              "family_unsupported:code": 31,
+              "family_unsupported:research": 2,
+              "target_not_bracketed_high": 239
+            }
+          }
+        }
+      ],
+      "surface_summary": {
+        "total_cells": 9,
+        "point_supported_cells": 6,
+        "resampling_supported_cells": 6,
+        "resampling_supported_fraction": 0.6666666666666666,
+        "band_sign_class_counts": {
+          "positive_band": 1,
+          "negative_band": 0,
+          "crosses_zero": 5,
+          "zero_band": 0,
+          "unsupported": 3
+        },
+        "sign_sensitive_to_mixture": true,
+        "support_fraction_range": {
+          "minimum": 0.0,
+          "maximum": 0.87109375
+        },
+        "band_width_range": {
+          "minimum": 1.9628080188545318,
+          "maximum": 2.1327789327789315
+        },
+        "unsupported_reason_counts": {
+          "base_observed:family_unsupported:research": 9,
+          "base_observed:target_not_bracketed_high": 225,
+          "base_reference:family_unsupported:research": 9,
+          "base_reference:target_not_bracketed_high": 135,
+          "current_observed:family_unsupported:code": 279,
+          "current_observed:family_unsupported:research": 9,
+          "current_observed:target_not_bracketed_high": 18,
+          "current_reference:family_unsupported:code": 279,
+          "current_reference:family_unsupported:research": 9,
+          "current_reference:target_not_bracketed_high": 718,
+          "family_unsupported:code": 279,
+          "family_unsupported:research": 18,
+          "target_not_bracketed_high": 888
+        }
+      }
+    }
+  },
+  "interpretation_boundary": "joint_sampling_x_reference_mixture_surface",
+  "non_authoritative": true
+}

@@ -1,0 +1,358 @@
+{
+  "schema_version": "0.2.10",
+  "sensitivity_id": "sensitivity:reference-mixture",
+  "generated_at": "2026-08-23T02:50:00+00:00",
+  "method": "simplex_grid_reference_mixture_v1",
+  "base_snapshot_id": "snapshot:base",
+  "current_snapshot_id": "snapshot:current",
+  "comparison_id": "comparison:base-current",
+  "measurement_contract": {
+    "unit": "interaction_depth",
+    "reliability_p": 0.9,
+    "scope_id": "scope:reference",
+    "assessment_method": "monotone_binomial_pava_v1"
+  },
+  "families": [
+    "code",
+    "research"
+  ],
+  "reference_family_weights": {
+    "code": 0.5,
+    "research": 0.5
+  },
+  "grid": {
+    "grid_step": 0.1,
+    "minimum_family_weight": 0.1,
+    "max_grid_points": 1000,
+    "total_points": 9
+  },
+  "conditioning": {
+    "task_family_curves_fixed": true,
+    "outcome_counts_fixed": true,
+    "observed_family_weights_fixed": true,
+    "reference_mixture_varied": true
+  },
+  "subjects": {
+    "autonomy": {
+      "reference_point_estimate": 0.8470588235294114,
+      "mixture_scan": [
+        {
+          "reference_family_weights": {
+            "code": 0.1,
+            "research": 0.9
+          },
+          "support_status": "supported",
+          "support_reasons": [],
+          "composition_adjusted_delta": 0.4475095785440599,
+          "reference_base_horizon": 6.041379310344828,
+          "reference_current_horizon": 6.488888888888888
+        },
+        {
+          "reference_family_weights": {
+            "code": 0.2,
+            "research": 0.8
+          },
+          "support_status": "supported",
+          "support_reasons": [],
+          "composition_adjusted_delta": 0.5076923076923077,
+          "reference_base_horizon": 6.092307692307692,
+          "reference_current_horizon": 6.6
+        },
+        {
+          "reference_family_weights": {
+            "code": 0.3,
+            "research": 0.7
+          },
+          "support_status": "supported",
+          "support_reasons": [],
+          "composition_adjusted_delta": 0.5863354037267063,
+          "reference_base_horizon": 6.156521739130435,
+          "reference_current_horizon": 6.742857142857141
+        },
+        {
+          "reference_family_weights": {
+            "code": 0.4,
+            "research": 0.6
+          },
+          "support_status": "supported",
+          "support_reasons": [],
+          "composition_adjusted_delta": 0.6933333333333334,
+          "reference_base_horizon": 6.24,
+          "reference_current_horizon": 6.933333333333334
+        },
+        {
+          "reference_family_weights": {
+            "code": 0.5,
+            "research": 0.5
+          },
+          "support_status": "supported",
+          "support_reasons": [],
+          "composition_adjusted_delta": 0.8470588235294114,
+          "reference_base_horizon": 6.352941176470588,
+          "reference_current_horizon": 7.199999999999999
+        },
+        {
+          "reference_family_weights": {
+            "code": 0.6,
+            "research": 0.4
+          },
+          "support_status": "supported",
+          "support_reasons": [],
+          "composition_adjusted_delta": 1.0857142857142836,
+          "reference_base_horizon": 6.514285714285714,
+          "reference_current_horizon": 7.599999999999998
+        },
+        {
+          "reference_family_weights": {
+            "code": 0.7,
+            "research": 0.3
+          },
+          "support_status": "unsupported",
+          "support_reasons": [
+            "current_reference:target_not_bracketed_high",
+            "target_not_bracketed_high"
+          ],
+          "composition_adjusted_delta": null,
+          "reference_base_horizon": 6.763636363636363,
+          "reference_current_horizon": null
+        },
+        {
+          "reference_family_weights": {
+            "code": 0.8,
+            "research": 0.2
+          },
+          "support_status": "unsupported",
+          "support_reasons": [
+            "current_reference:target_not_bracketed_high",
+            "target_not_bracketed_high"
+          ],
+          "composition_adjusted_delta": null,
+          "reference_base_horizon": 7.2,
+          "reference_current_horizon": null
+        },
+        {
+          "reference_family_weights": {
+            "code": 0.9,
+            "research": 0.1
+          },
+          "support_status": "unsupported",
+          "support_reasons": [
+            "base_reference:target_not_bracketed_high",
+            "current_reference:target_not_bracketed_high",
+            "target_not_bracketed_high"
+          ],
+          "composition_adjusted_delta": null,
+          "reference_base_horizon": null,
+          "reference_current_horizon": null
+        }
+      ],
+      "supported_grid_points": 6,
+      "total_grid_points": 9,
+      "supported_grid_fraction": 0.6666666666666666,
+      "sensitivity_range": {
+        "minimum": 0.4475095785440599,
+        "maximum": 1.0857142857142836,
+        "span": 0.6382047071702237,
+        "argmin_weights": {
+          "code": 0.1,
+          "research": 0.9
+        },
+        "argmax_weights": {
+          "code": 0.6,
+          "research": 0.4
+        }
+      },
+      "reference_position_in_supported_range": 0.6260518615679571,
+      "sign_shares": {
+        "positive": 1.0,
+        "negative": 0.0,
+        "zero": 0.0
+      },
+      "unsupported_reason_counts": {
+        "base_reference:target_not_bracketed_high": 1,
+        "current_reference:target_not_bracketed_high": 3,
+        "target_not_bracketed_high": 3
+      },
+      "uncertainty_axes": {
+        "sampling_uncertainty_at_reference": {
+          "supported_replicates": 195,
+          "total_replicates": 256,
+          "supported_fraction": 0.76171875,
+          "support_status": "supported",
+          "band": {
+            "lower": -0.13522727272727283,
+            "median": 0.761904761904761,
+            "upper": 2.0768218623481767
+          },
+          "mean": 0.8451430267767238
+        },
+        "sampling_band_width_at_reference": 2.2120491350754494,
+        "reference_mixture_sensitivity_span": 0.6382047071702237,
+        "mixture_to_sampling_width_ratio": 0.28851289831247606,
+        "larger_reported_axis": "sampling",
+        "axes_are_additive": false
+      }
+    },
+    "governance": {
+      "reference_point_estimate": 0.8923076923076918,
+      "mixture_scan": [
+        {
+          "reference_family_weights": {
+            "code": 0.1,
+            "research": 0.9
+          },
+          "support_status": "supported",
+          "support_reasons": [],
+          "composition_adjusted_delta": 0.45219164118246624,
+          "reference_base_horizon": 5.036697247706422,
+          "reference_current_horizon": 5.488888888888888
+        },
+        {
+          "reference_family_weights": {
+            "code": 0.2,
+            "research": 0.8
+          },
+          "support_status": "supported",
+          "support_reasons": [],
+          "composition_adjusted_delta": 0.518367346938776,
+          "reference_base_horizon": 5.081632653061225,
+          "reference_current_horizon": 5.6000000000000005
+        },
+        {
+          "reference_family_weights": {
+            "code": 0.3,
+            "research": 0.7
+          },
+          "support_status": "supported",
+          "support_reasons": [],
+          "composition_adjusted_delta": 0.604926108374384,
+          "reference_base_horizon": 5.137931034482758,
+          "reference_current_horizon": 5.742857142857142
+        },
+        {
+          "reference_family_weights": {
+            "code": 0.4,
+            "research": 0.6
+          },
+          "support_status": "supported",
+          "support_reasons": [],
+          "composition_adjusted_delta": 0.7228070175438592,
+          "reference_base_horizon": 5.210526315789474,
+          "reference_current_horizon": 5.933333333333334
+        },
+        {
+          "reference_family_weights": {
+            "code": 0.5,
+            "research": 0.5
+          },
+          "support_status": "supported",
+          "support_reasons": [],
+          "composition_adjusted_delta": 0.8923076923076918,
+          "reference_base_horizon": 5.3076923076923075,
+          "reference_current_horizon": 6.199999999999999
+        },
+        {
+          "reference_family_weights": {
+            "code": 0.6,
+            "research": 0.4
+          },
+          "support_status": "supported",
+          "support_reasons": [],
+          "composition_adjusted_delta": 1.155555555555555,
+          "reference_base_horizon": 5.444444444444443,
+          "reference_current_horizon": 6.599999999999998
+        },
+        {
+          "reference_family_weights": {
+            "code": 0.7,
+            "research": 0.3
+          },
+          "support_status": "unsupported",
+          "support_reasons": [
+            "current_reference:target_not_bracketed_high",
+            "target_not_bracketed_high"
+          ],
+          "composition_adjusted_delta": null,
+          "reference_base_horizon": 5.651162790697673,
+          "reference_current_horizon": null
+        },
+        {
+          "reference_family_weights": {
+            "code": 0.8,
+            "research": 0.2
+          },
+          "support_status": "unsupported",
+          "support_reasons": [
+            "current_reference:target_not_bracketed_high",
+            "target_not_bracketed_high"
+          ],
+          "composition_adjusted_delta": null,
+          "reference_base_horizon": 6.0,
+          "reference_current_horizon": null
+        },
+        {
+          "reference_family_weights": {
+            "code": 0.9,
+            "research": 0.1
+          },
+          "support_status": "unsupported",
+          "support_reasons": [
+            "current_reference:target_not_bracketed_high",
+            "target_not_bracketed_high"
+          ],
+          "composition_adjusted_delta": null,
+          "reference_base_horizon": 6.714285714285715,
+          "reference_current_horizon": null
+        }
+      ],
+      "supported_grid_points": 6,
+      "total_grid_points": 9,
+      "supported_grid_fraction": 0.6666666666666666,
+      "sensitivity_range": {
+        "minimum": 0.45219164118246624,
+        "maximum": 1.155555555555555,
+        "span": 0.7033639143730888,
+        "argmin_weights": {
+          "code": 0.1,
+          "research": 0.9
+        },
+        "argmax_weights": {
+          "code": 0.6,
+          "research": 0.4
+        }
+      },
+      "reference_position_in_supported_range": 0.6257302118171685,
+      "sign_shares": {
+        "positive": 1.0,
+        "negative": 0.0,
+        "zero": 0.0
+      },
+      "unsupported_reason_counts": {
+        "current_reference:target_not_bracketed_high": 3,
+        "target_not_bracketed_high": 3
+      },
+      "uncertainty_axes": {
+        "sampling_uncertainty_at_reference": {
+          "supported_replicates": 201,
+          "total_replicates": 256,
+          "supported_fraction": 0.78515625,
+          "support_status": "supported",
+          "band": {
+            "lower": 0.08333333333333212,
+            "median": 0.9000000000000012,
+            "upper": 2.0427807486631018
+          },
+          "mean": 0.9539714979328483
+        },
+        "sampling_band_width_at_reference": 1.9594474153297696,
+        "reference_mixture_sensitivity_span": 0.7033639143730888,
+        "mixture_to_sampling_width_ratio": 0.3589603420180146,
+        "larger_reported_axis": "sampling",
+        "axes_are_additive": false
+      }
+    }
+  },
+  "uncertainty_decomposition": "separate_axes_not_additive",
+  "interpretation_boundary": "reference_mixture_sensitivity_only",
+  "non_authoritative": true
+}

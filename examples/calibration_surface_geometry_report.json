@@ -1,0 +1,613 @@
+{
+  "schema_version": "0.2.12",
+  "geometry_id": "geometry:reference-base-current",
+  "generated_at": "2026-08-23T15:35:00+08:00",
+  "method": "simplex_supported_surface_geometry_v1",
+  "source_surface": {
+    "schema_version": "0.2.11",
+    "surface_id": "surface:reference-base-current",
+    "method": "joint_empirical_binomial_simplex_surface_v1"
+  },
+  "measurement_contract": {
+    "unit": "interaction_depth",
+    "reliability_p": 0.9,
+    "scope_id": "scope:reference",
+    "assessment_method": "monotone_binomial_pava_v1"
+  },
+  "families": [
+    "code",
+    "research"
+  ],
+  "grid": {
+    "grid_step": 0.1,
+    "adjacency_method": "simplex_single_transfer_v1",
+    "adjacency_tolerance": 1e-09
+  },
+  "boundary_interpolation": {
+    "positive_stability": "supported_edge_lower_band_zero_crossing_linear_v1",
+    "negative_stability": "supported_edge_upper_band_zero_crossing_linear_v1",
+    "zero_tolerance": 1e-12
+  },
+  "conditioning": {
+    "supported_cells_only_for_graph": true,
+    "unsupported_cells_interpolated": false,
+    "sign_boundary_interpolation_supported_edges_only": true,
+    "local_gradients_supported_edges_only": true
+  },
+  "subjects": {
+    "autonomy": {
+      "supported_graph": {
+        "supported_node_count": 6,
+        "supported_edge_count": 5,
+        "nodes": [
+          {
+            "cell_key": "code=0.1|research=0.9",
+            "reference_family_weights": {
+              "code": 0.1,
+              "research": 0.9
+            },
+            "band_sign_class": "crosses_zero"
+          },
+          {
+            "cell_key": "code=0.2|research=0.8",
+            "reference_family_weights": {
+              "code": 0.2,
+              "research": 0.8
+            },
+            "band_sign_class": "crosses_zero"
+          },
+          {
+            "cell_key": "code=0.3|research=0.7",
+            "reference_family_weights": {
+              "code": 0.3,
+              "research": 0.7
+            },
+            "band_sign_class": "crosses_zero"
+          },
+          {
+            "cell_key": "code=0.4|research=0.6",
+            "reference_family_weights": {
+              "code": 0.4,
+              "research": 0.6
+            },
+            "band_sign_class": "crosses_zero"
+          },
+          {
+            "cell_key": "code=0.5|research=0.5",
+            "reference_family_weights": {
+              "code": 0.5,
+              "research": 0.5
+            },
+            "band_sign_class": "crosses_zero"
+          },
+          {
+            "cell_key": "code=0.6|research=0.4",
+            "reference_family_weights": {
+              "code": 0.6,
+              "research": 0.4
+            },
+            "band_sign_class": "positive_band"
+          }
+        ],
+        "edges": [
+          {
+            "cell_a": "code=0.1|research=0.9",
+            "cell_b": "code=0.2|research=0.8",
+            "weights_a": {
+              "code": 0.1,
+              "research": 0.9
+            },
+            "weights_b": {
+              "code": 0.2,
+              "research": 0.8
+            },
+            "increased_family": "code",
+            "decreased_family": "research",
+            "transfer_mass": 0.09999999999999999
+          },
+          {
+            "cell_a": "code=0.2|research=0.8",
+            "cell_b": "code=0.3|research=0.7",
+            "weights_a": {
+              "code": 0.2,
+              "research": 0.8
+            },
+            "weights_b": {
+              "code": 0.3,
+              "research": 0.7
+            },
+            "increased_family": "code",
+            "decreased_family": "research",
+            "transfer_mass": 0.10000000000000003
+          },
+          {
+            "cell_a": "code=0.3|research=0.7",
+            "cell_b": "code=0.4|research=0.6",
+            "weights_a": {
+              "code": 0.3,
+              "research": 0.7
+            },
+            "weights_b": {
+              "code": 0.4,
+              "research": 0.6
+            },
+            "increased_family": "code",
+            "decreased_family": "research",
+            "transfer_mass": 0.1
+          },
+          {
+            "cell_a": "code=0.4|research=0.6",
+            "cell_b": "code=0.5|research=0.5",
+            "weights_a": {
+              "code": 0.4,
+              "research": 0.6
+            },
+            "weights_b": {
+              "code": 0.5,
+              "research": 0.5
+            },
+            "increased_family": "code",
+            "decreased_family": "research",
+            "transfer_mass": 0.09999999999999998
+          },
+          {
+            "cell_a": "code=0.5|research=0.5",
+            "cell_b": "code=0.6|research=0.4",
+            "weights_a": {
+              "code": 0.5,
+              "research": 0.5
+            },
+            "weights_b": {
+              "code": 0.6,
+              "research": 0.4
+            },
+            "increased_family": "code",
+            "decreased_family": "research",
+            "transfer_mass": 0.09999999999999998
+          }
+        ],
+        "connected_components": [
+          {
+            "component_id": "supported:0000",
+            "size": 6,
+            "members": [
+              "code=0.1|research=0.9",
+              "code=0.2|research=0.8",
+              "code=0.3|research=0.7",
+              "code=0.4|research=0.6",
+              "code=0.5|research=0.5",
+              "code=0.6|research=0.4"
+            ]
+          }
+        ],
+        "isolated_nodes": []
+      },
+      "sign_regions": {
+        "positive_band": {
+          "node_count": 1,
+          "component_count": 1,
+          "components": [
+            {
+              "component_id": "positive_band:0000",
+              "size": 1,
+              "members": [
+                "code=0.6|research=0.4"
+              ]
+            }
+          ]
+        },
+        "negative_band": {
+          "node_count": 0,
+          "component_count": 0,
+          "components": []
+        },
+        "crosses_zero": {
+          "node_count": 5,
+          "component_count": 1,
+          "components": [
+            {
+              "component_id": "crosses_zero:0000",
+              "size": 5,
+              "members": [
+                "code=0.1|research=0.9",
+                "code=0.2|research=0.8",
+                "code=0.3|research=0.7",
+                "code=0.4|research=0.6",
+                "code=0.5|research=0.5"
+              ]
+            }
+          ]
+        },
+        "zero_band": {
+          "node_count": 0,
+          "component_count": 0,
+          "components": []
+        }
+      },
+      "boundaries": {
+        "support_edges": [
+          {
+            "supported_cell": "code=0.6|research=0.4",
+            "unsupported_cell": "code=0.7|research=0.3",
+            "transfer_mass": 0.1
+          }
+        ],
+        "sign_class_edges": [
+          {
+            "cell_a": "code=0.5|research=0.5",
+            "cell_b": "code=0.6|research=0.4",
+            "class_a": "crosses_zero",
+            "class_b": "positive_band",
+            "transfer_mass": 0.09999999999999998
+          }
+        ],
+        "positive_stability_zero_crossings": [
+          {
+            "cell_a": "code=0.5|research=0.5",
+            "cell_b": "code=0.6|research=0.4",
+            "endpoint_field": "band.lower",
+            "endpoint_value_a": -0.09468531468531484,
+            "endpoint_value_b": 0.08433014354066957,
+            "interpolation_fraction": 0.5289225613454375,
+            "estimated_reference_family_weights": {
+              "code": 0.5528922561345437,
+              "research": 0.44710774386545626
+            },
+            "observed_cell": false
+          }
+        ],
+        "negative_stability_zero_crossings": []
+      },
+      "local_gradients": [
+        {
+          "cell_a": "code=0.1|research=0.9",
+          "cell_b": "code=0.2|research=0.8",
+          "transfer_mass": 0.09999999999999999,
+          "increased_family": "code",
+          "decreased_family": "research",
+          "point_estimate_slope": 0.6018272914824774,
+          "band_lower_slope": 0.4597245195739178,
+          "band_upper_slope": 0.29110075315010864
+        },
+        {
+          "cell_a": "code=0.2|research=0.8",
+          "cell_b": "code=0.3|research=0.7",
+          "transfer_mass": 0.10000000000000003,
+          "increased_family": "code",
+          "decreased_family": "research",
+          "point_estimate_slope": 0.7864309603439865,
+          "band_lower_slope": 1.0601527828998014,
+          "band_upper_slope": 0.4470863728688655
+        },
+        {
+          "cell_a": "code=0.3|research=0.7",
+          "cell_b": "code=0.4|research=0.6",
+          "transfer_mass": 0.1,
+          "increased_family": "code",
+          "decreased_family": "research",
+          "point_estimate_slope": 1.0699792960662702,
+          "band_lower_slope": 0.5419168398570473,
+          "band_upper_slope": 0.610501321796606
+        },
+        {
+          "cell_a": "code=0.4|research=0.6",
+          "cell_b": "code=0.5|research=0.5",
+          "transfer_mass": 0.09999999999999998,
+          "increased_family": "code",
+          "decreased_family": "research",
+          "point_estimate_slope": 1.537254901960781,
+          "band_lower_slope": -0.1498544466286435,
+          "band_upper_slope": -0.3089499973710708
+        },
+        {
+          "cell_a": "code=0.5|research=0.5",
+          "cell_b": "code=0.6|research=0.4",
+          "transfer_mass": 0.09999999999999998,
+          "increased_family": "code",
+          "decreased_family": "research",
+          "point_estimate_slope": 2.3865546218487226,
+          "band_lower_slope": 1.7901545822598446,
+          "band_upper_slope": 0.12985376889966152
+        }
+      ],
+      "geometry_summary": {
+        "supported_component_count": 1,
+        "largest_supported_component_size": 6,
+        "support_boundary_edge_count": 1,
+        "sign_class_boundary_edge_count": 1,
+        "positive_stability_boundary_count": 1,
+        "negative_stability_boundary_count": 0,
+        "local_gradient_edge_count": 5,
+        "max_absolute_point_estimate_slope": 2.3865546218487226
+      }
+    },
+    "governance": {
+      "supported_graph": {
+        "supported_node_count": 6,
+        "supported_edge_count": 5,
+        "nodes": [
+          {
+            "cell_key": "code=0.1|research=0.9",
+            "reference_family_weights": {
+              "code": 0.1,
+              "research": 0.9
+            },
+            "band_sign_class": "crosses_zero"
+          },
+          {
+            "cell_key": "code=0.2|research=0.8",
+            "reference_family_weights": {
+              "code": 0.2,
+              "research": 0.8
+            },
+            "band_sign_class": "crosses_zero"
+          },
+          {
+            "cell_key": "code=0.3|research=0.7",
+            "reference_family_weights": {
+              "code": 0.3,
+              "research": 0.7
+            },
+            "band_sign_class": "crosses_zero"
+          },
+          {
+            "cell_key": "code=0.4|research=0.6",
+            "reference_family_weights": {
+              "code": 0.4,
+              "research": 0.6
+            },
+            "band_sign_class": "crosses_zero"
+          },
+          {
+            "cell_key": "code=0.5|research=0.5",
+            "reference_family_weights": {
+              "code": 0.5,
+              "research": 0.5
+            },
+            "band_sign_class": "crosses_zero"
+          },
+          {
+            "cell_key": "code=0.6|research=0.4",
+            "reference_family_weights": {
+              "code": 0.6,
+              "research": 0.4
+            },
+            "band_sign_class": "positive_band"
+          }
+        ],
+        "edges": [
+          {
+            "cell_a": "code=0.1|research=0.9",
+            "cell_b": "code=0.2|research=0.8",
+            "weights_a": {
+              "code": 0.1,
+              "research": 0.9
+            },
+            "weights_b": {
+              "code": 0.2,
+              "research": 0.8
+            },
+            "increased_family": "code",
+            "decreased_family": "research",
+            "transfer_mass": 0.09999999999999999
+          },
+          {
+            "cell_a": "code=0.2|research=0.8",
+            "cell_b": "code=0.3|research=0.7",
+            "weights_a": {
+              "code": 0.2,
+              "research": 0.8
+            },
+            "weights_b": {
+              "code": 0.3,
+              "research": 0.7
+            },
+            "increased_family": "code",
+            "decreased_family": "research",
+            "transfer_mass": 0.10000000000000003
+          },
+          {
+            "cell_a": "code=0.3|research=0.7",
+            "cell_b": "code=0.4|research=0.6",
+            "weights_a": {
+              "code": 0.3,
+              "research": 0.7
+            },
+            "weights_b": {
+              "code": 0.4,
+              "research": 0.6
+            },
+            "increased_family": "code",
+            "decreased_family": "research",
+            "transfer_mass": 0.1
+          },
+          {
+            "cell_a": "code=0.4|research=0.6",
+            "cell_b": "code=0.5|research=0.5",
+            "weights_a": {
+              "code": 0.4,
+              "research": 0.6
+            },
+            "weights_b": {
+              "code": 0.5,
+              "research": 0.5
+            },
+            "increased_family": "code",
+            "decreased_family": "research",
+            "transfer_mass": 0.09999999999999998
+          },
+          {
+            "cell_a": "code=0.5|research=0.5",
+            "cell_b": "code=0.6|research=0.4",
+            "weights_a": {
+              "code": 0.5,
+              "research": 0.5
+            },
+            "weights_b": {
+              "code": 0.6,
+              "research": 0.4
+            },
+            "increased_family": "code",
+            "decreased_family": "research",
+            "transfer_mass": 0.09999999999999998
+          }
+        ],
+        "connected_components": [
+          {
+            "component_id": "supported:0000",
+            "size": 6,
+            "members": [
+              "code=0.1|research=0.9",
+              "code=0.2|research=0.8",
+              "code=0.3|research=0.7",
+              "code=0.4|research=0.6",
+              "code=0.5|research=0.5",
+              "code=0.6|research=0.4"
+            ]
+          }
+        ],
+        "isolated_nodes": []
+      },
+      "sign_regions": {
+        "positive_band": {
+          "node_count": 1,
+          "component_count": 1,
+          "components": [
+            {
+              "component_id": "positive_band:0000",
+              "size": 1,
+              "members": [
+                "code=0.6|research=0.4"
+              ]
+            }
+          ]
+        },
+        "negative_band": {
+          "node_count": 0,
+          "component_count": 0,
+          "components": []
+        },
+        "crosses_zero": {
+          "node_count": 5,
+          "component_count": 1,
+          "components": [
+            {
+              "component_id": "crosses_zero:0000",
+              "size": 5,
+              "members": [
+                "code=0.1|research=0.9",
+                "code=0.2|research=0.8",
+                "code=0.3|research=0.7",
+                "code=0.4|research=0.6",
+                "code=0.5|research=0.5"
+              ]
+            }
+          ]
+        },
+        "zero_band": {
+          "node_count": 0,
+          "component_count": 0,
+          "components": []
+        }
+      },
+      "boundaries": {
+        "support_edges": [
+          {
+            "supported_cell": "code=0.6|research=0.4",
+            "unsupported_cell": "code=0.7|research=0.3",
+            "transfer_mass": 0.1
+          }
+        ],
+        "sign_class_edges": [
+          {
+            "cell_a": "code=0.5|research=0.5",
+            "cell_b": "code=0.6|research=0.4",
+            "class_a": "crosses_zero",
+            "class_b": "positive_band",
+            "transfer_mass": 0.09999999999999998
+          }
+        ],
+        "positive_stability_zero_crossings": [
+          {
+            "cell_a": "code=0.5|research=0.5",
+            "cell_b": "code=0.6|research=0.4",
+            "endpoint_field": "band.lower",
+            "endpoint_value_a": 6.217248937900855e-16,
+            "endpoint_value_b": 0.10147769543118258,
+            "interpolation_fraction": 0.0,
+            "estimated_reference_family_weights": {
+              "code": 0.5,
+              "research": 0.5
+            },
+            "observed_cell": false
+          }
+        ],
+        "negative_stability_zero_crossings": []
+      },
+      "local_gradients": [
+        {
+          "cell_a": "code=0.1|research=0.9",
+          "cell_b": "code=0.2|research=0.8",
+          "transfer_mass": 0.09999999999999999,
+          "increased_family": "code",
+          "decreased_family": "research",
+          "point_estimate_slope": 0.6617570575630971,
+          "band_lower_slope": 0.3877975234297138,
+          "band_upper_slope": 0.5547523047522973
+        },
+        {
+          "cell_a": "code=0.2|research=0.8",
+          "cell_b": "code=0.3|research=0.7",
+          "transfer_mass": 0.10000000000000003,
+          "increased_family": "code",
+          "decreased_family": "research",
+          "point_estimate_slope": 0.86558761435608,
+          "band_lower_slope": 0.7381583933308006,
+          "band_upper_slope": 0.346750691578288
+        },
+        {
+          "cell_a": "code=0.3|research=0.7",
+          "cell_b": "code=0.4|research=0.6",
+          "transfer_mass": 0.1,
+          "increased_family": "code",
+          "decreased_family": "research",
+          "point_estimate_slope": 1.1788090916947525,
+          "band_lower_slope": 1.2450236420251508,
+          "band_upper_slope": 0.7575843225928036
+        },
+        {
+          "cell_a": "code=0.4|research=0.6",
+          "cell_b": "code=0.5|research=0.5",
+          "transfer_mass": 0.09999999999999998,
+          "increased_family": "code",
+          "decreased_family": "research",
+          "point_estimate_slope": 1.6950067476383261,
+          "band_lower_slope": 0.7860487338748229,
+          "band_upper_slope": 0.48826921796802936
+        },
+        {
+          "cell_a": "code=0.5|research=0.5",
+          "cell_b": "code=0.6|research=0.4",
+          "transfer_mass": 0.09999999999999998,
+          "increased_family": "code",
+          "decreased_family": "research",
+          "point_estimate_slope": 2.6324786324786325,
+          "band_lower_slope": 1.01477695431182,
+          "band_upper_slope": 0.49169435215947754
+        }
+      ],
+      "geometry_summary": {
+        "supported_component_count": 1,
+        "largest_supported_component_size": 6,
+        "support_boundary_edge_count": 1,
+        "sign_class_boundary_edge_count": 1,
+        "positive_stability_boundary_count": 1,
+        "negative_stability_boundary_count": 0,
+        "local_gradient_edge_count": 5,
+        "max_absolute_point_estimate_slope": 2.6324786324786325
+      }
+    }
+  },
+  "interpretation_boundary": "evidence_supported_discrete_surface_geometry",
+  "non_authoritative": true
+}
