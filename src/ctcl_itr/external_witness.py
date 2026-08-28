@@ -26,6 +26,7 @@ to trust the party being verified.
 from __future__ import annotations
 
 import base64
+import hashlib
 import json
 import urllib.error
 import urllib.request
@@ -33,12 +34,35 @@ from typing import Any
 
 WITNESS_SCHEMA_VERSION = "0.1"
 DEFAULT_ENDPOINT = "https://commoninstant.org"
-# CTCL's own documented signed-fields order (GET /v1/pubkey's own
-# `signed_fields` string) - reconstructing this ourselves rather than
-# trusting whatever a witness record claims keeps a forged claim of
-# "signed_fields" from smuggling a different (unsigned) string past
-# verification.
-EXPECTED_SIGNED_FIELDS = "instant_id|unix_ns|timescale"
+# CTCL's two documented signed-fields schemes (GET /v1/pubkey's own
+# `schemes_in_use`) that a registered instant's signature can carry.
+# Reconstructing the message ourselves from this fixed set - rather than
+# trusting whatever a witness record CLAIMS its own signed_fields covers -
+# keeps a forged claim from smuggling a different (unsigned) string past
+# verification; anything outside this set is refused, not guessed at.
+#
+# The plain scheme predates 2026-08-28 and does NOT cover label/meta - a
+# witness record built on a plain-scheme instant is only good for proving
+# "CTCL attests this instant_id existed at this time," not "CTCL attests
+# THIS DIGEST specifically" (the digest lives in `meta`, which the signature
+# doesn't reach). `meta_bound` in the result below says honestly which case
+# applied - found by an independent subagent verification run the same day
+# this module was first written, not assumed away.
+SIGNED_FIELDS_PLAIN = "instant_id|unix_ns|timescale"
+SIGNED_FIELDS_WITH_PAYLOAD = "instant_id|unix_ns|timescale|sha256(canonical_json(label,meta))"
+
+
+def _canonical_json(value: Any) -> str:
+    """Must match CTCL Web's own canonicalJson() (src/worker.js) byte for byte:
+    object keys sorted recursively, no whitespace. See that function's own
+    comment for the one known cross-language gap (non-integer number formatting).
+    """
+    if value is None or not isinstance(value, (dict, list)):
+        return json.dumps(value, ensure_ascii=False)
+    if isinstance(value, list):
+        return "[" + ",".join(_canonical_json(v) for v in value) + "]"
+    keys = sorted(value.keys())
+    return "{" + ",".join(json.dumps(k, ensure_ascii=False) + ":" + _canonical_json(value[k]) for k in keys) + "}"
 
 
 class WitnessError(ValueError):
@@ -162,8 +186,19 @@ def verify_witness(anchor: dict[str, Any], witness: dict[str, Any], endpoint: st
     sig = record.get("signature")
     if not sig:
         return {"valid": False, "failure": {"code": "unsigned", "message": "the witnessed instant exists but carries no signature - this CTCL deployment has no signing key configured"}}
-    if sig.get("signed_fields") != EXPECTED_SIGNED_FIELDS:
-        return {"valid": False, "failure": {"code": "unsupported_signed_fields", "message": f"don't know how to reconstruct signed_fields={sig.get('signed_fields')!r}"}}
+
+    fields = sig.get("signed_fields")
+    if fields == SIGNED_FIELDS_PLAIN:
+        signed_string = "|".join([record["id"], record["unix_ns"], record["reference_timescale"]])
+        meta_bound = False
+    elif fields == SIGNED_FIELDS_WITH_PAYLOAD:
+        payload_digest = hashlib.sha256(
+            _canonical_json({"label": record.get("label"), "meta": record.get("meta")}).encode("utf-8")
+        ).hexdigest()
+        signed_string = "|".join([record["id"], record["unix_ns"], record["reference_timescale"], payload_digest])
+        meta_bound = True
+    else:
+        return {"valid": False, "failure": {"code": "unsupported_signed_fields", "message": f"don't know how to reconstruct signed_fields={fields!r}"}}
 
     try:
         pubkey_resp = _http_json(f"{endpoint}/v1/pubkey")
@@ -173,7 +208,6 @@ def verify_witness(anchor: dict[str, Any], witness: dict[str, Any], endpoint: st
         return {"valid": False, "failure": {"code": "pubkey_unavailable", "message": str(pubkey_resp.get("error"))}}
     pubkey_data = pubkey_resp["data"]
 
-    signed_string = "|".join([record["id"], record["unix_ns"], record["reference_timescale"]])
     try:
         pubkey = _decode_ed25519_public_key(pubkey_data["public_jwk"])
         pubkey.verify(base64.b64decode(sig["value"]), signed_string.encode("utf-8"))
@@ -186,6 +220,11 @@ def verify_witness(anchor: dict[str, Any], witness: dict[str, Any], endpoint: st
         "endpoint": endpoint,
         "witnessed_rfc3339": witness.get("witnessed_rfc3339"),
         "key_id": sig.get("key_id"),
+        # True only under SIGNED_FIELDS_WITH_PAYLOAD: whether CTCL's signature
+        # itself covers the witnessed digest, or only the instant's existence
+        # at this time (SIGNED_FIELDS_PLAIN - digest-to-instant binding then
+        # rests on trusting CTCL's own server/API integrity, not the signature).
+        "meta_bound": meta_bound,
         "failure": None,
     }
 

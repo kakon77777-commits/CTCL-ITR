@@ -6,7 +6,7 @@ A causal, temporal, auditable runtime ledger for long-horizon and multi-agent AI
 
 ## Status
 
-**v0.2.15 — External Witness Anchoring / Engineering Contract**
+**v0.2.16 — Payload-Bound Witness Verification / Engineering Contract**
 
 CTCL-ITR turns AI work from a flat `prompt → response` record into an observable execution model:
 
@@ -729,6 +729,10 @@ Witnessed Digest Match != Live Event Recording (still no SDK for an agent to emi
 
 Not a general witness-provider interface — only CTCL is supported as a witness source in this release.
 
+## v0.2.16 — Payload-Bound Witness Verification
+
+Same-day follow-up. An independent cross-conversation verification run (a fresh subagent with no access to this project's code) found that v0.2.15's signature covered `instant_id|unix_ns|timescale` only — not `meta`, where the witnessed digest actually lives, so the digest-to-instant binding rested on trusting CTCL's server, not the signature itself. CTCL closed this the same day with a new, separately-labelled scheme (`...|sha256(canonical_json(label,meta))`) that doesn't invalidate anything signed under the old one. `verify_witness()` now recognizes both, independently recomputing the payload digest under the new scheme and reporting `meta_bound: true`/`false` honestly rather than assuming one fixed level of protection.
+
 ## Relationship to CTCL
 
 CTCL provides the broader temporal / causal framework.
@@ -876,6 +880,11 @@ The canonical ATL causal graph keeps `causal_parent_ids[]` because multi-agent j
 - independent re-verification using only CTCL's published public key
 - closes the self-issued-anchor trust gap named in v0.2.2's own docs, confirmed exploitable via a live backdating demo
 - still no live event-recording SDK; only CTCL supported as a witness source
+
+### v0.2.16 — Payload-Bound Witness Verification
+- recognizes CTCL's new signature scheme covering a canonical digest of label+meta
+- honest `meta_bound: true`/`false` reporting instead of one assumed protection level
+- found by an independent cross-conversation verification run, not by the project's own review
 
 ### v0.3
 - distributed workers and fencing

@@ -26,9 +26,9 @@ def test_geometry_trajectory_validator_passes():
     assert 'autonomy_support_reversals=1' in cp.stdout
     assert 'governance_boundary_code_velocity_reversals=1' in cp.stdout
 
-def test_package_metadata_is_v0215_and_exposes_entry_point():
+def test_package_metadata_is_v0216_and_exposes_entry_point():
     text=(ROOT/'pyproject.toml').read_text(encoding='utf-8')
-    assert 'version = "0.2.15"' in text
+    assert 'version = "0.2.16"' in text
     assert 'ctcl-itr-geometry-trajectory = "ctcl_itr.calibration_geometry_trajectory:_main"' in text
     init_text=(ROOT/'src'/'ctcl_itr'/'__init__.py').read_text(encoding='utf-8')
-    assert '__version__ = "0.2.15"' in init_text
+    assert '__version__ = "0.2.16"' in init_text

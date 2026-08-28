@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ctcl-itr"
-version = "0.2.15"
+version = "0.2.16"
 description = "Causal, temporal, auditable runtime ledger utilities for long-horizon and multi-agent AI systems."
 readme = "README.md"
 license = "Apache-2.0"
