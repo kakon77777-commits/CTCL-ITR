@@ -6,7 +6,7 @@ A causal, temporal, auditable runtime ledger for long-horizon and multi-agent AI
 
 ## Status
 
-**v0.2.14 — Geometry Motion Stability & Multi-Snapshot Trajectories / Engineering Contract**
+**v0.2.15 — External Witness Anchoring / Engineering Contract**
 
 CTCL-ITR turns AI work from a flat `prompt → response` record into an observable execution model:
 
@@ -67,6 +67,7 @@ CTCL-ITR/
 │   ├── governance_signals.py
 │   ├── horizon_calibration.py
 │   ├── calibration_robustness.py
+│   ├── external_witness.py
 │   └── interop/
 ├── tests/
 ├── validator/
@@ -693,12 +694,48 @@ Gradient Trajectory != Global Derivative Field
 Trajectory Report != Authority
 ```
 
+## v0.2.15 — External Witness Anchoring
+
+v0.2.2's Ledger Integrity chain proves a ledger has not changed since its own `LedgerAnchor` was issued — it does not prove the anchor itself is genuine, since the anchor is computed and stored by the same party who controls the ledger. Confirmed empirically: a reference ledger's `occurred_at` backdated by six years, resealed fresh, still verified `valid: true` against its own self-issued anchor.
+
+v0.2.15 closes that gap using CTCL (commoninstant.org) — this project's own sibling — as an external witness. CTCL Ed25519-signs every registered instant and publishes its public key at `GET /v1/pubkey`, so a party verifying a ledger no longer has to trust whoever produced it.
+
+```text
+LedgerAnchor (v0.2.2, self-issued)
+  -> register final_chain_digest as a CTCL instant (POST /v1/instants)
+  -> CTCL Ed25519-signs the moment it was presented
+  -> WitnessRecord (instant_id, signature, witnessed timestamp)
+  -> independent re-fetch of the instant AND CTCL's public key
+  -> Ed25519 signature verification using ONLY CTCL's published key
+```
+
+Reference CLI:
+
+```bash
+ctcl-itr-integrity seal examples/multi_agent_branch_join.events.jsonl --chain-out /tmp/x.integrity.jsonl --anchor-out /tmp/x.anchor.json
+ctcl-itr-witness witness /tmp/x.anchor.json --out /tmp/x.witness.json
+ctcl-itr-witness verify-witness /tmp/x.anchor.json --witness /tmp/x.witness.json
+```
+
+Verified live against production `commoninstant.org`: a real anchor witnessed and independently re-verified `valid: true`; the same witness record checked against a deliberately forged (backdated) anchor correctly fails `digest_mismatch`, because CTCL only ever witnessed the real anchor's digest.
+
+Core boundary:
+
+```text
+Internal Tamper-Evidence != External Trust
+Self-Issued Anchor != Third-Party-Witnessed Anchor
+Witnessed Digest Match != Live Event Recording (still no SDK for an agent to emit events in real time)
+```
+
+Not a general witness-provider interface — only CTCL is supported as a witness source in this release.
 
 ## Relationship to CTCL
 
 CTCL provides the broader temporal / causal framework.
 
 CTCL-ITR is the execution-time layer that makes interaction time observable and auditable.
+
+As of v0.2.15 this is a real code dependency, not just a conceptual one: `ctcl-itr-witness` calls CTCL's live `/v1/instants`, `/v1/instant/{id}`, and `/v1/pubkey` endpoints to turn a self-issued ledger anchor into a third-party-witnessed one (see v0.2.15 above).
 
 ```text
 CTCL
@@ -833,6 +870,12 @@ The canonical ATL causal graph keeps `causal_parent_ids[]` because multi-agent j
 - component overlap lineage lifespan
 - sign-region persistence and support excursions
 - supported-edge gradient trajectories
+
+### v0.2.15 — External Witness Anchoring
+- CTCL (commoninstant.org) as an external, Ed25519-signed witness for a v0.2.2 LedgerAnchor
+- independent re-verification using only CTCL's published public key
+- closes the self-issued-anchor trust gap named in v0.2.2's own docs, confirmed exploitable via a live backdating demo
+- still no live event-recording SDK; only CTCL supported as a witness source
 
 ### v0.3
 - distributed workers and fencing
